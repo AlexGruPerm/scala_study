@@ -47,7 +47,7 @@ object FirstClass extends App{
   //println("st class :"+st.getClass.getName)
   printClassName(objName="Set",obj=st)
 
-  var stm = mutable.Set(1,2,3)
+  var stm = mutable.Set(1,2,3,4)
   //println("stm class :"+stm.getClass.getName)
   printClassName(objName="Set mutable",obj=stm)
 

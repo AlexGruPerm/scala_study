@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,7 +15,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="FirstClass.scala" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../scala_study/src/FirstClass.scala">
+        <entry file="file://$PROJECT_DIR$/src/FirstClass.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="25">
               <caret line="45" column="43" lean-forward="true" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
@@ -26,13 +26,13 @@
     </leaf>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../scala_study" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/FirstClass.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/FirstClass.scala" />
+        <option value="$PROJECT_DIR$/src/FirstClass.scala" />
       </list>
     </option>
   </component>
@@ -200,14 +200,14 @@
     <option name="LAST_COMMIT_MESSAGE" value="begin study" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/FirstClass.scala">
+    <entry file="file://$PROJECT_DIR$/src/FirstClass.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="30" selection-start-column="30" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/FirstClass.scala">
+    <entry file="file://$PROJECT_DIR$/src/FirstClass.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
           <caret line="45" column="43" lean-forward="true" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
