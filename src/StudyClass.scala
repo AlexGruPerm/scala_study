@@ -1,54 +1,53 @@
+import scala.io.Source
+import scala.util.parsing.json._
+import org.json4s._
+import org.json4s.native.JsonMethods._
 
-
-//When a singleton object
-//shares the same name with a class, it is called that class’s companion object
-object StudyClass {
-  var varSingltineObject = 100
-
-}
-
-//A singleton object that does not share the same name with a companion
-//class is called a standalone object.
-
-//The class is called the companion class of the singleton object.
-class StudyClass {
-  /*
-   Inside a class definition, you place fields and methods, which are collectively
-   called members.
-  */
-  // Fields are also known as instance variables
-  var className = "none"
-  private var classValue = 0
-
-  def add(b: Int): Unit = {
-    this.classValue = b + StudyClass.varSingltineObject
-  }
-
-  def getClassValue: Int = this.classValue
-
-
-}
-
-
-
-
+  /**
+  *
+  *   Application's main class with method main(args)
+  *
+  **/
 
 object StartAppClass extends App{
-  println("Begin")
-  val sc1 = new StudyClass
-  val sc2 = new StudyClass
+  println("-- Begin ------------------------------------------")
+   val s = Set(1,2,3,3,2,4,1,3,2,5,7,8,9)
+    println(s.getClass.getName+"["+s.getClass.getTypeName+"]")
+    println(s)
+    println(" ")
 
-  println(sc1.className)
-  sc1.className="manually set new Name"
-  println(sc1.className)
+    try {
+      val vv = for (x <- s if (x < 2 || x > 8))
+        yield x
+      if (vv.size > 0) {
+        for (x <- vv) {
+          val resx = x match {
+                            case 1 => println("small")
+                            case 9 => println("big")
+                            case _ => println("n/n")
+                          }
+          println(resx)
+        }
+      } else {
+        throw new RuntimeException("vv is empty")
+      }
+    } catch {
+      case ex: RuntimeException => println(ex.getMessage)
+    } finally {
+      println("Finally step")
+    }
 
-  sc1.add(10)
-  println("Class Vlaue is: "+sc1.getClassValue)
+    /*
 
-  println("Like static field: "+StudyClass.varSingltineObject)
-  StudyClass.varSingltineObject = 200
-  println("set new value - Like static field: "+StudyClass.varSingltineObject)
+    val servUrl ="http://87.245.154.49/trading/service/new/armIndicators"
+    val html = Source.fromURL(servUrl)
+    val htmlString = html.mkString
+    println(htmlString)
+    */
+
+    //https://github.com/json4s/json4s
 
 
-  println("End")
+
+  println("-- End ------------------------------------------")
 }
