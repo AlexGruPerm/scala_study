@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="json4s-ext_2.13.0-M4-3.5.4">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../scala/lib/json4s-ext_2.13.0-M4-3.5.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
