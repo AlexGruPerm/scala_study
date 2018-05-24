@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../scala_study/.idea/libraries/json4s_ext_2_13_0_M4_3_5_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scala_study/src/CSVAnalyze.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scala_study/src/CollectStudy.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/scala_study.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/scala_study.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/src/StudyClass.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/StudyClass.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -17,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="StudyClass.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StudyClass.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/StudyClass.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="67" column="46" selection-start-line="67" selection-start-column="46" selection-end-line="67" selection-end-column="46" />
+            <state>
+              <caret selection-end-column="15" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -29,7 +29,40 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="CSVAnalyze.scala" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../scala_study/src/CSVAnalyze.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FirstClass.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../scala_study/src/FirstClass.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CollectStudy.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../scala_study/src/CollectStudy.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="419">
+              <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>ObjectSpec</find>
+      <find>apply</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../scala_study" />
@@ -42,6 +75,8 @@
         <option value="$PROJECT_DIR$/src/StudyClass.scala" />
         <option value="$PROJECT_DIR$/src/StudyClass.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/StudyClass.scala" />
+        <option value="$PROJECT_DIR$/../scala_study/src/CollectStudy.scala" />
+        <option value="$PROJECT_DIR$/../scala_study/src/CSVAnalyze.scala" />
       </list>
     </option>
   </component>
@@ -67,6 +102,11 @@
             <path>
               <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
               <item name="scala_study" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scala_study" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
@@ -97,7 +137,17 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.StartAppClass">
+  <component name="RunManager" selected="Application.CSVAnalyze">
+    <configuration name="CSVAnalyze" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="CSVAnalyze" />
+      <module name="scala_study" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="CollectStudy" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="CollectStudy" />
+      <module name="scala_study" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+    </configuration>
     <configuration name="FirstClass" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="FirstClass" />
       <module name="scala_study" />
@@ -152,11 +202,14 @@
       <listeners />
     </configuration>
     <list>
+      <item itemvalue="Application.CollectStudy" />
       <item itemvalue="Application.FirstClass" />
       <item itemvalue="Application.StartAppClass" />
+      <item itemvalue="Application.CSVAnalyze" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CSVAnalyze" />
         <item itemvalue="Application.StartAppClass" />
         <item itemvalue="Application.FirstClass" />
       </list>
@@ -198,7 +251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526891464396</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="indexedSeq of objects, recursively search by objects">
+      <created>1526972120552</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1526972120552</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -207,12 +267,12 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32911393" />
+      <window_info active="true" anchor="bottom" id="Messages" order="7" visible="true" weight="0.32911393" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50104165" side_tool="true" weight="0.32911393" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49895832" visible="true" weight="0.3491561" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49895832" weight="0.443038" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15" />
@@ -237,7 +297,8 @@
     <MESSAGE value="begin study" />
     <MESSAGE value="test commit from home" />
     <MESSAGE value="just begin with Json" />
-    <option name="LAST_COMMIT_MESSAGE" value="just begin with Json" />
+    <MESSAGE value="indexedSeq of objects, recursively search by objects" />
+    <option name="LAST_COMMIT_MESSAGE" value="indexedSeq of objects, recursively search by objects" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../scala_study/src/StudyClass.scala">
@@ -285,13 +346,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/FirstClass.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../scala/lib/scala-parser-combinators_2.12-1.0.6.jar!/scala/util/parsing/json/package.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -308,11 +362,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/StudyClass.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="67" column="46" selection-start-line="67" selection-start-column="46" selection-end-line="67" selection-end-column="46" />
+        <state>
+          <caret selection-end-column="15" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/CollectStudy.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/FirstClass.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/CSVAnalyze.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
         </state>
       </provider>
     </entry>

@@ -1,6 +1,7 @@
 import scala.io.Source
 import scala.util.parsing.json._
 import java.net._
+import scala.collection.immutable.IndexedSeq
 
   /**
   *
@@ -8,13 +9,28 @@ import java.net._
   *
   **/
 
-  class ObjectSpec(attrSource : List[Int], objectName : String){
-    require (attrSource.length > 0)
+  trait ObectBase{
+
+    def getName():String{}
+
+    def getAttr():List[Int]{}
+
+  }
+
+  class ObjectSpec(attrSource : List[Int],objectName : String) extends ObectBase{
     private val attr = attrSource
     private val name = objectName
-    def getAttr():List[Int] = this.attr
-    def getName():String = this.objectName
+    override def getAttr():List[Int] = this.attr
+    override def getName():String = this.objectName
   }
+
+  class ObjectSpecAny(attrSource : List[Int],objectName : String) extends ObectBase{
+    private val attr = attrSource
+    private val name = objectName
+    override def getAttr():List[Int] = this.attr
+    override def getName():String = this.objectName
+  }
+
 
 
 
@@ -40,7 +56,13 @@ object StartAppClass extends App {
   }
 
   //  List of objects.
-  val listObj = for (x <- 1 to 1000) yield new ObjectSpec(genRandomIntList(lengthList = 3), genRandomName(lengthList = 10))
+  val listObj1 = for (x <- 1 to 100)
+                 yield new ObjectSpec(genRandomIntList(lengthList = 3), genRandomName(lengthList = 10))
+
+  val listObj2 = for (x <- 1 to 100)
+                 yield new ObjectSpecAny(genRandomIntList(lengthList = 3), genRandomName(lengthList = 10))
+
+  val listObj : IndexedSeq[ObectBase] = listObj1++listObj2
 
   // Just output objects
   println("There are "+listObj.length+" object in the List. List has Class name - "+listObj.getClass.getName+" type- "+listObj.getClass.getTypeName)
@@ -48,7 +70,7 @@ object StartAppClass extends App {
 
   //output just 3 objects as example.
   for(i <- 1 to 3){
-    println(listObj.apply(i).getName()+"  "+listObj.apply(i).getAttr())
+    println(listObj(i).getName()+"  "+listObj(i).getAttr())
   }
   /*
   for (oneObj <- listObj) {
@@ -57,16 +79,16 @@ object StartAppClass extends App {
   */
 
   // value for search in attr field of
-  val searchInt : Int = 99
+  val searchInt : Int = 50
 
   //recursive function to search value in objects
 
-  def searchVal(sVal: Int, searchFromIndex : Int, listObj : scala.collection.immutable.IndexedSeq[ObjectSpec]):String={
+  def searchVal(sVal: Int, searchFromIndex : Int, listObj : scala.collection.immutable.IndexedSeq[ObectBase]):String={
     if (searchFromIndex == listObj.length ) return "not found"
-   //println("searchFromIndex="+searchFromIndex+" objectName="+listObj.apply(searchFromIndex).getName())
-   if (listObj.apply(searchFromIndex).getAttr().contains(sVal)) {
-     println("StepNUmber is ["+searchFromIndex+"] Result attr:"+listObj.apply(searchFromIndex).getAttr())
-     listObj.apply(searchFromIndex).getName()
+   //println("searchFromIndex="+searchFromIndex+" objectName="+listObj(searchFromIndex).getName())
+   if (listObj(searchFromIndex).getAttr().contains(sVal)) {
+     println("StepNUmber is ["+searchFromIndex+"] Result attr:"+listObj(searchFromIndex).getAttr())
+     listObj(searchFromIndex).getName()
    }
     else searchVal(sVal, searchFromIndex+1, listObj)
   }
