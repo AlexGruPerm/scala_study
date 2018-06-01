@@ -9,7 +9,6 @@ object HOFuncs extends App {
     else dx*f(x+dx/2) + numint(f,x+dx,xu,dx)
   }
 
-  //calculate of integral of function y with limits x=0, xu=2 with step = 0.01
   println(numint(y,x=0,xu=2,dx=0.01))
 
 }
