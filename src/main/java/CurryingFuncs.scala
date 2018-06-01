@@ -117,8 +117,53 @@ class BarBuilder(ticks : TicksDs, ticksCntBar : Int){
 }
 
 
+class PatterSearcher(barsHist : BarsDS, barsCurr :BarsDS){
+
+  /**  In the history of bars (object bars) search current formation (patter) - object barsCurr
+   *    and return all !-LAST-! bars of founded formations as an object of class BarsDS
+    * */
+  def patterSearchHistory : BarsDS = {
+
+    def get_part(seqBars: Seq[Bar],startIndex : Int, n : Int) : Seq[Bar] ={
+      if ( startIndex == n ) {
+        return Seq(seqBars(startIndex))
+      } else {
+        Seq(seqBars(startIndex)) ++ get_part(seqBars,startIndex+1, n)
+      }
+    }
+
+    //Compare 2 sequence of bars (Seq[Bar]) with same saze.
+
+    def compHistPartCurr(histPart : BarsDS, barsCurr: BarsDS): Boolean = {
+     true
+    }
+
+    val histFoundLastBars : Seq[Bar] = for(i <- 0 until barsHist.Data.size-barsCurr.size) yield {
+      //println("get indexes: ("+i+","+(i+barsCurr.size-1).toInt+")")
+      //val partHist : Seq[Bar] = get_part(barsHist.Data,i,(i+barsCurr.size-1))
+      val partHistBars : BarsDS = new BarsDS(get_part(barsHist.Data,i,(i+barsCurr.size-1)).toSeq)
+      // use here filter with custom function compHistPartCurr
+
+      partHistBars.map(x => compHistPartCurr(x,barsCurr)
+      /*
+      if (compHistPartCurr(partHistBars,barsCurr)) {
+         partHistBars.Data.last
+      } else {
+         partHistBars.Data.last
+      }
+      */
+
+      // Seq(new Bar(Seq(new Tick(Tuple2(1,1)))))
+    }
+
+    new BarsDS(histFoundLastBars)
+  }
+
+}
+
+
 object CurryingFuncs extends App {                 //simple
-  val ticks : TicksDs = new scvReader("data/test.csv").readTicks
+  val ticks : TicksDs = new scvReader("data/first.csv").readTicks
   println("-----------------------------------")
   println("ticks.size="+ticks.size+" ticks(Class): "+ticks.getClass.getName)
   println("-----------------------------------")
@@ -129,42 +174,43 @@ object CurryingFuncs extends App {                 //simple
   }
   */
 
-
-  /*
-  val bars_t10 : BarsDS = new BarBuilder(ticks, 10).getBars
-  val bars_t5  : BarsDS = new BarBuilder(ticks, 5).getBars
+  val bars : BarsDS = new BarBuilder(ticks, 30).getBars
 
   println("-----------------------------------")
-  println("bars_t10.size="+bars_t10.size)
-  println("bars_t5.size="+bars_t5.size)
+  println("bars.size="+bars.size)
   println("-----------------------------------")
   //simple output of ticks
-  for (thisBar <- bars_t10.Data) {
-    println(thisBar)
-    //println("["+thisBar.bNumBegin+"-"+thisBar.bNumEnd+"] "+" "+thisBar.bOpen+" "+thisBar.bClose)
-  }
+  for (thisBar <- bars.Data) println(thisBar)
 
-  val b10_avgB : Float = bars_t10.Data.map(x=>(x.bHighBody)).sum.toFloat/bars_t10.Data.size
-  val b10_avgS : Float = bars_t10.Data.map(x=>(x.bHighShad)).sum.toFloat/bars_t10.Data.size
+  val avgB : Float = bars.Data.map(x=>(x.bHighBody)).sum.toFloat/bars.Data.size
+  val avgS : Float = bars.Data.map(x=>(x.bHighShad)).sum.toFloat/bars.Data.size
 
-  println("Avg Bars10 Body Hight =" +  b10_avgB )
-  println("Avg Bars10 Shad Hight =" +  b10_avgS )
-  println("S/B =" +  b10_avgS/b10_avgB )
+  println("Avg Bars Body Hight =" +  avgB )
+  println("Avg Bars Shad Hight =" +  avgS )
+  println("S/B =" +  avgS/avgB )
 
-  val b5_avgB : Float = bars_t5.Data.map(x=>(x.bHighBody)).sum.toFloat/bars_t5.Data.size
-  val b5_avgS : Float = bars_t5.Data.map(x=>(x.bHighShad)).sum.toFloat/bars_t5.Data.size
 
-  println("Avg Bars5 Body Hight =" + b5_avgB   )
-  println("Avg Bars5 Shad Hight =" + b5_avgS   )
-  println("S/B =" +  b5_avgS/b5_avgB )
-  */
-
+  /*
   for (i <- 2 to 30){
     val bars : BarsDS = new BarBuilder(ticks, i).getBars
     val avgB : Float = bars.Data.map(x=>(x.bHighBody)).sum.toFloat/bars.Data.size
     val avgS : Float = bars.Data.map(x=>(x.bHighShad)).sum.toFloat/bars.Data.size
     println("i="+i+" S/B =" +  avgS/avgB )
   }
+  */
+  println("-----------------------------------")
 
+  val ticksCurr : TicksDs = new scvReader("data/current.csv").readTicks
+  val barsCurr : BarsDS = new BarBuilder(ticksCurr, 30).getBars
+
+  for (cb <- barsCurr.Data) println(cb)
+
+  val barsHistSeacher : PatterSearcher = new PatterSearcher(bars,barsCurr)
+
+  println("===================================")
+
+  val searchHistRes : BarsDS = barsHistSeacher.patterSearchHistory
+
+  for (resHistFound <- searchHistRes.Data) println(resHistFound)
 
 }
