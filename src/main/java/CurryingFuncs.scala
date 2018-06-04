@@ -354,5 +354,10 @@ object CurryingFuncs extends App {                 //simple
 
   visualSearch.show(frwBars)
 
+  println("=== STEP 6 ================================")
+  println(" ")
+  println(" Pattern founded in history need classification, f.e. total 560, 460-u ,100-d   Data can be added in real time with interval f.e. 1 min.")
+  //we need use caches (for source ), queues,
+  println(" ")
 
 }
