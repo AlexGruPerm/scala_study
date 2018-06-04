@@ -133,32 +133,57 @@ class PatterSearcher(barsHist : BarsDS, barsCurr :BarsDS){
     }
 
     //Compare 2 sequence of bars (Seq[Bar]) with same saze.
-
     def compHistPartCurr(histPart : BarsDS, barsCurr: BarsDS): Boolean = {
-     true
+      //println("compHistPartCurr - "+histPart.size+" - "+barsCurr.size+" |")
+      val countCompareEquals : Seq[Int] = for (i <- 0 until histPart.Data.size) yield {
+        // RULE : barType and barBodyHight are like same !
+        if (
+              histPart.Data(i).bType == barsCurr.Data(i).bType &&
+              math.abs(histPart.Data(i).bHighBody - barsCurr.Data(i).bHighBody) <= 2
+           )
+        {
+          1
+        }
+        else 0
+      }
+
+      //simple, Compare size and count equals (Sum of 0,1,0,1...)
+      if (histPart.size == countCompareEquals.sum) true else false
     }
 
-    val histFoundLastBars : Seq[Bar] = for(i <- 0 until barsHist.Data.size-barsCurr.size) yield {
-      //println("get indexes: ("+i+","+(i+barsCurr.size-1).toInt+")")
-      //val partHist : Seq[Bar] = get_part(barsHist.Data,i,(i+barsCurr.size-1))
-      val partHistBars : BarsDS = new BarsDS(get_part(barsHist.Data,i,(i+barsCurr.size-1)).toSeq)
-      // use here filter with custom function compHistPartCurr
-
-      partHistBars.map(x => compHistPartCurr(x,barsCurr)
-      /*
-      if (compHistPartCurr(partHistBars,barsCurr)) {
-         partHistBars.Data.last
-      } else {
-         partHistBars.Data.last
-      }
-      */
-
-      // Seq(new Bar(Seq(new Tick(Tuple2(1,1)))))
+    val histFoundLastBars : Seq[Bar] =
+                          for(i <- 0 to barsHist.Data.size-barsCurr.size
+                            if (compHistPartCurr((new BarsDS(get_part(barsHist.Data,i,(i+barsCurr.size-1)).toSeq)),barsCurr))
+                          ) yield {
+      barsHist.Data(i+barsCurr.size-1)
     }
 
     new BarsDS(histFoundLastBars)
   }
+}
 
+
+class VisualSearchResults(barsHist : BarsDS, barsCurr :BarsDS, barsFound: BarsDS){
+
+  def show = {
+    println("   ")
+    println(" SUMMARY : barsHist=["+barsHist.size+"] barsCurr=["+barsCurr.size+"] barsFound=["+barsFound.size+"]")
+    println("   ")
+     for (bc <- barsCurr.Data) println(bc)
+    println("   ")
+
+    for (bh <- barsHist.Data){
+      print(bh+" ")
+      for (bf <- barsFound.Data){
+        if (bh == bf)
+           print(" *")
+      }
+      println(" ")
+    }
+
+    println("   ")
+    println("   ")
+  }
 }
 
 
@@ -180,7 +205,7 @@ object CurryingFuncs extends App {                 //simple
   println("bars.size="+bars.size)
   println("-----------------------------------")
   //simple output of ticks
-  for (thisBar <- bars.Data) println(thisBar)
+  //for (thisBar <- bars.Data) println(thisBar)
 
   val avgB : Float = bars.Data.map(x=>(x.bHighBody)).sum.toFloat/bars.Data.size
   val avgS : Float = bars.Data.map(x=>(x.bHighShad)).sum.toFloat/bars.Data.size
@@ -205,12 +230,22 @@ object CurryingFuncs extends App {                 //simple
 
   for (cb <- barsCurr.Data) println(cb)
 
+  println("~~~~~~~~~~~~~~~~")
+  println("bars.size="+bars.size)
+  println("barsCurr.size="+barsCurr.size)
+  println("~~~~~~~~~~~~~~~~")
+
   val barsHistSeacher : PatterSearcher = new PatterSearcher(bars,barsCurr)
 
   println("===================================")
-
   val searchHistRes : BarsDS = barsHistSeacher.patterSearchHistory
-
+  println("Found in history (last bars in group):"+searchHistRes.size)
   for (resHistFound <- searchHistRes.Data) println(resHistFound)
+
+  // -------------------------------------------------------------------------------------------
+  // STEP:3 All history Bars visualisation with Current and comparison results.
+  // -------------------------------------------------------------------------------------------
+
+  new VisualSearchResults(bars,barsCurr,searchHistRes).show
 
 }
