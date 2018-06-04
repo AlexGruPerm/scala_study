@@ -69,7 +69,18 @@ class Bar(barTicks : Seq[Tick]){
 }
 
 
-case class BarForwardRes(beginBar : Bar,endBar : Option[Bar] ) {
+case class BarForwardRes(beginBar : Bar,endBar : Option[Bar],hValueHight : Int) {
+
+  val beRes : Tuple2[String,Int] = if (endBar.isDefined) {
+                               if (endBar.get.bHigh > beginBar.bClose+hValueHight) ("u" -> (endBar.get.bHigh - (beginBar.bClose+hValueHight)))
+                                 else if (endBar.get.bLow < beginBar.bClose-hValueHight) ("d" -> ((beginBar.bClose-hValueHight)-endBar.get.bLow))
+                               else ("n"->0)
+                             } else ("n"->0)
+
+
+  val beType   : String = beRes._1
+  val beNumRes : Int    = beRes._2
+
   override def toString = {
     beginBar.toString+" > "+endBar.toString
   }
@@ -189,7 +200,7 @@ class VisualSearchResults(barsHist : BarsDS, barsCurr :BarsDS, barsFound: BarsDS
       print(bh+" ")
       for (bf <- barsFound.Data){
         if (bh == bf)
-           print(" *")
+           print(" in")
       }
       println(" ")
     }
@@ -210,7 +221,7 @@ class VisualSearchResults(barsHist : BarsDS, barsCurr :BarsDS, barsFound: BarsDS
 
       val idxInPair : Int = frwBars.map(x => x.endBar).flatten.indexOf(bh)
       if ( idxInPair > 0 )
-        print("         < idxInPair="+idxInPair+"  BEGIN: "+frwBars(idxInPair).beginBar.bNumEnd+" END: "+frwBars(idxInPair).endBar)
+        print("         out idxInPair="+idxInPair+"  BEGIN: "+frwBars(idxInPair).beginBar.bNumEnd+" rType="+frwBars(idxInPair).beType+" rHight="+frwBars(idxInPair).beNumRes+"   END: "+frwBars(idxInPair).endBar)
 
       println(" ")
     }
@@ -248,7 +259,7 @@ class histForwardAnalyzing(barsHist : BarsDS, barsFound: BarsDS, hValueHight : I
          false
       }
 
-      new BarForwardRes(startBar, barsHist.Data.partition(_.bNumBegin < startBar.bNumEnd)._2.find(x => findBar(x,startBar)))
+      new BarForwardRes(startBar, barsHist.Data.partition(_.bNumBegin < startBar.bNumEnd)._2.find(x => findBar(x,startBar)),hValueHight)
     }
 
     for(currBarFound <- barsFound.Data) yield getForwardSearchBar(currBarFound)
