@@ -69,14 +69,11 @@ class Bar(barTicks : Seq[Tick]){
 }
 
 
-case class BarForwardRes(beginBar : Bar,endBar : Option[Bar]) {
+case class BarForwardRes(beginBar : Bar,endBar : Option[Bar] ) {
   override def toString = {
     beginBar.toString+" > "+endBar.toString
   }
 }
-
-
-
 
 
 
@@ -200,11 +197,6 @@ class VisualSearchResults(barsHist : BarsDS, barsCurr :BarsDS, barsFound: BarsDS
     println("   ")
   }
 
-  //DELETE THIS FUNC
-  def get_indexOf_CurrentBar_Eq_SecondInPair(bh: Bar, pairs : Seq[Option[Bar]]) : Int ={
-   val sb : Seq[Bar] = pairs.flatten
-    1
-  }
 
   def show(frwBars :Seq[BarForwardRes]) : Unit = {
     println(" SUMMARY VISUAL : barsHist=["+barsHist.size+"] barsCurr=["+barsCurr.size+"] barsFound=["+barsFound.size+"]")
@@ -213,14 +205,13 @@ class VisualSearchResults(barsHist : BarsDS, barsCurr :BarsDS, barsFound: BarsDS
       print(bh+" ")
       for (bf <- barsFound.Data){
         if (bh == bf)
-          print("  * ")
-
-        val idxInPair : Int = frwBars.map(x => x.endBar).flatten.indexOf(bh)
-          //get_indexOf_CurrentBar_Eq_SecondInPair(bh, frwBars.map(x => x.endBar))
-
-        if ( idxInPair > 0 )
-          print("  <  "+frwBars(idxInPair))
+          print("   * ")
       }
+
+      val idxInPair : Int = frwBars.map(x => x.endBar).flatten.indexOf(bh)
+      if ( idxInPair > 0 )
+        print("         < idxInPair="+idxInPair+"  BEGIN: "+frwBars(idxInPair).beginBar.bNumEnd+" END: "+frwBars(idxInPair).endBar)
+
       println(" ")
     }
     println("   ")
@@ -264,6 +255,9 @@ class histForwardAnalyzing(barsHist : BarsDS, barsFound: BarsDS, hValueHight : I
   }
 
 }
+
+
+
 
 
 
@@ -336,6 +330,7 @@ object CurryingFuncs extends App {                 //simple
   println(" ")
 
   val frwBars : Seq[BarForwardRes] = new histForwardAnalyzing(bars, searchHistRes, 20).get_forward_bars
+
 
   println("frwBars.size="+frwBars.size)
   println(" ")
