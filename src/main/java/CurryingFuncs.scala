@@ -68,6 +68,18 @@ class Bar(barTicks : Seq[Tick]){
 
 }
 
+
+case class BarForwardRes(beginBar : Bar,endBar : Option[Bar]) {
+  override def toString = {
+    beginBar.toString+" > "+endBar.toString
+  }
+}
+
+
+
+
+
+
 /** presents sequence of bars (instances of Bar class)
   *
   * @param Data
@@ -152,22 +164,26 @@ class PatterSearcher(barsHist : BarsDS, barsCurr :BarsDS){
     }
 
     val histFoundLastBars : Seq[Bar] =
-                          for(i <- 0 to barsHist.Data.size-barsCurr.size
-                            if (compHistPartCurr((new BarsDS(get_part(barsHist.Data,i,(i+barsCurr.size-1)).toSeq)),barsCurr))
-                          ) yield {
-      barsHist.Data(i+barsCurr.size-1)
-    }
+      for(i <- 0 to barsHist.Data.size-barsCurr.size
+          if (compHistPartCurr((new BarsDS(get_part(barsHist.Data,i,(i+barsCurr.size-1)).toSeq)),barsCurr))
+      ) yield {
+        barsHist.Data(i+barsCurr.size-1)
+      }
 
     new BarsDS(histFoundLastBars)
   }
 }
 
-
+/** Class just for visualization pattern search
+  *
+  * @param barsHist  - Full history bars
+  * @param barsCurr  - Bars in current pattern
+  * @param barsFound - result of search current pattern in history, last bars of patterns.
+  */
 class VisualSearchResults(barsHist : BarsDS, barsCurr :BarsDS, barsFound: BarsDS){
-
   def show = {
     println("   ")
-    println(" SUMMARY : barsHist=["+barsHist.size+"] barsCurr=["+barsCurr.size+"] barsFound=["+barsFound.size+"]")
+    println(" VISUAL : barsHist=["+barsHist.size+"] barsCurr=["+barsCurr.size+"] barsFound=["+barsFound.size+"]")
     println("   ")
      for (bc <- barsCurr.Data) println(bc)
     println("   ")
@@ -180,11 +196,77 @@ class VisualSearchResults(barsHist : BarsDS, barsCurr :BarsDS, barsFound: BarsDS
       }
       println(" ")
     }
-
     println("   ")
     println("   ")
   }
+
+  //DELETE THIS FUNC
+  def get_indexOf_CurrentBar_Eq_SecondInPair(bh: Bar, pairs : Seq[Option[Bar]]) : Int ={
+   val sb : Seq[Bar] = pairs.flatten
+    1
+  }
+
+  def show(frwBars :Seq[BarForwardRes]) : Unit = {
+    println(" SUMMARY VISUAL : barsHist=["+barsHist.size+"] barsCurr=["+barsCurr.size+"] barsFound=["+barsFound.size+"]")
+
+    for (bh <- barsHist.Data){
+      print(bh+" ")
+      for (bf <- barsFound.Data){
+        if (bh == bf)
+          print("  * ")
+
+        val idxInPair : Int = frwBars.map(x => x.endBar).flatten.indexOf(bh)
+          //get_indexOf_CurrentBar_Eq_SecondInPair(bh, frwBars.map(x => x.endBar))
+
+        if ( idxInPair > 0 )
+          print("  <  "+frwBars(idxInPair))
+      }
+      println(" ")
+    }
+    println("   ")
+
+
+  }
+
 }
+
+
+
+
+
+
+
+class histForwardAnalyzing(barsHist : BarsDS, barsFound: BarsDS, hValueHight : Int){
+
+  def get_forward_bars : Seq[BarForwardRes] = {
+
+    def getForwardSearchBar(startBar : Bar) : BarForwardRes ={
+
+
+      // partition divide seq on 2 parts:
+      // ._1 before Bar - startBar and ._2 after startBar
+      // In second part make find element with conditions
+
+      def findBar(cBar : Bar, compareBar : Bar) : Boolean ={
+       if (
+           (cBar.bHigh > startBar.bClose+hValueHight) /*u*/ ||
+           (cBar.bLow  < startBar.bClose-hValueHight) /*d*/
+          )
+         true
+       else
+         false
+      }
+
+      new BarForwardRes(startBar, barsHist.Data.partition(_.bNumBegin < startBar.bNumEnd)._2.find(x => findBar(x,startBar)))
+    }
+
+    for(currBarFound <- barsFound.Data) yield getForwardSearchBar(currBarFound)
+  }
+
+}
+
+
+
 
 
 object CurryingFuncs extends App {                 //simple
@@ -240,12 +322,31 @@ object CurryingFuncs extends App {                 //simple
   println("===================================")
   val searchHistRes : BarsDS = barsHistSeacher.patterSearchHistory
   println("Found in history (last bars in group):"+searchHistRes.size)
-  for (resHistFound <- searchHistRes.Data) println(resHistFound)
+    for (resHistFound <- searchHistRes.Data) println(resHistFound)
 
   // -------------------------------------------------------------------------------------------
   // STEP:3 All history Bars visualisation with Current and comparison results.
   // -------------------------------------------------------------------------------------------
+  val visualSearch = new VisualSearchResults(bars,barsCurr,searchHistRes)
+  visualSearch.show
 
-  new VisualSearchResults(bars,barsCurr,searchHistRes).show
+  println("=== STEP 4 ================================")
+  println(" ")
+  println(" Forward search ")
+  println(" ")
+
+  val frwBars : Seq[BarForwardRes] = new histForwardAnalyzing(bars, searchHistRes, 20).get_forward_bars
+
+  println("frwBars.size="+frwBars.size)
+  println(" ")
+    for (curResPair <- frwBars) println(curResPair.beginBar+"    >   "+curResPair.endBar)
+
+  println("=== STEP 5 ================================")
+  println(" ")
+  println(" Summary visialization ")
+  println(" ")
+
+  visualSearch.show(frwBars)
+
 
 }
