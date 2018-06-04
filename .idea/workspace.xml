@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BarsPatternSearch.scala" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CSVAnalyze.scala" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CollectStudy.scala" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CurryingFuncs.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CurryingFuncs.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FirstClass.scala" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/HOFuncs.scala" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StudyClass.scala" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TestCollectFunctions.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TestCollectFunctions.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -22,7 +16,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CurryingFuncs.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CurryingFuncs.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/CurryingFuncs.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="366">
@@ -31,11 +25,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestCollectFunctions.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TestCollectFunctions.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/TestCollectFunctions.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="105">
+              <caret line="25" column="14" lean-forward="true" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -84,10 +78,10 @@
         <option value="$PROJECT_DIR$/src/main/java/CollectStudy.scala" />
         <option value="$PROJECT_DIR$/src/main/java/HOFuncs.scala" />
         <option value="$PROJECT_DIR$/src/main/java/BarsPatternSearch.scala" />
-        <option value="$PROJECT_DIR$/src/main/java/TestCollectFunctions.scala" />
         <option value="$PROJECT_DIR$/src/main/java/StudyClass.scala" />
         <option value="$PROJECT_DIR$/src/main/java/CurryingFuncs.scala" />
         <option value="$PROJECT_DIR$/src/main/java/CurryingFuncs.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/TestCollectFunctions.scala" />
       </list>
     </option>
   </component>
@@ -168,7 +162,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.CurryingFuncs">
+  <component name="RunManager" selected="Application.TestCollectFunctions">
     <configuration name="BarsPatternSearch" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="BarsPatternSearch" />
       <module name="scala_study" />
@@ -277,8 +271,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.CurryingFuncs" />
         <item itemvalue="Application.TestCollectFunctions" />
+        <item itemvalue="Application.CurryingFuncs" />
         <item itemvalue="Application.BarsPatternSearch" />
         <item itemvalue="Application.HOFuncs" />
         <item itemvalue="Application.SearchMaxs" />
@@ -398,7 +392,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528134959090</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Before step 6">
+      <created>1528135492583</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1528135492583</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -412,10 +413,10 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.0734375" side_tool="true" weight="0.39662448" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.9265625" visible="true" weight="0.4425864" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.9265625" visible="true" weight="0.4425864" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1421875" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1421875" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -448,7 +449,8 @@
     <MESSAGE value="Task to elemenate Option" />
     <MESSAGE value="Correct Step 5 output" />
     <MESSAGE value="Finish with Step 5, clear files before step 6." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finish with Step 5, clear files before step 6." />
+    <MESSAGE value="Before step 6" />
+    <option name="LAST_COMMIT_MESSAGE" value="Before step 6" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/CurryingFuncs.scala">
@@ -609,13 +611,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/TestCollectFunctions.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/SearchMaxs.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
@@ -627,6 +622,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="366">
           <caret line="359" column="35" selection-start-line="359" selection-start-column="35" selection-end-line="359" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/TestCollectFunctions.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="25" column="14" lean-forward="true" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
         </state>
       </provider>
     </entry>
