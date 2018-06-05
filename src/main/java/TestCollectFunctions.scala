@@ -1,52 +1,31 @@
 object TestCollectFunctions extends App{
 
-  //is it possible go through tuple in loops
-  def test_loop_by_tuple : Unit = {
-    val t : Tuple5[Int, Int, Int ,Int, Int] = Tuple5(1,2,3,4,5)
-    println(t)
+  def test_parts_simple : Unit ={
+    val v : Seq[Int] = for(i <- 1 to 10) yield i
+    println(v)
 
-    //for (ti <- t) println(ti)
+    def get_rest(acc: Int, s : Seq[Int], limitV : Int) : Seq[Int] = {
+     if (acc+s.head < limitV) get_rest(acc+s.head,s.tail,limitV)
+     else s.tail
+    }
+
+    val r : Seq[Int] = get_rest(0,v,10)
+
+    println(r)
+  }
+
+  def test_divide_seq_on_bars : Unit = {
+    val src : Seq[Int] = for(i <- 1 to 95) yield i
+    println("src="+src)
+    println(" ")
+    val barSize : Int = 10
+    val bars : Seq[Seq[Int]] = src.sliding(barSize,barSize).filter(x => (x.size==barSize)).toSeq
+    println("bars.size="+bars.size)
+    bars.foreach(println)
 
   }
 
-  def sumAll=(x:Int,y:Int) => {
-    val res : Int = x+y
-    println ("x="+x+" y="+y+" res="+res)
-    res
-  }
-
-
-  def test_reduceLeft : Unit ={
-    val s : Seq[Int] = Seq(1,2,3,4,5,6)
-    println(s.reduceLeft(sumAll))
-  }
-
-  def checkTW = (x : Int) => {
-   if (x<4) true
-    else false
-  }
-
-  def test_parts : Unit = {
-   val s : Seq[Int] = Seq(2,2,3,1,4,1,1,1,1,1,1,5,6,9,0)
-
-    println(s.head)
-    println(s.init)
-    println(s.tail)
-    println(s take 2)
-    println(s take 2)
-    println(s.drop(5))
-
-    println("dw="+s.dropWhile(x => (x>1)))
-
-    println("tw="+s.takeWhile(x => checkTW(x)))
-
-    println("    ")
-    println(s)
-
-  }
-
-  //test_loop_by_tuple
-  //test_reduceLeft
-   test_parts
+  //test_parts_simple
+  test_divide_seq_on_bars
 
 }

@@ -120,13 +120,7 @@ class BarBuilder(ticks : TicksDs, ticksCntBar : Int){
     }
 
     val sb : Seq[Bar] = for(i <- 0 to ticks.size-1 by ticksCntBar if ((i + ticksCntBar - 1) <= (ticks.size-1)) ) yield {
-                                //val beginIndex : Int = i
-                                //val endIndex   : Int = beginIndex + ticksCntBar - 1
-                                //val vb : Bar = new Bar(get_part(ticks.Data, beginIndex, endIndex))
-                                // fdebug: val vb : Bar = new Bar((   Seq(new Tick(Tuple2(1,10)))  ))
-                                //vb
                                 new Bar(get_part(ticks.Data, i, i + ticksCntBar - 1))
-                            //new Bar(get_part(ticks.Data,i,ticksCntBar))
                          }
 
     val barsDS : BarsDS = new BarsDS(sb)
@@ -160,10 +154,7 @@ class PatterSearcher(barsHist : BarsDS, barsCurr :BarsDS){
         if (
               histPart.Data(i).bType == barsCurr.Data(i).bType &&
               math.abs(histPart.Data(i).bHighBody - barsCurr.Data(i).bHighBody) <= 2
-           )
-        {
-          1
-        }
+           ) 1
         else 0
       }
 
@@ -174,9 +165,7 @@ class PatterSearcher(barsHist : BarsDS, barsCurr :BarsDS){
     val histFoundLastBars : Seq[Bar] =
       for(i <- 0 to barsHist.Data.size-barsCurr.size
           if (compHistPartCurr((new BarsDS(get_part(barsHist.Data,i,(i+barsCurr.size-1)).toSeq)),barsCurr))
-      ) yield {
-        barsHist.Data(i+barsCurr.size-1)
-      }
+      ) yield barsHist.Data(i+barsCurr.size-1)
 
     new BarsDS(histFoundLastBars)
   }
