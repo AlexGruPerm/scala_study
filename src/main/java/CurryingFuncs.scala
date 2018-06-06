@@ -99,34 +99,12 @@ case class BarsDS(Data : Seq[Bar]){
 
 /** Make sequence of Bar (instance BarsDS) from sequence of Tick (instance TicksDs)
   *
-  * @param ticks        - source sequence of ticks (instances of class Tick)
-  * @param ticksCntBar  - how many ticks in one Bar
+  * @param ticks        - Source sequence of ticks (instances of class Tick)
+  * @param ticksCntBar  - Ticks count in one Bar
   */
 class BarBuilder(ticks : TicksDs, ticksCntBar : Int){
-
-  def getBars : BarsDS = {
-    // ok,but!!! val barsDS : BarsDS = new BarsDS(ticks.Data.sliding(ticksCntBar).toSeq.map(x => getBar(x)))
-
-    // local recursive function that start form index i and end with index n, go through Seq,
-    // and return parts 1 - n, n+1 - n+1+n ...
-    def get_part(st: Seq[Tick], startIndex : Int, endIndex: Int) : Seq[Tick] = {
-      if ( startIndex == endIndex ) {
-        //return Seq(st.head)
-        return Seq(st(startIndex))
-      } else {
-        //Seq(st.head) ++ get_part(st.tail,i+1,n)
-        Seq(st(startIndex)) ++ get_part(st,startIndex+1, endIndex)
-      }
-    }
-
-    val sb : Seq[Bar] = for(i <- 0 to ticks.size-1 by ticksCntBar if ((i + ticksCntBar - 1) <= (ticks.size-1)) ) yield {
-                                new Bar(get_part(ticks.Data, i, i + ticksCntBar - 1))
-                         }
-
-    val barsDS : BarsDS = new BarsDS(sb)
-      barsDS
-
-  }
+  def getBars : BarsDS = new BarsDS(for(oneBar <- ticks.Data.sliding(ticksCntBar,ticksCntBar).filter(x => (x.size==ticksCntBar)).toSeq) yield
+                                      new Bar(oneBar))
 
 }
 
