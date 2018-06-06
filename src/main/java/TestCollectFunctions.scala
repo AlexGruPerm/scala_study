@@ -25,7 +25,16 @@ object TestCollectFunctions extends App{
 
   }
 
+  def test_zip : Unit = {
+   val s1 : Seq[String] = Seq("a","b","c")
+   val s2 : Seq[Int] = Seq(3,4,5)
+
+    for (x <- s1.zip(s2)) println(x._1+"  "+x._2)
+
+  }
+
   //test_parts_simple
-  test_divide_seq_on_bars
+  //test_divide_seq_on_bars
+  test_zip
 
 }

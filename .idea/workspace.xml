@@ -4,6 +4,7 @@
     <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/TestCollectFunctions.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/TestCollectFunctions.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -19,8 +20,8 @@
       <file leaf-file-name="CurryingFuncs.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="118" column="2" lean-forward="true" selection-start-line="118" selection-start-column="2" selection-end-line="118" selection-end-column="2" />
+            <state relative-caret-position="204">
+              <caret line="72" column="62" selection-start-line="72" selection-start-column="62" selection-end-line="72" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -28,8 +29,8 @@
       <file leaf-file-name="TestCollectFunctions.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/TestCollectFunctions.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="9" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="96" />
+            <state relative-caret-position="272">
+              <caret line="28" column="42" lean-forward="true" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -408,7 +409,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528203402084</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Rewritten method getBars of class BarBuilder.">
+      <created>1528262770821</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1528262770821</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -422,7 +430,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.0734375" side_tool="true" weight="0.39662448" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.9265625" visible="true" weight="0.29746836" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.9265625" visible="true" weight="0.27531645" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1421875" />
@@ -460,7 +468,8 @@
     <MESSAGE value="Finish with Step 5, clear files before step 6." />
     <MESSAGE value="Before step 6" />
     <MESSAGE value="Found way to rewrite  def getBars : BarsDS = {}&#10;by using sliding(s,s)&#10;look at test_dividing_seq_on_bars" />
-    <option name="LAST_COMMIT_MESSAGE" value="Found way to rewrite  def getBars : BarsDS = {}&#10;by using sliding(s,s)&#10;look at test_dividing_seq_on_bars" />
+    <MESSAGE value="Rewritten method getBars of class BarBuilder." />
+    <option name="LAST_COMMIT_MESSAGE" value="Rewritten method getBars of class BarBuilder." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
@@ -641,15 +650,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/TestCollectFunctions.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="9" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="96" />
+        <state relative-caret-position="272">
+          <caret line="28" column="42" lean-forward="true" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="118" column="2" lean-forward="true" selection-start-line="118" selection-start-column="2" selection-end-line="118" selection-end-column="2" />
+        <state relative-caret-position="204">
+          <caret line="72" column="62" selection-start-line="72" selection-start-column="62" selection-end-line="72" selection-end-column="62" />
         </state>
       </provider>
     </entry>

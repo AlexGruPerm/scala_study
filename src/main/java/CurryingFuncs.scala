@@ -8,6 +8,7 @@ case class Tick(Data : Tuple2[Int,Int]) {
   val tVal : Int = Data._2
 }
 
+
 /** presents sequence of ticks (instances of Tick class)
   *
   * @param Data sequence of ticks for constructor
@@ -15,6 +16,7 @@ case class Tick(Data : Tuple2[Int,Int]) {
 case class TicksDs (Data : Seq[Tick]) {
   def size : Int = Data.size
 }
+
 
 /** For read source file and return necessary data for instantiate TicksDs class object
   *
@@ -38,11 +40,10 @@ class scvReader(CsvPath : String){
   }
 }
 
-/**
+
+/** Instance of class represent one Bar
   *
   * @param barTicks : Seq[Tick] - Sequence of ticks that define this Bar.
-  *
-  * Instance of class represent one Bar
   */
 class Bar(barTicks : Seq[Tick]){
   val bNumBegin :Int = barTicks(0).tNum
@@ -59,17 +60,17 @@ class Bar(barTicks : Seq[Tick]){
 
   val bType     : String = (bOpen compare bClose).signum match {
                                                         case -1 => "g" // bOpen < bClose
-                                                        case  0 => "n"          // bOpen = bClose
+                                                        case  0 => "n" // bOpen = bClose
                                                         case  1 => "r" // bOpen > bClose
                                                       }
 
   override def toString =
-   "[ "+bNumBegin+":"+bNumEnd+"] ohlc=["+bOpen+","+bHigh+","+bLow+","+bClose+"] ( "+bType+" ) width,body,shad=["+bWidth+","+bHighBody+","+bHighShad+"]"
+   "[ "+bNumBegin+":"+bNumEnd+"] ohlc=["+bOpen+","+bHigh+","+bLow+","+bClose+"] "+bType+"   body,shad=["+bHighBody+","+bHighShad+"]"
 
 }
 
 
-case class BarForwardRes(beginBar : Bar,endBar : Option[Bar],hValueHight : Int) {
+case class BarForwardRes(beginBar : Bar,endBar : Option[Bar], hValueHight : Int) {
 
   val beRes : Tuple2[String,Int] = if (endBar.isDefined) {
                                if (endBar.get.bHigh > beginBar.bClose+hValueHight) ("u" -> (endBar.get.bHigh - (beginBar.bClose+hValueHight)))
@@ -80,6 +81,7 @@ case class BarForwardRes(beginBar : Bar,endBar : Option[Bar],hValueHight : Int) 
 
   val beType   : String = beRes._1
   val beNumRes : Int    = beRes._2
+  val resTicksDuration  : Int = endBar.get.bNumBegin - beginBar.bNumEnd
 
   override def toString = {
     beginBar.toString+" > "+endBar.toString
@@ -87,15 +89,23 @@ case class BarForwardRes(beginBar : Bar,endBar : Option[Bar],hValueHight : Int) 
 }
 
 
-
 /** presents sequence of bars (instances of Bar class)
   *
-  * @param Data
+  * Additional functionality some compare methods, used in search current pattern in history.
   *
+  * @param Data
   */
 case class BarsDS(Data : Seq[Bar]){
   def size : Int = Data.size
+
+  def compareByTypes(that: BarsDS) : Boolean= {
+    require(Data.size == that.Data.size, "[compareByTypes] Compared sequences has to be same size")
+    if (Data.zip(that.Data).filter(barsPair => (barsPair._1.bType != barsPair._2.bType)).nonEmpty /*.size != 0*/) false
+    else
+      true
+  }
 }
+
 
 /** Make sequence of Bar (instance BarsDS) from sequence of Tick (instance TicksDs)
   *
@@ -109,45 +119,18 @@ class BarBuilder(ticks : TicksDs, ticksCntBar : Int){
 }
 
 
+/**  In the history of bars (object bars) search current formation (patter) - object barsCurr
+  *    and return all !-LAST-! bars of founded formations as an object of class BarsDS
+  */
 class PatterSearcher(barsHist : BarsDS, barsCurr :BarsDS){
 
-  /**  In the history of bars (object bars) search current formation (patter) - object barsCurr
-   *    and return all !-LAST-! bars of founded formations as an object of class BarsDS
-    * */
-  def patterSearchHistory : BarsDS = {
+  def patterSearchHistory : BarsDS =
+    new BarsDS(barsHist.Data.sliding(barsCurr.size,barsCurr.size).filter(bh => (bh.size == barsCurr.size))
+                                                                 .filter(bh =>  (new BarsDS(bh)).compareByTypes(barsCurr))
+                                                                 .map(bh => bh.last).toSeq)
 
-    def get_part(seqBars: Seq[Bar],startIndex : Int, n : Int) : Seq[Bar] ={
-      if ( startIndex == n ) {
-        return Seq(seqBars(startIndex))
-      } else {
-        Seq(seqBars(startIndex)) ++ get_part(seqBars,startIndex+1, n)
-      }
-    }
-
-    //Compare 2 sequence of bars (Seq[Bar]) with same saze.
-    def compHistPartCurr(histPart : BarsDS, barsCurr: BarsDS): Boolean = {
-      //println("compHistPartCurr - "+histPart.size+" - "+barsCurr.size+" |")
-      val countCompareEquals : Seq[Int] = for (i <- 0 until histPart.Data.size) yield {
-        // RULE : barType and barBodyHight are like same !
-        if (
-              histPart.Data(i).bType == barsCurr.Data(i).bType &&
-              math.abs(histPart.Data(i).bHighBody - barsCurr.Data(i).bHighBody) <= 2
-           ) 1
-        else 0
-      }
-
-      //simple, Compare size and count equals (Sum of 0,1,0,1...)
-      if (histPart.size == countCompareEquals.sum) true else false
-    }
-
-    val histFoundLastBars : Seq[Bar] =
-      for(i <- 0 to barsHist.Data.size-barsCurr.size
-          if (compHistPartCurr((new BarsDS(get_part(barsHist.Data,i,(i+barsCurr.size-1)).toSeq)),barsCurr))
-      ) yield barsHist.Data(i+barsCurr.size-1)
-
-    new BarsDS(histFoundLastBars)
-  }
 }
+
 
 /** Class just for visualization pattern search
   *
@@ -201,10 +184,6 @@ class VisualSearchResults(barsHist : BarsDS, barsCurr :BarsDS, barsFound: BarsDS
 
 
 
-
-
-
-
 class histForwardAnalyzing(barsHist : BarsDS, barsFound: BarsDS, hValueHight : Int){
 
   def get_forward_bars : Seq[BarForwardRes] = {
@@ -237,10 +216,6 @@ class histForwardAnalyzing(barsHist : BarsDS, barsFound: BarsDS, hValueHight : I
 
 
 
-
-
-
-
 object CurryingFuncs extends App {                 //simple
   val ticks : TicksDs = new scvReader("data/first.csv").readTicks
   println("-----------------------------------")
@@ -260,34 +235,25 @@ object CurryingFuncs extends App {                 //simple
   println("-----------------------------------")
   //simple output of ticks
   //for (thisBar <- bars.Data) println(thisBar)
-
+  /*
   val avgB : Float = bars.Data.map(x=>(x.bHighBody)).sum.toFloat/bars.Data.size
   val avgS : Float = bars.Data.map(x=>(x.bHighShad)).sum.toFloat/bars.Data.size
-
   println("Avg Bars Body Hight =" +  avgB )
   println("Avg Bars Shad Hight =" +  avgS )
   println("S/B =" +  avgS/avgB )
-
-
-  /*
-  for (i <- 2 to 30){
-    val bars : BarsDS = new BarBuilder(ticks, i).getBars
-    val avgB : Float = bars.Data.map(x=>(x.bHighBody)).sum.toFloat/bars.Data.size
-    val avgS : Float = bars.Data.map(x=>(x.bHighShad)).sum.toFloat/bars.Data.size
-    println("i="+i+" S/B =" +  avgS/avgB )
-  }
   */
-  println("-----------------------------------")
 
   val ticksCurr : TicksDs = new scvReader("data/current.csv").readTicks
   val barsCurr : BarsDS = new BarBuilder(ticksCurr, 30).getBars
 
-  for (cb <- barsCurr.Data) println(cb)
+  println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+  println("bars.size     = "+bars.size)
+  println("barsCurr.size = "+barsCurr.size)
+  println("~~ barsCurr Patter for search ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+  for (cb <- barsCurr.Data) println("          "+cb)
+  println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
-  println("~~~~~~~~~~~~~~~~")
-  println("bars.size="+bars.size)
-  println("barsCurr.size="+barsCurr.size)
-  println("~~~~~~~~~~~~~~~~")
+
 
   val barsHistSeacher : PatterSearcher = new PatterSearcher(bars,barsCurr)
 
@@ -300,7 +266,7 @@ object CurryingFuncs extends App {                 //simple
   // STEP:3 All history Bars visualisation with Current and comparison results.
   // -------------------------------------------------------------------------------------------
   val visualSearch = new VisualSearchResults(bars,barsCurr,searchHistRes)
-  visualSearch.show
+  //visualSearch.show
 
   println("=== STEP 4 ================================")
   println(" ")
@@ -311,8 +277,10 @@ object CurryingFuncs extends App {                 //simple
 
 
   println("frwBars.size="+frwBars.size)
-  println(" ")
-    for (curResPair <- frwBars) println(curResPair.beginBar+"    >   "+curResPair.endBar)
+  println(" Last bar in founded pattern(hist)                        duration      EXIST bar")
+    for (currResPair <- frwBars) println(currResPair.beginBar+"    >    "+currResPair.resTicksDuration+"  "+currResPair.endBar)
+
+
 
   println("=== STEP 5 ================================")
   println(" ")
@@ -326,5 +294,6 @@ object CurryingFuncs extends App {                 //simple
   println(" Pattern founded in history need classification, f.e. total 560, 460-u ,100-d   Data can be added in real time with interval f.e. 1 min.")
   //we need use caches (for source ), queues,
   println(" ")
+
 
 }
