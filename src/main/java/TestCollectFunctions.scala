@@ -43,7 +43,55 @@ object TestCollectFunctions extends App{
   //test_parts_simple
   //test_divide_seq_on_bars
   //test_zip
+  //test_dw
 
-  test_dw
+  def test_recursive_search : Unit ={
+    //for(i <- 1 to 10) println("("+i+","+math.round(math.random()*10)+"),")
+    //for(i <- 1 to 10) println("("+i+","+i+"),")
+
+    var hist :Seq[Tuple2[Int,Int]] = Seq(
+      (1,1),
+      (2,2),
+      (3,4),
+      (4,6),
+      (5,5),
+      (6,4),
+      (7,5)
+      /*,
+      (8,11),
+      (9,8),
+      (10,5)
+    */
+    )
+
+    val hValueHight : Int = 4
+    var curr :Seq[Tuple2[Int,Int]] = Seq((1,1),(3,4))
+
+    // (1,1) -> begin with (2,2) result (4,6) because 6 > 1+4 =5
+    // (3,4) -> begin with resule (8,10) because 10 > 4+4=8
+
+    def rec_search(seqToSearch : Seq[Tuple2[Int,Int]], seqWhatSearchFirstElm : Seq[Tuple2[Int,Int]]) : Seq[Tuple2[Tuple2[Int,Int],Tuple2[Int,Int]]] = {
+      if (seqWhatSearchFirstElm.size==1) {
+        //last iteration
+        Seq(
+            ((seqWhatSearchFirstElm.head), seqToSearch.find(x => (x._2 > seqWhatSearchFirstElm.head._2+hValueHight || x._2 < seqWhatSearchFirstElm.head._2-hValueHight)).getOrElse(Tuple2(0,0)))
+           )
+      } else {
+        Seq(
+            ((seqWhatSearchFirstElm.head), seqToSearch.find(x => (x._2 > seqWhatSearchFirstElm.head._2+hValueHight || x._2 < seqWhatSearchFirstElm.head._2-hValueHight)).getOrElse(Tuple2(0,0)))
+           ) ++
+            rec_search(seqToSearch.span(x => (x._1 < seqWhatSearchFirstElm.head._1))._2, seqWhatSearchFirstElm.tail)
+      }
+    }
+
+    val res : Seq[Tuple2[Tuple2[Int,Int],Tuple2[Int,Int]]] = rec_search(hist,curr)
+
+    for(pair <- res) {
+      println(pair._1+" - "+pair._2)
+    }
+
+  }
+
+  test_recursive_search
 
 }
