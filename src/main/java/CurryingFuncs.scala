@@ -200,13 +200,23 @@ class histForwardAnalyzing(barsHist : BarsDS, barsFound: BarsDS, hValueHight : I
       // In second part make find element with conditions
 
       //new BarForwardRes(startBar, barsHist.Data.partition(_.bNumBegin < startBar.bNumEnd)._2.find(x => findBar(x,startBar)),hValueHight)
+/*
       new BarForwardRes(startBar, barsHist.Data.partition(_.bNumBegin < startBar.bNumEnd)._2
                                                .find(x => (x.bHigh > startBar.bClose+hValueHight || x.bLow < startBar.bClose-hValueHight)),hValueHight)
+*/
+      new BarForwardRes(startBar, barsHist.Data.dropWhile(_.bNumBegin < startBar.bNumEnd)
+        .find(x => (x.bHigh > startBar.bClose+hValueHight || x.bLow < startBar.bClose-hValueHight)),hValueHight)
 
     }
-    //Tips: possible rewrite getForwardSearchBar with adding second par - lookFromBNumBegin - currBarFound.bNumEnd
-    //  and next inside getForwardSearchBar replace partition with dropWhile that "remove" first elements that
-    //  _.bNumBegin <= lookFromBNumBegin !?
+    //Tips:
+    // 1)
+    // currBarFound is a Bar that has [bNumBegin,bNumEnd]
+    //      we can use it for search index in  barsHist.Data
+    // and next not iterate aech time from 0 position in barsHist,
+    // and replace it with drop(foundexIndex, may be with +/- 1)
+    //2)
+    //   replace search on recursion function that get second part and continue search from it, not from begin of seq.
+
     for(currBarFound <- barsFound.Data) yield getForwardSearchBar(currBarFound)
   }
 

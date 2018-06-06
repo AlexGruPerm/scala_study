@@ -35,7 +35,9 @@ object TestCollectFunctions extends App{
 
   def test_dw : Unit ={
     val s : Seq[Int] = Seq(1,2,3,4,5,6,7,8,9)
+    println(s.partition(x => (x<5))._2)
     println(s.dropWhile(x => (x<5)))
+    println(s.span(x => (x<5))._2)
   }
 
   //test_parts_simple
