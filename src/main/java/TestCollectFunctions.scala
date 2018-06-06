@@ -33,8 +33,15 @@ object TestCollectFunctions extends App{
 
   }
 
+  def test_dw : Unit ={
+    val s : Seq[Int] = Seq(1,2,3,4,5,6,7,8,9)
+    println(s.dropWhile(x => (x<5)))
+  }
+
   //test_parts_simple
   //test_divide_seq_on_bars
-  test_zip
+  //test_zip
+
+  test_dw
 
 }

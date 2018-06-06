@@ -183,31 +183,30 @@ class VisualSearchResults(barsHist : BarsDS, barsCurr :BarsDS, barsFound: BarsDS
 }
 
 
-
+/**
+  *
+  * @param barsHist    -- full history
+  * @param barsFound   -- last bars of founded patterns in history
+  * @param hValueHight
+  */
 class histForwardAnalyzing(barsHist : BarsDS, barsFound: BarsDS, hValueHight : Int){
 
   def get_forward_bars : Seq[BarForwardRes] = {
 
     def getForwardSearchBar(startBar : Bar) : BarForwardRes ={
 
-
       // partition divide seq on 2 parts:
       // ._1 before Bar - startBar and ._2 after startBar
       // In second part make find element with conditions
 
-      def findBar(cBar : Bar, compareBar : Bar) : Boolean ={
-       if (
-           (cBar.bHigh > startBar.bClose+hValueHight) /*u*/ ||
-           (cBar.bLow  < startBar.bClose-hValueHight) /*d*/
-          )
-         true
-       else
-         false
-      }
+      //new BarForwardRes(startBar, barsHist.Data.partition(_.bNumBegin < startBar.bNumEnd)._2.find(x => findBar(x,startBar)),hValueHight)
+      new BarForwardRes(startBar, barsHist.Data.partition(_.bNumBegin < startBar.bNumEnd)._2
+                                               .find(x => (x.bHigh > startBar.bClose+hValueHight || x.bLow < startBar.bClose-hValueHight)),hValueHight)
 
-      new BarForwardRes(startBar, barsHist.Data.partition(_.bNumBegin < startBar.bNumEnd)._2.find(x => findBar(x,startBar)),hValueHight)
     }
-
+    //Tips: possible rewrite getForwardSearchBar with adding second par - lookFromBNumBegin - currBarFound.bNumEnd
+    //  and next inside getForwardSearchBar replace partition with dropWhile that "remove" first elements that
+    //  _.bNumBegin <= lookFromBNumBegin !?
     for(currBarFound <- barsFound.Data) yield getForwardSearchBar(currBarFound)
   }
 
