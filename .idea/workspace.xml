@@ -28,8 +28,8 @@
       <file leaf-file-name="CurryingFuncs.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="219" lean-forward="true" selection-start-line="219" selection-end-line="219" />
+            <state relative-caret-position="161">
+              <caret line="279" column="2" selection-start-line="279" selection-start-column="2" selection-end-line="279" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -443,7 +443,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528285549587</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Rewritten function getForwardSearchBar in class histForwardAnalyzing to recursive from form&#10;&#10;      new BarForwardRes(&#10;            startBar, barsHist.Data.dropWhile(_.bNumBegin &lt; startBar.bNumEnd)&#10;                                   .find(x =&gt; (x.bHigh &gt; startBar.bClose+hValueHight || x.bLow &lt; startBar.bClose-hValueHight)),hValueHight)">
+      <created>1528358191817</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1528358191817</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -457,7 +464,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.0734375" side_tool="true" weight="0.39662448" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32911393" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.9265625" visible="true" weight="0.29957807" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.9265625" visible="true" weight="0.31012657" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1421875" />
@@ -536,7 +543,8 @@
     <MESSAGE value="Rewritten class histForwardAnalyzing&#10;added recommendation to replace partition with dropWhile" />
     <MESSAGE value="getForwardSearchBar&#10;different ways to do:&#10;1) partition, dropWhile, span&#10;2) search indexes on first step and continue form it in second&#10;3) use recursive search that continue next iteration from previous found position." />
     <MESSAGE value="everything ready to rewrite getForwardSearchBar with recursive function to elimination of partition,dropWhile or span." />
-    <option name="LAST_COMMIT_MESSAGE" value="everything ready to rewrite getForwardSearchBar with recursive function to elimination of partition,dropWhile or span." />
+    <MESSAGE value="Rewritten function getForwardSearchBar in class histForwardAnalyzing to recursive from form&#10;&#10;      new BarForwardRes(&#10;            startBar, barsHist.Data.dropWhile(_.bNumBegin &lt; startBar.bNumEnd)&#10;                                   .find(x =&gt; (x.bHigh &gt; startBar.bClose+hValueHight || x.bLow &lt; startBar.bClose-hValueHight)),hValueHight)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rewritten function getForwardSearchBar in class histForwardAnalyzing to recursive from form&#10;&#10;      new BarForwardRes(&#10;            startBar, barsHist.Data.dropWhile(_.bNumBegin &lt; startBar.bNumEnd)&#10;                                   .find(x =&gt; (x.bHigh &gt; startBar.bClose+hValueHight || x.bLow &lt; startBar.bClose-hValueHight)),hValueHight)" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
@@ -731,8 +739,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="219" lean-forward="true" selection-start-line="219" selection-end-line="219" />
+        <state relative-caret-position="161">
+          <caret line="279" column="2" selection-start-line="279" selection-start-column="2" selection-end-line="279" selection-end-column="2" />
         </state>
       </provider>
     </entry>
