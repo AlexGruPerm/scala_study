@@ -70,18 +70,18 @@ class Bar(barTicks : Seq[Tick]){
 }
 
 
-case class BarForwardRes(beginBar : Bar,endBar : Option[Bar], hValueHight : Int) {
+case class BarForwardRes(beginBar : Bar,endBar :Bar, hValueHight : Int) {
 
-  val beRes : Tuple2[String,Int] = if (endBar.isDefined) {
-                               if (endBar.get.bHigh > beginBar.bClose+hValueHight) ("u" -> (endBar.get.bHigh - (beginBar.bClose+hValueHight)))
-                                 else if (endBar.get.bLow < beginBar.bClose-hValueHight) ("d" -> ((beginBar.bClose-hValueHight)-endBar.get.bLow))
-                               else ("n"->0)
-                             } else ("n"->0)
-
+  val beRes : Tuple2[String,Int] = if (endBar.bNumBegin == 0) ("n"->0)
+                                     else {
+                                           if (endBar.bHigh > beginBar.bClose + hValueHight) ("u" -> (endBar.bHigh - (beginBar.bClose + hValueHight)))
+                                           else if (endBar.bLow < beginBar.bClose - hValueHight) ("d" -> ((beginBar.bClose - hValueHight) - endBar.bLow))
+                                           else ("n" -> 0)
+                                          }
 
   val beType   : String = beRes._1
   val beNumRes : Int    = beRes._2
-  val resTicksDuration  : Int = endBar.get.bNumBegin - beginBar.bNumEnd
+  val resTicksDuration  : Int = endBar.bNumBegin - beginBar.bNumEnd
 
   override def toString = {
     beginBar.toString+" > "+endBar.toString
@@ -169,7 +169,7 @@ class VisualSearchResults(barsHist : BarsDS, barsCurr :BarsDS, barsFound: BarsDS
           print("   * ")
       }
 
-      val idxInPair : Int = frwBars.map(x => x.endBar).flatten.indexOf(bh)
+      val idxInPair : Int = frwBars.map(x => x.endBar).indexOf(bh)// .flatten.indexOf(bh)
       if ( idxInPair > 0 )
         print("         out idxInPair="+idxInPair+"  BEGIN: "+frwBars(idxInPair).beginBar.bNumEnd+" rType="+frwBars(idxInPair).beType+" rHight="+frwBars(idxInPair).beNumRes+"   END: "+frwBars(idxInPair).endBar)
 
@@ -193,6 +193,73 @@ class histForwardAnalyzing(barsHist : BarsDS, barsFound: BarsDS, hValueHight : I
 
   def get_forward_bars : Seq[BarForwardRes] = {
 
+    def getForwardSearchBar(seqToSearch : Seq[Bar], seqWhatSearchFirstElm : Seq[Bar], hValueHight : Int) : Seq[BarForwardRes] = {
+      if (seqWhatSearchFirstElm.size==1)
+        //last iteration
+        Seq(
+          new BarForwardRes(seqWhatSearchFirstElm.head, seqToSearch.find(x => (x.bHigh > (seqWhatSearchFirstElm.head.bClose + hValueHight) ||
+                                                                               x.bLow  < (seqWhatSearchFirstElm.head.bClose - hValueHight)))
+                                                                   .getOrElse(new Bar(Seq(new Tick(Tuple2(0,0))))),hValueHight
+          )
+        )
+       else
+        Seq(
+          new BarForwardRes(seqWhatSearchFirstElm.head, seqToSearch.find(x => (x.bHigh > (seqWhatSearchFirstElm.head.bClose + hValueHight) ||
+                                                                               x.bLow  < (seqWhatSearchFirstElm.head.bClose - hValueHight)))
+                                                                   .getOrElse(new Bar(Seq(new Tick(Tuple2(0,0))))),hValueHight
+          )
+        ) ++ getForwardSearchBar(seqToSearch.span(x => (x.bNumBegin <= seqWhatSearchFirstElm(1).bNumEnd))._2, seqWhatSearchFirstElm.tail, hValueHight)
+    }
+
+    getForwardSearchBar(barsHist.Data.span(x => (x.bNumBegin <= barsFound.Data.head.bNumEnd))._2, barsFound.Data, hValueHight)
+
+  }
+
+}
+
+
+//backup2
+/*
+class histForwardAnalyzing(barsHist : BarsDS, barsFound: BarsDS, hValueHight : Int){
+
+  def get_forward_bars : Seq[BarForwardRes] = {
+
+    def getForwardSearchBar(seqToSearch : Seq[Bar], seqWhatSearchFirstElm : Seq[Bar], hValueHight : Int) : Seq[BarForwardRes] = {
+
+      println(" > "+seqWhatSearchFirstElm.head.bNumEnd+"   c="+seqWhatSearchFirstElm.head.bClose+"  seqSearch_0_bNumBegin="+seqToSearch.head.bNumBegin)
+
+      if (seqWhatSearchFirstElm.size==1) {
+        //last iteration
+        Seq(
+          new BarForwardRes(seqWhatSearchFirstElm.head, seqToSearch.find(x => (x.bHigh > (seqWhatSearchFirstElm.head.bClose + hValueHight) ||
+                                                                               x.bLow  < (seqWhatSearchFirstElm.head.bClose - hValueHight))).getOrElse(new Bar(Seq(new Tick(Tuple2(0,0))))),hValueHight
+                           )
+        )
+      } else {
+        Seq(
+          new BarForwardRes(seqWhatSearchFirstElm.head, seqToSearch.find(x => (x.bHigh > (seqWhatSearchFirstElm.head.bClose + hValueHight) ||
+                                                                               x.bLow  < (seqWhatSearchFirstElm.head.bClose - hValueHight))).getOrElse(new Bar(Seq(new Tick(Tuple2(0,0))))),hValueHight
+          )
+        ) ++
+          getForwardSearchBar(seqToSearch.span(x => (x.bNumBegin <= seqWhatSearchFirstElm(1).bNumEnd))._2, seqWhatSearchFirstElm.tail, hValueHight)
+      }
+    }
+
+    //Important note: begin search from first founded bar in barsFound.
+    // ??? MAYBE: x.bNumBegin  <=  barsFound.
+    getForwardSearchBar(barsHist.Data.span(x => (x.bNumBegin <= barsFound.Data.head.bNumEnd))._2, barsFound.Data, hValueHight)
+  }
+
+}
+*/
+
+
+//backup
+/*
+class histForwardAnalyzing(barsHist : BarsDS, barsFound: BarsDS, hValueHight : Int){
+
+  def get_forward_bars : Seq[BarForwardRes] = {
+
     def getForwardSearchBar(startBar : Bar) : BarForwardRes ={
 
       // partition divide seq on 2 parts:
@@ -200,10 +267,7 @@ class histForwardAnalyzing(barsHist : BarsDS, barsFound: BarsDS, hValueHight : I
       // In second part make find element with conditions
 
       //new BarForwardRes(startBar, barsHist.Data.partition(_.bNumBegin < startBar.bNumEnd)._2.find(x => findBar(x,startBar)),hValueHight)
-/*
-      new BarForwardRes(startBar, barsHist.Data.partition(_.bNumBegin < startBar.bNumEnd)._2
-                                               .find(x => (x.bHigh > startBar.bClose+hValueHight || x.bLow < startBar.bClose-hValueHight)),hValueHight)
-*/
+
       new BarForwardRes(startBar, barsHist.Data.dropWhile(_.bNumBegin < startBar.bNumEnd)
         .find(x => (x.bHigh > startBar.bClose+hValueHight || x.bLow < startBar.bClose-hValueHight)),hValueHight)
 
@@ -221,7 +285,7 @@ class histForwardAnalyzing(barsHist : BarsDS, barsFound: BarsDS, hValueHight : I
   }
 
 }
-
+*/
 
 
 
@@ -285,9 +349,12 @@ object CurryingFuncs extends App {                 //simple
   val frwBars : Seq[BarForwardRes] = new histForwardAnalyzing(bars, searchHistRes, 20).get_forward_bars
 
 
+
   println("frwBars.size="+frwBars.size)
   println(" Last bar in founded pattern(hist)                        duration      EXIST bar")
     for (currResPair <- frwBars) println(currResPair.beginBar+"    >    "+currResPair.resTicksDuration+"  "+currResPair.endBar)
+
+
 
 
 
