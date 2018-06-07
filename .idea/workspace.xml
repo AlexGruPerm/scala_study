@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/data/current.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/data/current.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -20,8 +18,8 @@
       <file leaf-file-name="CurryingFuncs.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="124" column="3" lean-forward="true" selection-start-line="124" selection-start-column="3" selection-end-line="124" selection-end-column="3" />
+            <state relative-caret-position="311">
+              <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
             </state>
           </provider>
         </entry>
@@ -456,7 +454,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528358360524</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="One more control point before Step 6">
+      <created>1528365980204</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1528365980204</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -551,7 +556,8 @@
     <MESSAGE value="everything ready to rewrite getForwardSearchBar with recursive function to elimination of partition,dropWhile or span." />
     <MESSAGE value="Rewritten function getForwardSearchBar in class histForwardAnalyzing to recursive from form&#10;&#10;      new BarForwardRes(&#10;            startBar, barsHist.Data.dropWhile(_.bNumBegin &lt; startBar.bNumEnd)&#10;                                   .find(x =&gt; (x.bHigh &gt; startBar.bClose+hValueHight || x.bLow &lt; startBar.bClose-hValueHight)),hValueHight)" />
     <MESSAGE value="Control point before Step 6" />
-    <option name="LAST_COMMIT_MESSAGE" value="Control point before Step 6" />
+    <MESSAGE value="One more control point before Step 6" />
+    <option name="LAST_COMMIT_MESSAGE" value="One more control point before Step 6" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
@@ -746,8 +752,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="124" column="3" lean-forward="true" selection-start-line="124" selection-start-column="3" selection-end-line="124" selection-end-column="3" />
+        <state relative-caret-position="311">
+          <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
         </state>
       </provider>
     </entry>
