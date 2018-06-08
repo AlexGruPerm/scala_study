@@ -3,6 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scala_study/data/current.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/data/current.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scala_study/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scala_study/scala_study.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/scala_study.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/SearchMaxs.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/SearchMaxs.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/TestCollectFunctions.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/TestCollectFunctions.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -15,11 +21,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CurryingFuncs.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CurryingFuncs.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
+            <state relative-caret-position="234">
+              <caret line="115" column="16" selection-start-line="115" selection-start-column="13" selection-end-line="115" selection-end-column="16" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#207#223#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestJSON.scala" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/TestJSON.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="542">
+              <caret line="56" column="54" selection-start-line="56" selection-start-column="54" selection-end-line="56" selection-end-column="54" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="conf.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../scala_study/conf/conf.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="13" lean-forward="true" selection-end-line="13" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestCollectFunctions.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/TestCollectFunctions.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
             </state>
           </provider>
         </entry>
@@ -51,6 +91,12 @@
       <find>histForwardAnalyzing</find>
       <find>histForwardAnalyzing.get_forward_bars</find>
       <find>compar</find>
+      <find>CurryingFuncs</find>
+      <find>collec</find>
+      <find>collect</find>
+      <find>logger</find>
+      <find>overr</find>
+      <find>zip</find>
     </findStrings>
     <dirStrings>
       <dir>C:\scala_study</dir>
@@ -79,8 +125,14 @@
         <option value="$PROJECT_DIR$/src/main/java/CurryingFuncs.scala" />
         <option value="$PROJECT_DIR$/src/main/java/CurryingFuncs.scala" />
         <option value="$PROJECT_DIR$/src/main/java/TestCollectFunctions.scala" />
+        <option value="$PROJECT_DIR$/../scala_study/src/main/logback.xml" />
+        <option value="$PROJECT_DIR$/../scala_study/src/main/resources/logback.xml" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/TestCollectFunctions.scala" />
+        <option value="$PROJECT_DIR$/../scala_study/pom.xml" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala" />
+        <option value="$PROJECT_DIR$/../scala_study/src/main/java/SearchMaxs.scala" />
+        <option value="$PROJECT_DIR$/../scala_study/conf/conf.json" />
+        <option value="$PROJECT_DIR$/../scala_study/src/main/java/TestJSON.scala" />
       </list>
     </option>
   </component>
@@ -114,28 +166,6 @@
               <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
               <item name="scala_study" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
-              <item name="scala_study" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
-              <item name="scala_study" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
-              <item name="scala_study" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -143,11 +173,18 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/..///scala/lib/json4s-ext_2.13.0-M4-3.5.4.jar!/" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../scala_study/src/main/resources" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.3275862" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\scala_study\src\main\resources" />
+      <recent name="C:\scala_study\src\main\java" />
+      <recent name="C:\scala_study\src\main" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -161,7 +198,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.CurryingFuncs">
+  <component name="RunManager" selected="Application.TestJSON">
     <configuration name="BarsPatternSearch" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="BarsPatternSearch" />
       <module name="scala_study" />
@@ -182,13 +219,13 @@
       <module name="scala_study" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
     </configuration>
-    <configuration name="SearchMaxs" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="SearchMaxs" />
+    <configuration name="TestCollectFunctions" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="TestCollectFunctions" />
       <module name="scala_study" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
     </configuration>
-    <configuration name="TestCollectFunctions" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="TestCollectFunctions" />
+    <configuration name="TestJSON" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="TestJSON" />
       <module name="scala_study" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
     </configuration>
@@ -212,6 +249,30 @@
         <value defaultName="singleModule" />
       </option>
       <patterns />
+    </configuration>
+    <configuration name="Maven_build" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="build" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/../scala_study" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
     </configuration>
     <configuration name="Maven_compile" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
@@ -261,20 +322,21 @@
     </configuration>
     <list>
       <item itemvalue="Application.CollectStudy" />
+      <item itemvalue="Maven.Maven_build" />
       <item itemvalue="Maven.Maven_compile" />
-      <item itemvalue="Application.SearchMaxs" />
       <item itemvalue="Application.HOFuncs" />
       <item itemvalue="Application.BarsPatternSearch" />
       <item itemvalue="Application.CurryingFuncs" />
       <item itemvalue="Application.TestCollectFunctions" />
+      <item itemvalue="Application.TestJSON" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestJSON" />
         <item itemvalue="Application.CurryingFuncs" />
         <item itemvalue="Application.TestCollectFunctions" />
         <item itemvalue="Application.BarsPatternSearch" />
         <item itemvalue="Application.HOFuncs" />
-        <item itemvalue="Application.SearchMaxs" />
       </list>
     </recent_temporary>
   </component>
@@ -461,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528365980204</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Work Step 6 to home">
+      <created>1528375458178</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1528375458178</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -470,15 +539,15 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49895832" weight="0.25632912" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49635416" weight="0.25632912" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.0734375" side_tool="true" weight="0.39662448" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.26197916" side_tool="true" weight="0.31751055" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32911393" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.9265625" visible="true" weight="0.44936708" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.73802084" visible="true" weight="0.26687765" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1421875" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21197917" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -532,7 +601,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ready to begin Project and git" />
     <MESSAGE value="begin study" />
     <MESSAGE value="test commit from home" />
     <MESSAGE value="just begin with Json" />
@@ -557,13 +625,18 @@
     <MESSAGE value="Rewritten function getForwardSearchBar in class histForwardAnalyzing to recursive from form&#10;&#10;      new BarForwardRes(&#10;            startBar, barsHist.Data.dropWhile(_.bNumBegin &lt; startBar.bNumEnd)&#10;                                   .find(x =&gt; (x.bHigh &gt; startBar.bClose+hValueHight || x.bLow &lt; startBar.bClose-hValueHight)),hValueHight)" />
     <MESSAGE value="Control point before Step 6" />
     <MESSAGE value="One more control point before Step 6" />
-    <option name="LAST_COMMIT_MESSAGE" value="One more control point before Step 6" />
+    <MESSAGE value="Work Step 6 to home" />
+    <option name="LAST_COMMIT_MESSAGE" value="Work Step 6 to home" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5984">
           <caret line="352" lean-forward="true" selection-start-line="352" selection-end-line="352" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#207#223#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -680,13 +753,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/FirstClass.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -729,20 +795,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/SearchMaxs.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="29" column="39" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/TestCollectFunctions.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8">
-          <caret line="75" column="12" lean-forward="true" selection-start-line="75" selection-start-column="12" selection-end-line="75" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../scala/lib/scala-library.jar!/scala/App.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -750,10 +802,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/resources/logback.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/SearchMaxs.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="83" column="63" lean-forward="true" selection-start-line="83" selection-start-column="63" selection-end-line="83" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="39" column="17" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/TestCollectFunctions.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/conf/conf.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="13" lean-forward="true" selection-end-line="13" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
+        <state relative-caret-position="234">
+          <caret line="115" column="16" selection-start-line="115" selection-start-column="13" selection-end-line="115" selection-end-column="16" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#207#223#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/TestJSON.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="542">
+          <caret line="56" column="54" selection-start-line="56" selection-start-column="54" selection-end-line="56" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -766,7 +867,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.3275862" />
               </list>
             </option>
           </splitter-proportions>
@@ -778,7 +879,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.3275862" />
               </list>
             </option>
           </splitter-proportions>
@@ -802,7 +903,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.3275862" />
               </list>
             </option>
           </splitter-proportions>
@@ -814,7 +915,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.3275862" />
                 <option value="0.6" />
               </list>
             </option>
@@ -839,7 +940,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.3275862" />
               </list>
             </option>
           </splitter-proportions>

@@ -1,3 +1,15 @@
+/* !?
+import com.typesafe.scalalogging.Logger
+import org.slf4j.{ Logger => Underlying }
+import org.slf4j.Marker
+import scala.Seq
+*/
+/* !?
+import com.typesafe.scalalogging._
+import org.slf4j.LoggerFactory
+*/
+import scala.Seq
+import scala.io
 
 /** presents one tick as object
   *
@@ -45,7 +57,7 @@ class scvReader(CsvPath : String){
   *
   * @param barTicks : Seq[Tick] - Sequence of ticks that define this Bar.
   */
-class Bar(barTicks : Seq[Tick]){
+class Bar(barTicks : scala.Seq[Tick]){
   val bNumBegin :Int = barTicks(0).tNum
   val bNumEnd   :Int = barTicks.last.tNum
 
@@ -89,13 +101,14 @@ case class BarForwardRes(beginBar : Bar,endBar :Bar, hValueHight : Int) {
 }
 
 
+
 /** presents sequence of bars (instances of Bar class)
   *
   * Additional functionality some compare methods, used in search current pattern in history.
   *
   * @param Data
   */
-case class BarsDS(Data : Seq[Bar]){
+case class BarsDS(Data : scala.Seq[Bar]){
   def size : Int = Data.size
 
   def compareByTypes(that: BarsDS) : Boolean= {
@@ -104,7 +117,6 @@ case class BarsDS(Data : Seq[Bar]){
     else
       true
   }
-
 
   def between(compVal : Int, valFrom : Double, ValTo :Double) : Boolean = {
     println("...................DEBUG......... between "+valFrom+" and "+ValTo)
@@ -146,10 +158,9 @@ class BarBuilder(ticks : TicksDs, ticksCntBar : Int){
   *    and return all !-LAST-! bars of founded formations as an object of class BarsDS
   */
 class PatterSearcher(barsHist : BarsDS, barsCurr :BarsDS){
-
   def patterSearchHistory : BarsDS =
     new BarsDS(barsHist.Data.sliding(barsCurr.size,barsCurr.size).filter(bh => (bh.size == barsCurr.size))
-                                                                 .filter(bh =>  (new BarsDS(bh)).compareByTypes2(barsCurr)) // .compareByTypes(barsCurr))
+                                                                 .filter(bh =>  (new BarsDS(bh)).compareByTypes2(barsCurr))
                                                                  .map(bh => bh.last).toSeq)
 
 }
@@ -243,6 +254,29 @@ class histForwardAnalyzing(barsHist : BarsDS, barsFound: BarsDS, hValueHight : I
 
 
 object CurryingFuncs extends App {                 //simple
+
+  //val logger = com.typesafe.scalalogging.Logger("application")
+/*
+  private val logger = Logger(LoggerFactory.getLogger(this.getClass))
+  println("logger.getClass.getName = "+logger.getClass.getName)
+
+  logger.info("service started")
+  logger.debug("reading")
+  logger.error("bad request: ")
+*/
+
+  val runtime = Runtime.getRuntime()
+  val format = java.text.NumberFormat.getInstance()
+
+  val maxMemory1 = runtime.maxMemory()
+  val allocatedMemory1 = runtime.totalMemory()
+  val freeMemory1 = runtime.freeMemory()
+  val totalFree1 = freeMemory1 + (maxMemory1 - allocatedMemory1)
+
+  val t0 = System.nanoTime()
+
+
+
   val ticks : TicksDs = new scvReader("data/first.csv").readTicks
   println("-----------------------------------")
   println("ticks.size="+ticks.size+" ticks(Class): "+ticks.getClass.getName)
@@ -254,7 +288,7 @@ object CurryingFuncs extends App {                 //simple
   }
   */
 
-  val bars : BarsDS = new BarBuilder(ticks, 30).getBars
+  val bars : BarsDS = new BarBuilder(ticks, 10).getBars
 
   println("-----------------------------------")
   println("bars.size="+bars.size)
@@ -270,7 +304,7 @@ object CurryingFuncs extends App {                 //simple
   */
 
   val ticksCurr : TicksDs = new scvReader("data/current.csv").readTicks
-  val barsCurr : BarsDS = new BarBuilder(ticksCurr, 30).getBars
+  val barsCurr : BarsDS = new BarBuilder(ticksCurr, 10).getBars
 
   println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
   println("bars.size     = "+bars.size)
@@ -278,8 +312,6 @@ object CurryingFuncs extends App {                 //simple
   println("~~ barsCurr Patter for search ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
   for (cb <- barsCurr.Data) println("          "+cb)
   println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-
-
 
   val barsHistSeacher : PatterSearcher = new PatterSearcher(bars,barsCurr)
 
@@ -300,7 +332,7 @@ object CurryingFuncs extends App {                 //simple
   println(" ")
 
 
-  val frwBars : Seq[BarForwardRes] = new histForwardAnalyzing(bars, searchHistRes, 30).get_forward_bars
+  val frwBars : Seq[BarForwardRes] = new histForwardAnalyzing(bars, searchHistRes, 10).get_forward_bars
 
 
   println("frwBars.size="+frwBars.size)
@@ -319,6 +351,18 @@ object CurryingFuncs extends App {                 //simple
   println(" Pattern founded in history need classification, f.e. total 560, 460-u ,100-d   Data can be added in real time with interval f.e. 1 min.")
   //we need use caches (for source ), queues,
   println(" ")
+
+
+  val t1 = System.nanoTime()
+  val maxMemory2 = runtime.maxMemory()
+  val allocatedMemory2 = runtime.totalMemory()
+  val freeMemory2 = runtime.freeMemory()
+  val totalFree2 = freeMemory2 + (maxMemory2 - allocatedMemory2)
+
+  println(
+    "Elapsed time : " + (t1 - t0) / 1000000000.0 + "s " + "\n" +
+      "Memory: " + format.format((totalFree2 - totalFree1) / 1024 / 1024) + "MB"
+  )
 
 
 }

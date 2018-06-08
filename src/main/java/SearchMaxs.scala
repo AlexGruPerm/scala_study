@@ -75,7 +75,7 @@ object SearchMaxs extends App {
 
 
   //-------------------------------------------
-  val buff = io.Source.fromFile("data/test.csv")
+  val buff = scala.io.Source.fromFile("data/test.csv")
   //val vCSV  : Seq[Tuple2[Int,Int]] = Seq((0,0),(1,10),(2,20),(3,30),(4,20),(5,10),(6,0))
   val vCSV  : Seq[Tuple2[Int,Int]] = buff.getLines.map{oneLine => (oneLine.split(";")(0).toInt-1, oneLine.split(";")(1).toInt)}.toSeq
   println("Source sequence length :" + getLength(vCSV)+ vCSV(0))
