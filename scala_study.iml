@@ -43,8 +43,6 @@
     <orderEntry type="library" name="Maven: org.scala-lang.modules:scala-xml_2.12:1.0.6" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jul-to-slf4j:1.7.25" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.25" level="project" />
-    <orderEntry type="library" name="Maven: com.typesafe.akka:akka-actor_2.12:2.5.11" level="project" />
-    <orderEntry type="library" name="Maven: com.typesafe:config:1.3.2" level="project" />
     <orderEntry type="library" name="Maven: com.typesafe.akka:akka-slf4j_2.12:2.5.11" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:22.0" level="project" />
@@ -58,5 +56,10 @@
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Maven: org.scala-lang.modules:scala-java8-compat_2.12:0.8.0" level="project" />
     <orderEntry type="library" name="Maven: org.scala-lang.modules:scala-parser-combinators_2.12:1.0.6" level="project" />
+    <orderEntry type="library" name="Maven: com.typesafe.akka:akka-actor_2.12:2.5.13" level="project" />
+    <orderEntry type="library" name="Maven: com.typesafe:config:1.3.2" level="project" />
+    <orderEntry type="library" name="Maven: com.typesafe.akka:akka-http_2.12:10.1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.typesafe.akka:akka-http-core_2.12:10.1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.typesafe.akka:akka-parsing_2.12:10.1.1" level="project" />
   </component>
 </module>

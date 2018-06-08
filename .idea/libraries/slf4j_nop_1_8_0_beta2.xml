@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="slf4j-nop-1.8.0-beta2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../scala_study/src/main/slf4j-nop-1.8.0-beta2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

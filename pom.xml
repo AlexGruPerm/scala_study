@@ -38,5 +38,15 @@
         <artifactId>play_2.12</artifactId>
         <version>2.6.15</version>
     </dependency>
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-actor_2.12</artifactId>
+        <version>2.5.13</version>
+    </dependency>
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-http_2.12</artifactId>
+        <version>10.1.1</version>
+    </dependency>
 </dependencies>
 </project>

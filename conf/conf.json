@@ -1,0 +1,15 @@
+{
+  "data_sources":
+  [
+    {
+      "id":1,
+      "pair":"eurusd",
+      "file_path":"data/eurusd.csv"
+    },
+    {
+      "id":2,
+      "pair":"audusd",
+      "file_path":"data/audusd.csv"
+    }
+  ]
+}
