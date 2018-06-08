@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/data/current.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/data/current.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/scala_study.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/scala_study.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/SearchMaxs.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/SearchMaxs.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/TestCollectFunctions.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/TestCollectFunctions.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -37,20 +31,11 @@
       <file leaf-file-name="TestJSON.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/TestJSON.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="542">
-              <caret line="56" column="54" selection-start-line="56" selection-start-column="54" selection-end-line="56" selection-end-column="54" />
+            <state relative-caret-position="561">
+              <caret line="33" column="2" selection-start-line="33" selection-start-column="2" selection-end-line="33" selection-end-column="2" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="conf.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../scala_study/conf/conf.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="13" lean-forward="true" selection-end-line="13" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -165,6 +150,11 @@
             <path>
               <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
               <item name="scala_study" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scala_study" type="462c0819:PsiDirectoryNode" />
+              <item name="conf" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -530,7 +520,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528375458178</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="First success parsing json - TestJSON">
+      <created>1528459758274</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1528459758274</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -544,7 +541,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.26197916" side_tool="true" weight="0.31751055" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32911393" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.73802084" visible="true" weight="0.26687765" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.73802084" visible="true" weight="0.15611814" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21197917" />
@@ -601,7 +598,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="begin study" />
     <MESSAGE value="test commit from home" />
     <MESSAGE value="just begin with Json" />
     <MESSAGE value="indexedSeq of objects, recursively search by objects" />
@@ -626,7 +622,8 @@
     <MESSAGE value="Control point before Step 6" />
     <MESSAGE value="One more control point before Step 6" />
     <MESSAGE value="Work Step 6 to home" />
-    <option name="LAST_COMMIT_MESSAGE" value="Work Step 6 to home" />
+    <MESSAGE value="First success parsing json - TestJSON" />
+    <option name="LAST_COMMIT_MESSAGE" value="First success parsing json - TestJSON" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
@@ -830,13 +827,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/conf/conf.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="13" lean-forward="true" selection-end-line="13" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -848,10 +838,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/conf/conf.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" lean-forward="true" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/TestJSON.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="56" column="54" selection-start-line="56" selection-start-column="54" selection-end-line="56" selection-end-column="54" />
+        <state relative-caret-position="561">
+          <caret line="33" column="2" selection-start-line="33" selection-start-column="2" selection-end-line="33" selection-end-column="2" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>
