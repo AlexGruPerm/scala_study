@@ -5,6 +5,8 @@ import play.Application
 
 //Original question: https://stackoverflow.com/questions/25432588/why-do-you-need-to-create-these-json-read-write-when-in-java-you-didnt-have-to
 
+//Docs: https://www.playframework.com/documentation/2.6.x/ScalaJson
+
 case class oneConf(id: Int, pair: String, file_path: String)
 
 case class properties(data_sources: Seq[oneConf])

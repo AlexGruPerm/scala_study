@@ -1,3 +1,5 @@
+import akka.actor._
+
 object TestCollectFunctions extends App {
 
   def test_parts_simple: Unit = {
@@ -170,6 +172,49 @@ object TestCollectFunctions extends App {
 
 
 
-  compare_class_cclass
+
+
+  class HelloActor(myName: String) extends Actor {
+
+
+    def receive = {
+      case "hello" => {
+        println("("+myName+") hello back at you")
+        //Thread.sleep(3000)
+      }
+      case _       => {
+        println("("+myName+") huh?")
+        //Thread.sleep(3000)
+      }
+    }
+
+  }
+
+
+  def parallel_test : Unit ={
+
+    val system = ActorSystem("HelloSystem")
+
+    val helloActor = system.actorOf(Props(new HelloActor("Parameter as String")), name = "helloactor")
+    val helloActor2 = system.actorOf(Props(new HelloActor("xxxxxxxx")), name = "helloactor2")
+
+    println("helloActor.getClass.getName="+helloActor.getClass.getName)
+
+    helloActor.tell(msg = "y1",sender = helloActor2)
+    helloActor.tell(msg = "y2",sender = helloActor2)
+    helloActor.tell(msg = "y3",sender = helloActor2)
+
+    //helloActor ! "hello"
+    //helloActor ! "buenos dias"
+
+  }
+
+
+
+
+
+
+  parallel_test
+  //compare_class_cclass
 
 }
