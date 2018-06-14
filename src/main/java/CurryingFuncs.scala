@@ -95,9 +95,7 @@ case class BarForwardRes(beginBar : Bar,endBar :Bar, hValueHight : Int) {
   val beNumRes : Int    = hValueHight//beRes._2
   val resTicksDuration  : Int = if (endBar.bNumBegin != 0) (endBar.bNumBegin - beginBar.bNumEnd) else 0
 
-  override def toString = {
-    beginBar.toString+" > "+endBar.toString
-  }
+  override def toString = beginBar.toString+" > "+endBar.toString
 }
 
 
