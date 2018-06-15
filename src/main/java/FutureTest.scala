@@ -65,9 +65,11 @@ object FutureTest extends App {
 
   val l = f//(f,res)
 
+  /*
   l match {
     case _:Function1[Int,Int] && 1==1 => println("This is a function of [Int] return Int")
   }
+  */
 
 /*
 x match {
