@@ -1,4 +1,4 @@
-import akka.actor._
+//import akka.actor._
 
 object TestCollectFunctions extends App {
 
@@ -172,7 +172,7 @@ object TestCollectFunctions extends App {
 
 
 
-
+/*
 
   class HelloActor(myName: String) extends Actor {
 
@@ -189,6 +189,7 @@ object TestCollectFunctions extends App {
     }
 
   }
+
 
 
   def parallel_test : Unit ={
@@ -216,5 +217,5 @@ object TestCollectFunctions extends App {
 
   parallel_test
   //compare_class_cclass
-
+*/
 }

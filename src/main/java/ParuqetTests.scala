@@ -1,7 +1,8 @@
+import com.sksamuel.avro4s.RecordFormat
 import org.slf4j.LoggerFactory
 import org.apache.hadoop.fs.Path
 import org.apache.avro.{Schema, SchemaBuilder}
-import org.apache.hadoop.conf.Configuration
+//import org.apache.hadoop.conf.Configuration
 import org.apache.parquet.avro.AvroParquetWriter
 import org.apache.parquet.hadoop.{ParquetFileWriter, ParquetWriter}
 
@@ -9,22 +10,19 @@ case class Person(id:Int,name: String)
 
 object ParuqetTests extends App {
   val logger = LoggerFactory.getLogger(this.getClass)
-  println("Hello")
 
-  def writeToFile[Person](data: Iterable[Person], schema: Schema, path: String): Unit = {
+  def writeToFile[T](data: Iterable[T], schema: Schema, path: String): Unit = {
 
-    val sPath = new Path(path)
-
-    val writer = AvroParquetWriter.builder[Person](sPath)
-      //.withConf(conf)
+    //val sPath = new Path(path)
+    val writer = AvroParquetWriter.builder[T](new Path(path))
       .withSchema(schema)
       .withWriteMode(ParquetFileWriter.Mode.OVERWRITE)
       .build()
-      .asInstanceOf[ParquetWriter[Person]]
+      .asInstanceOf[ParquetWriter[T]]
 
-    data.foreach(x => println(x+" type="+x.getClass.getName))
-    // data.foreach(writer.write)
-    // writer.close()
+    val format = RecordFormat[Person]
+      data.foreach(x => writer.write(format.to(x.asInstanceOf[Person]).asInstanceOf[T]))
+      writer.close()
   }
 
   val schema = SchemaBuilder
@@ -34,7 +32,7 @@ object ParuqetTests extends App {
     .requiredString("name")
     .endRecord()
 
-  val personData = Seq(Person(1,"A"),Person(2,"B"))
+  val personData = for(i <- 1 to 1000000) yield {new Person(i,(i*10).toString)}
 
-  writeToFile(personData,schema,"prq/test.parquet")
+    writeToFile(personData,schema,"prq/test.parquet")
 }

@@ -1,3 +1,4 @@
+/*
 import java.io._
 import play._
 import play.api.libs.json.{JsValue, Json, JsPath, Reads}
@@ -23,9 +24,10 @@ object properties {
   implicit val propertiesV: Reads[properties] = Json.reads[properties]
 
 }
+*/
 
 object TestJSON extends App {
-
+/*
   val stream = new FileInputStream("conf/conf.json")
   val json = try {  Json.parse(stream) } finally { stream.close() }
   val r = json.as[properties]
@@ -33,5 +35,5 @@ object TestJSON extends App {
   for(conf <- r.data_sources.toSeq){
     println(conf.id+"  "+conf.pair+"  "+conf.file_path)
   }
-
+*/
 }

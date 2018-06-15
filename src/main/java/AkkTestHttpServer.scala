@@ -1,3 +1,4 @@
+/*
 import akka.actor.ActorSystem
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.HttpApp
@@ -25,12 +26,12 @@ object WebServer extends HttpApp {
       }
 
 }
-
+*/
 object AkkTestHttpServer extends App{
-
+/*
   val system = ActorSystem("ownActorSystem")
   val settings = ServerSettings(ConfigFactory.load).withVerboseErrorMessages(true)
   WebServer.startServer("localhost", 8080, settings, system)
   system.terminate()
-
+*/
 }
