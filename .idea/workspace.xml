@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../scala_study/src/main/java/ParquetWriteRead.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/ParuqetTests.scala" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/spark_win_shell.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/conf/spark_win_shell.scala" afterDir="false" />
-    </list>
+    <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,8 +16,11 @@
       <file leaf-file-name="ParquetWriteRead.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/ParquetWriteRead.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="67" selection-start-line="9" selection-start-column="67" selection-end-line="9" selection-end-column="67" />
+            <state relative-caret-position="221">
+              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -624,12 +622,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529434543560</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="New File,Class ParquetWriteRead with Full example:&#10;Write into parquet, read from parquet&#10;without Spark libs.&#10;Using: avro4s,avro,parquet">
+      <created>1529480292613</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1529480292613</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -638,10 +642,10 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.47552082" side_tool="true" weight="0.25632912" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" weight="0.32911393" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5546875" visible="true" weight="0.3566879" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5546875" visible="true" weight="0.3566879" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32911393" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1375" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1375" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32908705" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -695,7 +699,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Task to elemenate Option" />
     <MESSAGE value="Correct Step 5 output" />
     <MESSAGE value="Finish with Step 5, clear files before step 6." />
     <MESSAGE value="Before step 6" />
@@ -720,7 +723,8 @@
     <MESSAGE value="Success writing into parquet" />
     <MESSAGE value="Work, validate parquet file written in scala with Spark shell (windows)&#10;Look at file : spark_win_shell.txt" />
     <MESSAGE value="spark in src" />
-    <option name="LAST_COMMIT_MESSAGE" value="spark in src" />
+    <MESSAGE value="New File,Class ParquetWriteRead with Full example:&#10;Write into parquet, read from parquet&#10;without Spark libs.&#10;Using: avro4s,avro,parquet" />
+    <option name="LAST_COMMIT_MESSAGE" value="New File,Class ParquetWriteRead with Full example:&#10;Write into parquet, read from parquet&#10;without Spark libs.&#10;Using: avro4s,avro,parquet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -945,8 +949,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/ParquetWriteRead.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="67" selection-start-line="9" selection-start-column="67" selection-end-line="9" selection-end-column="67" />
+        <state relative-caret-position="221">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
