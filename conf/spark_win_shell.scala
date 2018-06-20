@@ -27,11 +27,16 @@ import java.io.File
 import org.apache.spark.sql.{Row, SaveMode, SparkSession}
 val warehouseLocation = new File("C:\\scala_study\\prq").getAbsolutePath
 println(warehouseLocation)
+
 val pDF =  spark.read.parquet(warehouseLocation)
 
-pDF: org.apache.spark.sql.DataFrame = [id: int, name: string]
-
 pDF.printSchema
+pDF.show
+
+
+
+
+--------------
 
 scala> pDF.printSchema
 root
@@ -46,22 +51,6 @@ scala> pDF.show
 |  2|  20|
 |  3|  30|
 |  4|  40|
-|  5|  50|
-|  6|  60|
-|  7|  70|
-|  8|  80|
-|  9|  90|
-| 10| 100|
-| 11| 110|
-| 12| 120|
-| 13| 130|
-| 14| 140|
-| 15| 150|
-| 16| 160|
-| 17| 170|
-| 18| 180|
-| 19| 190|
-| 20| 200|
 +---+----+
 only showing top 20 rows
 
