@@ -34,6 +34,37 @@
         <version>10.1.1</version>
     </dependency>
 -->
+    <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-core_2.11</artifactId>
+        <version>2.3.1</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql -->
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-sql_2.11</artifactId>
+        <version>2.3.1</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming -->
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-streaming_2.11</artifactId>
+        <version>2.3.1</version>
+        <scope>provided</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka -->
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-streaming-kafka_2.11</artifactId>
+        <version>1.6.3</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.datastax.cassandra/cassandra-driver-core -->
+    <dependency>
+        <groupId>com.datastax.cassandra</groupId>
+        <artifactId>cassandra-driver-core</artifactId>
+        <version>3.5.0</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.avro/avro -->
     <dependency>
         <groupId>org.apache.avro</groupId>
