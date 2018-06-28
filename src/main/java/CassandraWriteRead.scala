@@ -1,8 +1,12 @@
 import com.datastax.driver.core._
-import com.google.common.util.concurrent.{ FutureCallback, Futures, ListenableFuture }
-import scala.concurrent.{ ExecutionContext, Future, Promise }
+import com.google.common.util.concurrent.{FutureCallback, Futures, ListenableFuture}
+import org.joda.time.DateTime
+
+import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.language.implicitConversions
 import scala.collection.JavaConverters._
+import scala.util.{Success, Failure}
+
 
 
 
@@ -51,43 +55,112 @@ object CassandraWriteRead extends App {
     promise.future
   }
 
+  /*
   def execute(statement: Future[PreparedStatement], params: Any*)(
     implicit executionContext: ExecutionContext, session: Session
   ): Future[ResultSet] =
     statement
       .map(_.bind(params.map(_.asInstanceOf[Object])))
       .flatMap(session.executeAsync(_))
-
-
-  // val statement = cql"SELECT * FROM testkeyspace.person"
-  // val resultSet = execute(statement)
-
-  //val resultSet =  execute(cql"SELECT * FROM testkeyspace.person where id=?")
-
-  //val rows: Future[Iterable[Row]] = resultSet.map(_.asScala)
+*/
 
   /*
-  val pID = 1
-  val resultSet = execute(cql"SELECT * FROM testkeyspace.person where id=?", pID)
-*/
+    def execute(statement: Future[PreparedStatement], pageSize: Int, params: Any*)(
+    implicit executionContext: ExecutionContext, session: Session
+  ): Future[ResultSet] =
+    for {
+      ps <- statement
+      bs =  ps.bind() //ps.bind(params.map(_.asInstanceOf[Object]))
+      rs <- session.executeAsync(bs.setFetchSize(pageSize))
+    } yield rs
+  */
+
+  def execute(statement: Future[PreparedStatement], pageSize: Int)(
+    implicit executionContext: ExecutionContext, session: Session
+  ): Future[ResultSet] =
+    for {
+      ps <- statement
+      bs =  ps.bind() //ps.bind(params.map(_.asInstanceOf[Object]))
+      rs <- session.executeAsync(bs.setFetchSize(pageSize))
+    } yield rs
+
+
+
 
   implicit val ec = ExecutionContext.global
 
   val pID = 3
   val resultSet = execute(
-    cql"SELECT * FROM testkeyspace.person where id = ?",
-    pID
+    cql"SELECT * FROM testkeyspace.person",
+    10
   )(ec,session)
 
+  def fetchMoreResults(resultSet: ResultSet)(
+    implicit executionContext: ExecutionContext, session: Session
+  ): Future[ResultSet] =
+    if (resultSet.isFullyFetched) {
+      Future.failed(new NoSuchElementException("No more results to fetch"))
+    } else {
+      resultSet.fetchMoreResults()
+    }
+
+  val rows : Future[ResultSet] = resultSet
+
+  for{r <- rows} {
+    println("id="+r.one().getInt("id"))
+  }
+
+
+  /*
+  rows.map {r => r.one()} onComplete {
+    case Success(v) => {
+                        //println(v.getColumnDefinitions)
+                         val rowID    = v.getInt("id")
+                         val rowName = v.getString("name")
+                         println( "id = "+rowID+" name = ["+rowName+"]")
+                       }
+    case Failure(e) => e.printStackTrace()
+  }
+  */
+
+  /*
+  rows.map {r => r.one().getInt(0)} onComplete {
+    case Success(v) => println(v)
+    case Failure(e) => e.printStackTrace()
+  }
+  */
+
+  /*
+  rows.map {r => r.one().getInt(0)} onComplete {
+    case Success(v) => println(s"Id = $v")
+    case Failure(e) => e.printStackTrace()
+  }
+  */
+
+  /*
   val rows: Future[Iterable[Row]] = resultSet.map(_.asScala)
 
  for(r <- rows)  {
+   r.get
     for (f <- r.toList){
       println("f="+f.toString)
     }
   }
+  */
 
 
+
+/*
+  """==============================================
+    |
+    |Here we go, failed to process for week
+    |
+    |===============================================
+  """
+  */
+
+
+  Thread.sleep(5000)
 
   println("session.getState.getConnectedHosts="+session.getState.getConnectedHosts)
   session.close()
