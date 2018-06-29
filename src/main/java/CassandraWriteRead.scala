@@ -91,7 +91,7 @@ object CassandraWriteRead extends App {
 
   val pID = 3
   val resultSet = execute(
-    cql"SELECT * FROM testkeyspace.person",
+    cql"select * from finance.currency",
     10
   )(ec,session)
 
@@ -106,9 +106,34 @@ object CassandraWriteRead extends App {
 
   val rows : Future[ResultSet] = resultSet
 
-  for{r <- rows} {
-    println("id="+r.one().getInt("id"))
+
+
+  /*
+  rows.map {r => r.one()} onComplete {
+    case Success(v) => {
+                        println("id=" + v.getInt("id") + " name=" + v.getString("name"))
+                       }
+    case Failure(e) => e.printStackTrace()
   }
+  */
+
+
+
+  for{r <- rows} {
+    val thisRow1 = r.one()
+    println("id="+thisRow1.getInt("id")+" name="+thisRow1.getString("name"))
+    val thisRow2 = r.one()
+    println("id="+thisRow2.getInt("id")+" name="+thisRow2.getString("name"))
+    val thisRow3 = r.one()
+    println("id="+thisRow3.getInt("id")+" name="+thisRow3.getString("name"))
+  }
+
+  /*
+  for{r <- rows} {
+    val thisRow = r.one()
+    println("id="+thisRow.getInt("id")+" name="+thisRow.getString("name"))
+  }
+  */
 
 
   /*

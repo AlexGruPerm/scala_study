@@ -29,12 +29,6 @@ class Car(name: String,engVolume : Double,initGas : Double){
   }
 
   def getFuturAsFunc = () => beginDrive
- /* {
-    val f = this.beginDrive
-    f
-  }
-*/
-
 
 }
 
@@ -45,13 +39,13 @@ object FutureTest extends App {
                             new Car("nissan",2.0,150),
                             new Car("bmw",3.5,130))
 
-  //cars(0).driveCar()
-  //for(c <- cars) yield c.beginDrive
-  val listFuturesForStart = for(c <- cars) yield c.getFuturAsFunc//.beginDrive
-
-
-
   println(">>>")
+  val listFuturesForStart = for(c <- cars) yield c.getFuturAsFunc
+
+  //run it
+  for {
+   c <- listFuturesForStart
+  } yield c()
 
   Thread.sleep(20000)
   println("<<<")
