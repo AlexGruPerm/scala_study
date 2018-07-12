@@ -8,7 +8,7 @@ import scala.collection.JavaConverters._
 import scala.util.{Success, Failure}
 
 
-
+case class CurrPair(id : Int, name: String)
 
 
 object CassandraWriteRead extends App {
@@ -104,21 +104,33 @@ object CassandraWriteRead extends App {
       resultSet.fetchMoreResults()
     }
 
-  val rows : Future[ResultSet] = resultSet
+  val rowsFuture : Future[ResultSet] = resultSet
 
+
+  val rowToCurrPair = (row: Row) => new CurrPair(row.getInt("id"),row.getString("name"))
+  val computation = (rows: Seq[Row]) => rows.map(rowToCurrPair)
+
+ // rowsFuture.map(computation)
+
+
+/*
+//DB query
+val rowsFuture: Future[Seq[Row]] = cassandraSession.selectAll(readingFromTable)
+val rowToString = (row: Row) => row.getString("name")
+val computation = (rows: Seq[Row]) => rows.map(rowToString).mkString
+
+// Computation to the data, rather than the other way around
+val resultFuture = rowsFuture.map(computation)
+*/
 
 
   /*
-  rows.map {r => r.one()} onComplete {
-    case Success(v) => {
+  * {
                         println("id=" + v.getInt("id") + " name=" + v.getString("name"))
                        }
-    case Failure(e) => e.printStackTrace()
-  }
-  */
+  * */
 
-
-
+/*
   for{r <- rows} {
     val thisRow1 = r.one()
     println("id="+thisRow1.getInt("id")+" name="+thisRow1.getString("name"))
@@ -127,52 +139,7 @@ object CassandraWriteRead extends App {
     val thisRow3 = r.one()
     println("id="+thisRow3.getInt("id")+" name="+thisRow3.getString("name"))
   }
-
-  /*
-  for{r <- rows} {
-    val thisRow = r.one()
-    println("id="+thisRow.getInt("id")+" name="+thisRow.getString("name"))
-  }
-  */
-
-
-  /*
-  rows.map {r => r.one()} onComplete {
-    case Success(v) => {
-                        //println(v.getColumnDefinitions)
-                         val rowID    = v.getInt("id")
-                         val rowName = v.getString("name")
-                         println( "id = "+rowID+" name = ["+rowName+"]")
-                       }
-    case Failure(e) => e.printStackTrace()
-  }
-  */
-
-  /*
-  rows.map {r => r.one().getInt(0)} onComplete {
-    case Success(v) => println(v)
-    case Failure(e) => e.printStackTrace()
-  }
-  */
-
-  /*
-  rows.map {r => r.one().getInt(0)} onComplete {
-    case Success(v) => println(s"Id = $v")
-    case Failure(e) => e.printStackTrace()
-  }
-  */
-
-  /*
-  val rows: Future[Iterable[Row]] = resultSet.map(_.asScala)
-
- for(r <- rows)  {
-   r.get
-    for (f <- r.toList){
-      println("f="+f.toString)
-    }
-  }
-  */
-
+*/
 
 
 /*
