@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../scala_study/conf/DB.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="Final ticks data Table and CPP DLL for saving ticks into cassandra. &#10;Source cpp files.">
       <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/ReadCassandraExamples.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/ReadCassandraExamples.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -20,8 +18,8 @@
       <file leaf-file-name="ReadCassandraExamples.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/ReadCassandraExamples.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="553">
-              <caret line="182" lean-forward="true" selection-start-line="182" selection-end-line="182" />
+            <state relative-caret-position="349">
+              <caret line="170" column="18" selection-start-line="170" selection-start-column="18" selection-end-line="170" selection-end-column="18" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -375,13 +373,6 @@
       <option name="presentableId" value="Default" />
       <updated>1526274645461</updated>
     </task>
-    <task id="LOCAL-00001" summary="ready to begin Project and git">
-      <created>1526275263252</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1526275263252</updated>
-    </task>
     <task id="LOCAL-00002" summary="begin study">
       <created>1526302121524</created>
       <option name="number" value="00002" />
@@ -711,11 +702,26 @@
       <option name="project" value="LOCAL" />
       <updated>1531393039803</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Final ticks data Tbale and CPP DLL for saving ticks into cassandra. &#10;Source cpp files.">
+      <created>1531484813633</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1531484813633</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Final ticks data Table and CPP DLL for saving ticks into cassandra. &#10;Source cpp files.">
+      <created>1531484850843</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1531484850844</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -784,8 +790,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="everything ready to rewrite getForwardSearchBar with recursive function to elimination of partition,dropWhile or span." />
-    <MESSAGE value="Rewritten function getForwardSearchBar in class histForwardAnalyzing to recursive from form&#10;&#10;      new BarForwardRes(&#10;            startBar, barsHist.Data.dropWhile(_.bNumBegin &lt; startBar.bNumEnd)&#10;                                   .find(x =&gt; (x.bHigh &gt; startBar.bClose+hValueHight || x.bLow &lt; startBar.bClose-hValueHight)),hValueHight)" />
     <MESSAGE value="Control point before Step 6" />
     <MESSAGE value="One more control point before Step 6" />
     <MESSAGE value="Work Step 6 to home" />
@@ -809,7 +813,9 @@
     <MESSAGE value="cassandra try return rows from Future[ResultSet] one one one" />
     <MESSAGE value="3 success methods to fetch data from ResultSet (cassandra)" />
     <MESSAGE value="read dataset of ticks from cassandra for symbol=3, get UnixTimeStamp &#10;from ts." />
-    <option name="LAST_COMMIT_MESSAGE" value="read dataset of ticks from cassandra for symbol=3, get UnixTimeStamp &#10;from ts." />
+    <MESSAGE value="Final ticks data Tbale and CPP DLL for saving ticks into cassandra. &#10;Source cpp files." />
+    <MESSAGE value="Final ticks data Table and CPP DLL for saving ticks into cassandra. &#10;Source cpp files." />
+    <option name="LAST_COMMIT_MESSAGE" value="Final ticks data Table and CPP DLL for saving ticks into cassandra. &#10;Source cpp files." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1030,8 +1036,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/ReadCassandraExamples.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="182" lean-forward="true" selection-start-line="182" selection-end-line="182" />
+        <state relative-caret-position="349">
+          <caret line="170" column="18" selection-start-line="170" selection-start-column="18" selection-end-line="170" selection-end-column="18" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>

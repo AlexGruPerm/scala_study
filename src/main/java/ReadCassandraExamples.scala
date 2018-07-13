@@ -168,7 +168,7 @@ object ReadCassandraExamples extends App {
   //sample
 
 
-  for ((elm,idx) <- ticksData.zipWithIndex if idx<10) println(elm)
+  for ((elm,idx)  <- ticksData.zipWithIndex if idx<10) println(elm)
 
 
   /*
