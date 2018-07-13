@@ -1,18 +1,15 @@
-import java.sql.ResultSet
-
-import com.datastax.driver.core.querybuilder.QueryBuilder
 import com.datastax.driver.core.Cluster
-import com.datastax.driver.core.ResultSetFuture
-import com.datastax.driver.core.Session
-
-import scala.collection.JavaConverters._
-import com.datastax.driver.core.{Metadata, Row}
-import org.apache.spark.sql.execution.streaming.FileStreamSource.Timestamp
-import java.sql.Timestamp
-
-
 import scala.language.implicitConversions
-import scala.concurrent.{ ExecutionContext, Future}
+import com.datastax.driver.core.{Metadata, Row}
+
+//import java.sql.ResultSet
+//import com.datastax.driver.core.querybuilder.QueryBuilder
+//import com.datastax.driver.core.ResultSetFuture
+//import com.datastax.driver.core.Session
+//import scala.collection.JavaConverters._
+//import org.apache.spark.sql.execution.streaming.FileStreamSource.Timestamp
+import java.sql.Timestamp
+//import scala.concurrent.{ ExecutionContext, Future}
 
 
 case class CurrPair(id : Int, name: String) {
