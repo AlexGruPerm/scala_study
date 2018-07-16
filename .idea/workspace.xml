@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/conf/DB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/conf/DB.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/ReadCassandraExamples.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/ReadCassandraExamples.scala" afterDir="false" />
@@ -17,12 +18,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ReadCassandraExamples.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReadCassandraExamples.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/ReadCassandraExamples.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="235">
+              <caret line="182" column="11" lean-forward="true" selection-start-line="182" selection-start-column="11" selection-end-line="182" selection-end-column="11" />
               <folding>
-                <element signature="e#89#128#0" expanded="true" />
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BarCalculator.scala" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="156">
+              <caret line="80" column="22" selection-start-line="80" selection-start-column="6" selection-end-line="80" selection-end-column="22" />
+              <folding>
+                <element signature="e#24#45#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -32,9 +46,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>BarForwardRes</find>
-      <find>*&quot;</find>
-      <find>input</find>
       <find>++</find>
       <find>XXXX</find>
       <find>compareByTypes</find>
@@ -62,6 +73,9 @@
       <find>yield</find>
       <find>yield</find>
       <find>zipWithIndex</find>
+      <find>pair_ts_tsunx</find>
+      <find>getLastTickDdate</find>
+      <find>rowToTicker</find>
     </findStrings>
     <dirStrings>
       <dir>C:\scala_study</dir>
@@ -122,6 +136,7 @@
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/CassandraWriteRead.scala" />
         <option value="$PROJECT_DIR$/../scala_study/conf/DB.sql" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/ReadCassandraExamples.scala" />
+        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala" />
       </list>
     </option>
   </component>
@@ -155,6 +170,11 @@
             <path>
               <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
               <item name="scala_study" type="462c0819:PsiDirectoryNode" />
+              <item name="conf" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scala_study" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -169,6 +189,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scala_study" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="calculator" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
@@ -364,13 +392,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526274645461</updated>
-    </task>
-    <task id="LOCAL-00003" summary="test commit from home">
-      <created>1526323087299</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1526323087299</updated>
     </task>
     <task id="LOCAL-00004" summary="just begin with Json">
       <created>1526891464396</created>
@@ -708,11 +729,19 @@
       <option name="project" value="LOCAL" />
       <updated>1531484918482</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Final step between Bar calculator.">
+      <created>1531488703604</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1531488703604</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -721,10 +750,10 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.4625" side_tool="true" weight="0.40764332" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" weight="0.32911393" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.2537155" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.42356688" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32911393" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1375" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1375" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32908705" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -781,7 +810,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Control point before Step 6" />
     <MESSAGE value="One more control point before Step 6" />
     <MESSAGE value="Work Step 6 to home" />
     <MESSAGE value="First success parsing json - TestJSON" />
@@ -806,7 +834,8 @@
     <MESSAGE value="read dataset of ticks from cassandra for symbol=3, get UnixTimeStamp &#10;from ts." />
     <MESSAGE value="Final ticks data Tbale and CPP DLL for saving ticks into cassandra. &#10;Source cpp files." />
     <MESSAGE value="Final ticks data Table and CPP DLL for saving ticks into cassandra. &#10;Source cpp files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Final ticks data Table and CPP DLL for saving ticks into cassandra. &#10;Source cpp files." />
+    <MESSAGE value="Final step between Bar calculator." />
+    <option name="LAST_COMMIT_MESSAGE" value="Final step between Bar calculator." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -814,13 +843,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/Primitiv.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="3" lean-forward="true" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5984">
@@ -886,13 +908,6 @@
     <entry file="jar://$PROJECT_DIR$/../scala/lib/scala-library.jar!/scala/concurrent/Future.class" />
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/logback.xml" />
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/resources/log4j2.xml" />
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/AkkTestHttpServer.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="2" selection-start-column="2" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/TestCollectFunctions.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -940,16 +955,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/FutureTest.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="46" column="27" selection-start-line="46" selection-start-column="27" selection-end-line="46" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CassandraWriteRead.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -987,20 +992,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/MatchExpr.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/Primitiv.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="45" column="47" selection-start-line="45" selection-start-column="47" selection-end-line="45" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/SearchMaxs.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="419">
@@ -1011,25 +1002,67 @@
     <entry file="file://$PROJECT_DIR$/../scala_study/conf/MATHLIBRARY/MATHLIBRARY.cpp">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/AkkTestHttpServer.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2">
+          <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/MatchExpr.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/conf/DB.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="91" column="28" selection-start-line="91" selection-start-column="28" selection-end-line="91" selection-end-column="28" />
+        <state relative-caret-position="220">
+          <caret line="47" column="37" lean-forward="true" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-323">
-          <caret line="29" column="1" lean-forward="true" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
+        <state relative-caret-position="289">
+          <caret line="167" column="3" lean-forward="true" selection-start-line="167" selection-start-column="3" selection-end-line="167" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/Primitiv.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-423">
+          <caret line="36" column="19" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/ReadCassandraExamples.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="235">
+          <caret line="182" column="11" lean-forward="true" selection-start-line="182" selection-start-column="11" selection-end-line="182" selection-end-column="11" />
           <folding>
-            <element signature="e#89#128#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/FutureTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-270">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="80" column="22" selection-start-line="80" selection-start-column="6" selection-end-line="80" selection-end-column="22" />
+          <folding>
+            <element signature="e#24#45#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -2,6 +2,8 @@ import com.datastax.driver.core.Cluster
 import scala.language.implicitConversions
 import com.datastax.driver.core.{Metadata, Row}
 
+import bar.calculator.{BarCalculator}
+
 //import java.sql.ResultSet
 //import com.datastax.driver.core.querybuilder.QueryBuilder
 //import com.datastax.driver.core.ResultSetFuture
@@ -124,6 +126,19 @@ class SimpleClient(node: String) {
   }
 
 
+  def getListTS()={
+    val results = session.execute("""
+                                    select max(ts) as ts,
+                                           toUnixTimestamp(max(ts)) as tsunx
+                                      from mts_src.ticks
+                                     where ticker_id = 1 and
+                                               ddate = '2018-07-16';
+                                  """)
+
+    val rsList = results.all()
+    for(i <- 0 to rsList.size()-1)
+      println(rsList.get(i).getTimestamp("ts")+"  "+rsList.get(i).getLong("tsunx"))
+  }
 
 
 
@@ -153,20 +168,26 @@ object ReadCassandraExamples extends App {
   println((t2 - t1) + " msecs")
   */
 
+  /*
   val t1 = System.currentTimeMillis
   val ticksData = client.getTicks()
   val t2 = System.currentTimeMillis
-
   println("ticksData.size="+ticksData.size+" duration = "+(t2 - t1)+ " msecs")
-
   val sumAsk = ticksData.map(elm => elm.ask).sum
   println("sumAsk="+sumAsk)
+*/
 
-  //sample
+
+  //!!!!!!!!!!!!!
+  val barCalc = new BarCalculator(client.session)
+  barCalc.calc()
+
+  //val t1 = System.currentTimeMillis
+  //client.getListTS()
+  //val t2 = System.currentTimeMillis
 
 
-  for ((elm,idx)  <- ticksData.zipWithIndex if idx<10) println(elm)
-
+  //for ((elm,idx)  <- ticksData.zipWithIndex if idx<10) println(elm)
 
   /*
    val procSeq : Seq[Tuple3[Int,Int,Int]] = for ((elm,idx) <- srcSeq.zipWithIndex) yield {

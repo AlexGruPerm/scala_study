@@ -61,7 +61,10 @@ select max(ddate) from mts_src.ticks where ticker_id=4;
 
 select max(ts) from mts_src.ticks where ticker_id=4;
 
+CREATE INDEX ticks_ticker ON mts_src.ticks(ticker_id); // for search max ddate by ticker
+//Ex: select max(ddate) from mts_src.ticks where ticker_id=1;
 
+//==================================================================================================================
 
 /*
  * Table for store calculated bars for each ticker, each bar type (bar_width_sec = 30,60,90... seconds)
@@ -90,3 +93,46 @@ CREATE TABLE mts_bars.bars(
 
 
 select * from mts_bars.bars;
+
+//==================================================================================================================
+
+/*
+ * Tickers dictionary.
+ */
+CREATE TABLE mts_meta.tickers(
+	ticker_id      int,
+	ticker_code    text,
+    PRIMARY KEY(ticker_id, ticker_code)
+);
+
+insert into mts_meta.tickers(ticker_id,ticker_code) values(1,'EURUSD');
+insert into mts_meta.tickers(ticker_id,ticker_code) values(2,'AUDUSD');
+insert into mts_meta.tickers(ticker_id,ticker_code) values(3,'GBPUSD');
+insert into mts_meta.tickers(ticker_id,ticker_code) values(4,'NZDUSD');
+
+select * from mts_meta.tickers;
+
+/*
+ * Table with meta properties each sizes used for each ticker for
+ * bars calculator.
+ */
+CREATE TABLE mts_meta.bars_property(
+	ticker_id      int,
+	bar_width_sec  int,
+	is_enabled     int,
+    PRIMARY KEY(ticker_id, bar_width_sec, is_enabled)
+);
+
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(1,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(4,30,1);
+
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(1,60,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,60,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,60,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(4,60,1);
+
+select * from mts_meta.bars_property where ticker_id=1;
+
+//==================================================================================================================
