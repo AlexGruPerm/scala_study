@@ -8,21 +8,21 @@
 CREATE KEYSPACE IF NOT EXISTS mts_src
   WITH REPLICATION = {
    'class' : 'SimpleStrategy',
-   'replication_factor' : 3
+   'replication_factor' : 1
   };
 
 -- Keyspace for all MTS metadata.
 CREATE KEYSPACE IF NOT EXISTS mts_meta
   WITH REPLICATION = {
    'class' : 'SimpleStrategy',
-   'replication_factor' : 3
+   'replication_factor' : 1
   };
 
 -- Keyspace only for bars calculated from ticks.
 CREATE KEYSPACE IF NOT EXISTS mts_bars
   WITH REPLICATION = {
    'class' : 'SimpleStrategy',
-   'replication_factor' : 3
+   'replication_factor' : 1
   };
 
 -- Table for all tickers tick data.
@@ -109,6 +109,10 @@ insert into mts_meta.tickers(ticker_id,ticker_code) values(1,'EURUSD');
 insert into mts_meta.tickers(ticker_id,ticker_code) values(2,'AUDUSD');
 insert into mts_meta.tickers(ticker_id,ticker_code) values(3,'GBPUSD');
 insert into mts_meta.tickers(ticker_id,ticker_code) values(4,'NZDUSD');
+insert into mts_meta.tickers(ticker_id,ticker_code) values(5,'EURCHF');
+insert into mts_meta.tickers(ticker_id,ticker_code) values(6,'USDCAD');
+insert into mts_meta.tickers(ticker_id,ticker_code) values(7,'USDCHF');
+insert into mts_meta.tickers(ticker_id,ticker_code) values(8,'EURCAD');
 
 select * from mts_meta.tickers;
 
@@ -127,11 +131,19 @@ insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(1,
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,30,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,30,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(4,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(5,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(6,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(7,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(8,30,1);
 
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(1,60,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,60,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,60,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(4,60,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(5,60,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(6,60,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(7,60,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(8,60,1);
 
 select * from mts_meta.bars_property where ticker_id=1;
 

@@ -4,7 +4,8 @@ import java.util.Date
 
 import com.datastax.driver.core.{LocalDate, Row, Session}
 
-import scala.concurrent.Future
+import scala.concurrent.{Await, Future}
+import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.{Failure, Success}
 
@@ -75,12 +76,13 @@ class BarCalculator(session: Session) {
     )
   }
 
+
   /**
     * Return max(ddate) by ticker
     */
   def getLastTickDdate(p_ticker : Int) ={
-    val prepared = session.prepare("select distinct ticker_id, ddate FROM mts_src.ticks where ticker_id = :tickerId;")
-     // "select max(ddate) as ddate from mts_src.ticks where ticker_id=:tickerId;")
+    /*
+    val prepared = session.prepare("select distinct ddate,ticker_id FROM mts_src.ticks where ticker_id = :tickerId;")
     val bound = prepared.bind().setInt("tickerId", p_ticker)
     val rsList = session.execute(bound).all()
     val res = for(i <- 0 to rsList.size()-1) yield //sList.get(i).getDate("ddate")
@@ -92,7 +94,22 @@ class BarCalculator(session: Session) {
     val max_dates = res.find(x => x._2 == getLastTickDdate_Res_Max)
     println("[getLastTickDdate] p_ticker="+p_ticker+"  max_dates=["+max_dates+"]")
     max_dates
+    */
+    val rsList = session.execute("select distinct ddate,ticker_id FROM mts_src.ticks;").all()
+    val res = for(i <- 0 to rsList.size()-1) yield
+      (
+        rsList.get(i).getInt("ticker_id"),
+        rsList.get(i).getDate("ddate"),
+        new Date(rsList.get(i).getDate("ddate").getMillisSinceEpoch)
+      )
+    val getLastTickDdate_Res_Max = res.map(x => x._3).max
+    val max_dates = res.find(x => x._3 == getLastTickDdate_Res_Max &&  x._1 == p_ticker).map(x => (x._2,x._3))
+    println("[getLastTickDdate] p_ticker="+p_ticker+"  max_dates=["+max_dates+"]")
+    max_dates
+
+
   }
+
 
   /**
     * Return max(ts),max(ts) as UNixTimeStamp by ticker
@@ -125,7 +142,7 @@ class BarCalculator(session: Session) {
     val bars_max_ddate   : java.util.Date = if (bars.nonEmpty) bars.map(b => b.ddate).max else null
     val bars_last_ts_unx : Int = if (bars.nonEmpty) bars.map(b=>b.ts_end_unx).max else 0
 
-    val dd = getLastTickDdate(row.getInt("ticker_id"))
+     val dd = getLastTickDdate(row.getInt("ticker_id"))
 
     dd match {
       case Some(s) => {
@@ -198,28 +215,24 @@ class BarCalculator(session: Session) {
   def get_Tickers(bars : Seq[Bar]) = {
     val results = session.execute("select * from mts_meta.tickers;")
     val rsList = results.all()
-    for(i <- 0 to rsList.size()-1) yield rowToTicker(rsList.get(i),bars)
 
-    /*
-    def futGetTicker(r : Row, bars : Seq[Bar]) = Future {
-      rowToTicker(r,bars)
-    }
+    val listFuturesFGetTicker : Seq[Future[Ticker]] = for(i <- 0 to rsList.size()-1) yield
+       Future {
+               rowToTicker(rsList.get(i),bars)
+              }
 
-    val listFuturesFGetTicker = for(i <- 0 to rsList.size()-1) yield futGetTicker(rsList.get(i),bars)
+    val allFutiresGetTicker: Future[Seq[Ticker]] = Future.sequence(listFuturesFGetTicker)
+    val tickersRes: Seq[Ticker] = Await.result(allFutiresGetTicker, 30.seconds)
 
-    val res = for {
-      c <- listFuturesFGetTicker
-    } yield c
-
-    res
-    */
-
+    tickersRes
   }
+
 
   /**
     * Main function for all calculation and operations.
     */
   def calc()={
+    println("----------------------------------------------------------------------------------")
     val bars_properties : Seq[bars_property] = get_bars_property()
     for(oneProp <- bars_properties)
       println("ticker_id = "+oneProp.ticker_id+" bar_width_sec = "+oneProp.bar_width_sec+" "+oneProp.is_enabled)
@@ -227,10 +240,10 @@ class BarCalculator(session: Session) {
     val bars : Seq[Bar] = get_Bars()
     for(oneBar <- bars) println("oneBar.ticker_id="+oneBar.ticker_id)
 
-    println("-----------------------------------------")
+    println("----------------------------------------------------------------------------------")
+    val tickers : Seq[Ticker] = get_Tickers(bars)
 
-    val tickers : IndexedSeq[Ticker] = get_Tickers(bars)
-
+    println("----------------------------------------------------------------------------------")
     for (oneTicker <- tickers) {
       println(" ticker_id  = "+oneTicker.ticker_id+
               " ticker_code  = "+oneTicker.ticker_code+
@@ -242,6 +255,9 @@ class BarCalculator(session: Session) {
               " last_tick_ts_unx = "+oneTicker.last_tick_ts_unx)}
 
   }
+
+
+
 
 }
 
