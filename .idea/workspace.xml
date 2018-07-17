@@ -32,11 +32,29 @@
       <file leaf-file-name="BarCalculator.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="275" lean-forward="true" selection-start-line="275" selection-end-line="275" />
+            <state relative-caret-position="82">
+              <caret line="244" column="78" lean-forward="true" selection-start-line="244" selection-start-column="78" selection-end-line="244" selection-end-column="78" />
               <folding>
                 <element signature="e#24#57#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DB.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../scala_study/conf/DB.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="77" lean-forward="true" selection-start-line="77" selection-end-line="77" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CurryingFuncs.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="108" column="22" selection-start-line="108" selection-start-column="18" selection-end-line="108" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -45,8 +63,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>XXXX</find>
-      <find>compareByTypes</find>
       <find>dura</find>
       <find>compareByTypesAndHight</find>
       <find>histForwardAnalyzing</find>
@@ -73,8 +89,10 @@
       <find>zipWithIndex</find>
       <find>pair_ts_tsunx</find>
       <find>getLastTickDdate</find>
-      <find>rowToTicker</find>
       <find>getLastTickTs</find>
+      <find>Emp</find>
+      <find>rowToTicker</find>
+      <find>new D</find>
     </findStrings>
     <dirStrings>
       <dir>C:\scala_study</dir>
@@ -391,13 +409,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526274645461</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Study Seq methods and begin work with CSV as data source. Forts.">
-      <created>1527142459728</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1527142459728</updated>
     </task>
     <task id="LOCAL-00007" summary="continue with CSV and search local maximums">
       <created>1527166590587</created>
@@ -735,7 +746,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531758222722</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="A lot of optimization, cql queries and code. Date format.&#10;correct information from Bars pulled into Tickers.&#10;Next step is writing non blocking recursive function with pause, &#10;for calculate and save bars into table.">
+      <created>1531809206955</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1531809206955</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -749,7 +767,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.4625" side_tool="true" weight="0.40764332" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" weight="0.32911393" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.41932058" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.22611465" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32911393" />
       <window_info id="Designer" order="2" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1375" />
@@ -809,7 +827,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="First success parsing json - TestJSON" />
     <MESSAGE value="First success parsing json (read from files) - TestJSON" />
     <MESSAGE value="Made some preparation for work with json (read config, write buffers). and Http control with akka, Http simple web server." />
     <MESSAGE value="commit before new internal design and change IDE theme" />
@@ -834,7 +851,8 @@
     <MESSAGE value="Final step between Bar calculator." />
     <MESSAGE value="Bar calculator middle, before Futures" />
     <MESSAGE value="Bar calculator middle point, solve read problem with&#10;select distinct ddate,ticker_id FROM mts_src.ticks&#10;!!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bar calculator middle point, solve read problem with&#10;select distinct ddate,ticker_id FROM mts_src.ticks&#10;!!!" />
+    <MESSAGE value="A lot of optimization, cql queries and code. Date format.&#10;correct information from Bars pulled into Tickers.&#10;Next step is writing non blocking recursive function with pause, &#10;for calculate and save bars into table." />
+    <option name="LAST_COMMIT_MESSAGE" value="A lot of optimization, cql queries and code. Date format.&#10;correct information from Bars pulled into Tickers.&#10;Next step is writing non blocking recursive function with pause, &#10;for calculate and save bars into table." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1015,13 +1033,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="167" column="3" lean-forward="true" selection-start-line="167" selection-start-column="3" selection-end-line="167" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/Primitiv.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-423">
@@ -1049,17 +1060,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="108" column="22" selection-start-line="108" selection-start-column="18" selection-end-line="108" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/conf/DB.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1482">
-          <caret line="165" column="20" selection-start-line="165" selection-start-column="20" selection-end-line="165" selection-end-column="20" />
+        <state relative-caret-position="102">
+          <caret line="77" lean-forward="true" selection-start-line="77" selection-end-line="77" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="275" lean-forward="true" selection-start-line="275" selection-end-line="275" />
+        <state relative-caret-position="82">
+          <caret line="244" column="78" lean-forward="true" selection-start-line="244" selection-start-column="78" selection-end-line="244" selection-end-column="78" />
           <folding>
             <element signature="e#24#57#0" expanded="true" />
           </folding>

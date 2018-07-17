@@ -75,6 +75,7 @@ CREATE INDEX ticks_ticker ON mts_src.ticks(ticker_id); // for search max ddate b
  * btype text code, upbar - g (green), o=c - n(none), o>c downbar - r (red) : g,n,r
  *
  */
+
 CREATE TABLE mts_bars.bars(
 	ticker_id      int,
 	ddate          date,
@@ -88,8 +89,8 @@ CREATE TABLE mts_bars.bars(
     h_body         double,
     h_shad         double,
     btype          varchar,
-    PRIMARY KEY((ticker_id, ddate, bar_width_sec),ts_begin)
-) WITH CLUSTERING ORDER BY (ts_begin DESC);
+    PRIMARY KEY((ticker_id, ddate, bar_width_sec),ts_end)
+) WITH CLUSTERING ORDER BY (ts_end DESC)
 
 
 
@@ -219,3 +220,6 @@ insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(8,
 select * from mts_meta.bars_property where ticker_id=1;
 
 //==================================================================================================================
+
+WARN  [PERIODIC-COMMIT-LOG-SYNCER] 2018-07-17 11:58:12,563
+  NoSpamLogger.java:94 - Out of 39 commit log syncs over the past 198,47s with average duration of 51,70ms, 4 have exceeded the configured commit interval by an average of 177,59ms
