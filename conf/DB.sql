@@ -92,7 +92,78 @@ CREATE TABLE mts_bars.bars(
 ) WITH CLUSTERING ORDER BY (ts_begin DESC);
 
 
-select * from mts_bars.bars;
+
+ insert into mts_bars.bars(
+ 	ticker_id,
+	ddate,
+	bar_width_sec,
+    ts_begin,
+    ts_end,
+    o,
+    h,
+    l,
+    c,
+    h_body,
+    h_shad,
+    btype
+ ) values(
+ 	2,
+ 	'2018-07-17',
+ 	30,
+ 	1531804871493,
+ 	1531804891493,
+ 	1.23,
+ 	2.34,
+ 	3.35,
+ 	4.36,
+ 	3.12,
+ 	4.15,
+ 	'g'
+ );
+
+  insert into mts_bars.bars(
+ 	ticker_id,
+	ddate,
+	bar_width_sec,
+    ts_begin,
+    ts_end,
+    o,
+    h,
+    l,
+    c,
+    h_body,
+    h_shad,
+    btype
+ ) values(
+ 	4,
+ 	'2018-07-17',
+ 	30,
+ 	1531807510245,
+ 	1531807516245,
+ 	1.23,
+ 	2.34,
+ 	3.35,
+ 	4.36,
+ 	3.12,
+ 	4.15,
+ 	'r'
+ );
+
+ select
+	ticker_id,
+	ddate,
+	bar_width_sec,
+    ts_begin,
+    ts_end,
+    o,
+    h,
+    l,
+    c,
+    h_body,
+    h_shad,
+    btype,
+    toUnixTimestamp(ts_end) as ts_end_unx
+ from mts_bars.bars;
 
 //==================================================================================================================
 
