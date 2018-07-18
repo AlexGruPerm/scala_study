@@ -31,8 +31,8 @@
       <file leaf-file-name="BarCalculator.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="328" column="88" selection-start-line="328" selection-start-column="88" selection-end-line="328" selection-end-column="88" />
+            <state relative-caret-position="167">
+              <caret line="317" column="12" selection-start-line="317" selection-start-column="6" selection-end-line="317" selection-end-column="21" />
               <folding>
                 <element signature="e#24#57#0" expanded="true" />
               </folding>
@@ -409,13 +409,6 @@
       <option name="presentableId" value="Default" />
       <updated>1526274645461</updated>
     </task>
-    <task id="LOCAL-00008" summary="continue Study">
-      <created>1527250763167</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1527250763167</updated>
-    </task>
     <task id="LOCAL-00009" summary="integral">
       <created>1527664562963</created>
       <option name="number" value="00009" />
@@ -752,12 +745,18 @@
       <option name="project" value="LOCAL" />
       <updated>1531842605258</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Was mistake in Tickers population - solved &#10;Need select only last (by ddate) - solved with cql query&#10;Now we are near real Bars calculation.">
+      <created>1531899029857</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1531899029857</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -826,7 +825,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Made some preparation for work with json (read config, write buffers). and Http control with akka, Http simple web server." />
     <MESSAGE value="commit before new internal design and change IDE theme" />
     <MESSAGE value="commit before fetch from github" />
     <MESSAGE value="FROM WORK: Begin read &quot;Prokopec, Aleksandar - Learning Concurrent Programming in Scala (2017, Packt Publishing)&quot;" />
@@ -851,7 +849,8 @@
     <MESSAGE value="Bar calculator middle point, solve read problem with&#10;select distinct ddate,ticker_id FROM mts_src.ticks&#10;!!!" />
     <MESSAGE value="A lot of optimization, cql queries and code. Date format.&#10;correct information from Bars pulled into Tickers.&#10;Next step is writing non blocking recursive function with pause, &#10;for calculate and save bars into table." />
     <MESSAGE value="Was mistake in Tickers population. Need select only last (by ddate) &#10;bar of each pairs ticket_id + width.&#10;18.08.2018 Planning to rewrite this part more carefully." />
-    <option name="LAST_COMMIT_MESSAGE" value="Was mistake in Tickers population. Need select only last (by ddate) &#10;bar of each pairs ticket_id + width.&#10;18.08.2018 Planning to rewrite this part more carefully." />
+    <MESSAGE value="Was mistake in Tickers population - solved &#10;Need select only last (by ddate) - solved with cql query&#10;Now we are near real Bars calculation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Was mistake in Tickers population - solved &#10;Need select only last (by ddate) - solved with cql query&#10;Now we are near real Bars calculation." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1075,8 +1074,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="328" column="88" selection-start-line="328" selection-start-column="88" selection-end-line="328" selection-end-column="88" />
+        <state relative-caret-position="167">
+          <caret line="317" column="12" selection-start-line="317" selection-start-column="6" selection-end-line="317" selection-end-column="21" />
           <folding>
             <element signature="e#24#57#0" expanded="true" />
           </folding>
