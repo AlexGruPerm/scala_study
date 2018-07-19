@@ -16,7 +16,7 @@ case class bars_property(ticker_id      :Int,
                          bar_width_sec  :Int,
                          is_enabled     :Int)
 
-case class 	Bar(
+case class 	BarC(
                  ticker_id       :Int,
                  ddate           :java.util.Date,
                  bar_width_sec   :Int,
@@ -33,7 +33,7 @@ case class 	Bar(
                 )
 
 
-case class LastBars(seqBars : Seq[Bar]) {
+case class LastBars(seqBars : Seq[BarC]) {
   def size : Int = seqBars.size
 
   println("Constructor of LastBars size="+size)
@@ -103,7 +103,7 @@ class BarCalculator(session: Session) {
   }
 
   val rowToBar = (row : Row) => {
-    new Bar(
+    new BarC(
       row.getInt("ticker_id"),
       //row.getTimestamp("ddate"),
       new Date(row.getDate("ddate").getMillisSinceEpoch),
@@ -209,22 +209,6 @@ class BarCalculator(session: Session) {
 
 
   def get_Bars(bars_properties : Seq[bars_property]) = {
-    /*
-    val resCommonBars = session.execute("""select  distinct
-                                            	      ticker_id,
-                                            	      ddate,
-                                            	      bar_width_sec
-                                               from mts_bars.bars """)
-    val rsCommonBars = resCommonBars.all()
-    val seqOfSeqBarProp: Seq[IndexedSeq[barProps]] = for (bp <- bars_properties) yield {
-      //println("bp.ticker_id=" + bp.ticker_id + "  bp.bar_width_sec=" + bp.bar_width_sec)
-      for (i <- 0 to rsCommonBars.size() - 1 if bp.bar_width_sec == rsCommonBars.get(i).getInt("bar_width_sec") &&
-                                                bp.ticker_id == rsCommonBars.get(i).getInt("ticker_id")
-                                               ) yield {
-        new barProps(bp.ticker_id, rsCommonBars.get(i).getDate("ddate"), bp.bar_width_sec)
-      }
-    }
-    */
     //preparation once, outside next for loop
     val resLastDateBar = session.prepare("""select max(ddate) as ddate
                                               from mts_bars.bars
@@ -324,13 +308,25 @@ class BarCalculator(session: Session) {
     * @param bars - Last bars by each width.
     * @return
     */
-  def calc_one_ticker(ticker : Ticker, bars : Seq[Bar], barsPropsTicker : Seq[bars_property]) : Seq[ticker_bars_save_result] ={
+  def calc_one_ticker(ticker : Ticker, bars : Seq[BarC], barsPropsTicker : Seq[bars_property]) : Seq[ticker_bars_save_result] ={
     //check BARS property for this ticker
     // && - AND
     // || - OR
     //LastBars must be empty if no one bar exists or it can be only one last bar.
     println("  2.[calc_one_ticker] ticker="+ticker.ticker_id)
+    // or from Option can take a.getOrElse(0)
+
+    val seqMinsBarUnxtsEnd = for (bp <- barsPropsTicker) yield {
+      bars.filter(b => b.bar_width_sec == bp.bar_width_sec).map(b => b.ts_end_unx).reduceOption(_ min _) match {
+        case Some(s) => s
+        case None => 0.toLong
+      }
+    }
+
+    val min_unxts_in_bars = seqMinsBarUnxtsEnd.min
+
     val res = for (bp <- barsPropsTicker) yield {
+
        println("    3. bar_width_sec = " + bp.bar_width_sec)
        val lastBar_ByWidth = bars.filter(b => b.bar_width_sec == bp.bar_width_sec)
        val lastBar_ts_end_unx : Long =
@@ -344,8 +340,46 @@ class BarCalculator(session: Session) {
        val lastBat_tsendunx_Diff_ticker_lstunx_Sec = (ticker.last_tick_ts_unx -lastBar_ts_end_unx)/1000
        println("      4.  ts_end_unx = " + lastBar_ts_end_unx + " Diff[seconds] = " + lastBat_tsendunx_Diff_ticker_lstunx_Sec)
        if (lastBat_tsendunx_Diff_ticker_lstunx_Sec > bp.bar_width_sec) {
-         println("        5. diff more then width. Start calculation for ticker, width, ts in ticks from "+lastBar_ts_end_unx+" to "+ticker.last_tick_ts_unx)
+         println("        5. diff more then width. Start calculation for ticker, width, ts in ticks from "+min_unxts_in_bars /*lastBar_ts_end_unx*/+" to "+ticker.last_tick_ts_unx+" min tsunx_from_bars="+min_unxts_in_bars)
+         // вначале общее чтение тиковых данных.
           // тут запускается сам рассчет по заданным тикер, ширина, интервал тиков через unxts
+         /*
+
+         --одно чтение для всех ширин, для оптимизации, чтобы не перечитывать одно и тоже для каждой ширины.
+-- 314 мс.
+select ticker_id,
+	   ddate,
+       ts,
+       bid,
+       ask
+  from mts_src.ticks
+ where ticker_id=1 and
+       ts > 1531958334414 and -- mini from all last bars by this ticker
+       ts < 1531958392292 -- last_tick
+       ALLOW FILTERING;
+
+         */
+
+         //1. читаем исходные данные запросом выше,
+         //2. передаем их в калькулятор
+         //3. бары которые он вернул тут сохраняем в бд,
+         //4. заполянем корректно ticker_bars_save_result и возвращаем, чтобы снаружи мог сработать рекурсивный вызов это же функции.
+
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+         /*
+         тут что-то типа
+
+          def getBars : BarsDS = new BarsDS(for(oneBar <- ticks.Data.sliding(bar_width_sec,bar_width_sec).filter(x => (x.size==bar_width_sec)).toSeq) yield
+    new bar.calculator.Bar(1, bar_width_sec, oneBar))
+
+    и сразу генерим Seq of local calss BarC
+
+    Брать из старых наработок саму суть алгоритмов,а  не код.
+
+         */
+
+
           new ticker_bars_save_result(
             ticker_id            = ticker.ticker_id,
             bar_width_sec        = bp.bar_width_sec,
@@ -404,7 +438,7 @@ class BarCalculator(session: Session) {
     * Make main bar calculations with Futures.
     * @param tickers
     */
-  def run_background_calcs(tickers : Seq[Ticker],bars : Seq[Bar], bars_properties : Seq[bars_property]): Unit ={
+  def run_background_calcs(tickers : Seq[Ticker],bars : Seq[BarC], bars_properties : Seq[bars_property]): Unit ={
     //Seq[Future[Ticker]]
     val listFut_Tickers : Seq[Seq[ticker_bars_save_result]] = for(thisTicker <- tickers) yield {
                                                           println("1. [run_background_calcs] inside for(thisTicker <- tickers) ticker_id="+thisTicker.ticker_id)
@@ -451,7 +485,7 @@ class BarCalculator(session: Session) {
     println("----------------------------------------------------------------------------------")
 
     //Here we need read only !LAST! bars by each ticker_id and bar_width from property
-    val seqBars : Seq[Bar] = get_Bars(bars_properties)//.flatten
+    val seqBars : Seq[BarC] = get_Bars(bars_properties)//.flatten
     val lBars = new LastBars(seqBars)
     for(oneBar <- lBars.seqBars) println("LAST BAR: ticker_id = "+oneBar.ticker_id +" ddate="+formatDate(oneBar.ddate,"dd.MM.yyyy")+" width="+oneBar.bar_width_sec +" ts_end_unx = " +oneBar.ts_end_unx)
 

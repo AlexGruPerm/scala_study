@@ -1,3 +1,4 @@
+import bar.calculator.CurrPair
 import com.datastax.driver.core._
 import com.google.common.util.concurrent.{FutureCallback, Futures, ListenableFuture}
 import org.joda.time.DateTime
@@ -5,7 +6,7 @@ import org.joda.time.DateTime
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.language.implicitConversions
 import scala.collection.JavaConverters._
-import scala.util.{Success, Failure}
+import scala.util.{Failure, Success}
 
 
 case class CurrPair(id : Int, name: String)
