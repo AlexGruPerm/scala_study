@@ -31,8 +31,8 @@
       <file leaf-file-name="BarCalculator.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="317" column="12" selection-start-line="317" selection-start-column="6" selection-end-line="317" selection-end-column="21" />
+            <state relative-caret-position="311">
+              <caret line="408" column="71" selection-start-line="408" selection-start-column="71" selection-end-line="408" selection-end-column="71" />
               <folding>
                 <element signature="e#24#57#0" expanded="true" />
               </folding>
@@ -62,9 +62,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>histForwardAnalyzing</find>
-      <find>histForwardAnalyzing.get_forward_bars</find>
-      <find>compar</find>
       <find>CurryingFuncs</find>
       <find>collec</find>
       <find>collect</find>
@@ -92,6 +89,9 @@
       <find>new D</find>
       <find>max(</find>
       <find>LAST BAR</find>
+      <find>calc_one_ticker</find>
+      <find>run_background_calcs</find>
+      <find>ticket</find>
     </findStrings>
     <dirStrings>
       <dir>C:\scala_study</dir>
@@ -408,13 +408,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526274645461</updated>
-    </task>
-    <task id="LOCAL-00009" summary="integral">
-      <created>1527664562963</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1527664562963</updated>
     </task>
     <task id="LOCAL-00010" summary="Build bars from ticks with set count of ticks in one bar.">
       <created>1527838290796</created>
@@ -752,11 +745,19 @@
       <option name="project" value="LOCAL" />
       <updated>1531899029857</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="It needs start function calc_one_ticker&#10;from ticker? not from bars.&#10;otherwise we lose tickers without no one bar in history.">
+      <created>1531927724677</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1531927724677</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -765,7 +766,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.4625" side_tool="true" weight="0.40764332" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" weight="0.32911393" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.38747346" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.3641189" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32911393" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1375" />
@@ -825,7 +826,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="commit before new internal design and change IDE theme" />
     <MESSAGE value="commit before fetch from github" />
     <MESSAGE value="FROM WORK: Begin read &quot;Prokopec, Aleksandar - Learning Concurrent Programming in Scala (2017, Packt Publishing)&quot;" />
     <MESSAGE value="FROM WORK: Begin read &quot;Prokopec, Aleksandar - Learning Concurrent Programming in Scala (2017, Packt Publishing)&quot; #2" />
@@ -850,7 +850,8 @@
     <MESSAGE value="A lot of optimization, cql queries and code. Date format.&#10;correct information from Bars pulled into Tickers.&#10;Next step is writing non blocking recursive function with pause, &#10;for calculate and save bars into table." />
     <MESSAGE value="Was mistake in Tickers population. Need select only last (by ddate) &#10;bar of each pairs ticket_id + width.&#10;18.08.2018 Planning to rewrite this part more carefully." />
     <MESSAGE value="Was mistake in Tickers population - solved &#10;Need select only last (by ddate) - solved with cql query&#10;Now we are near real Bars calculation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Was mistake in Tickers population - solved &#10;Need select only last (by ddate) - solved with cql query&#10;Now we are near real Bars calculation." />
+    <MESSAGE value="It needs start function calc_one_ticker&#10;from ticker? not from bars.&#10;otherwise we lose tickers without no one bar in history." />
+    <option name="LAST_COMMIT_MESSAGE" value="It needs start function calc_one_ticker&#10;from ticker? not from bars.&#10;otherwise we lose tickers without no one bar in history." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1074,8 +1075,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="317" column="12" selection-start-line="317" selection-start-column="6" selection-end-line="317" selection-end-column="21" />
+        <state relative-caret-position="311">
+          <caret line="408" column="71" selection-start-line="408" selection-start-column="71" selection-end-line="408" selection-end-column="71" />
           <folding>
             <element signature="e#24#57#0" expanded="true" />
           </folding>

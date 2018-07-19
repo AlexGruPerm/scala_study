@@ -82,7 +82,8 @@ case class barProps(
   *
   */
 case class ticker_bars_save_result(
-                                    ticker_id  :Int,
+                                    ticker_id            :Int,
+                                    bar_width_sec        :Int,
                                     prev_last_bar_ts_unx :Long,
                                     curr_last_bar_ts_unx :Long,
                                     saved_bars_count     :Int
@@ -315,36 +316,104 @@ class BarCalculator(session: Session) {
   }
 
 
-  def calc_one_ticker(ticker : Ticker, bars : Seq[Bar]) : ticker_bars_save_result ={
-    //check BARS property for this ticker
-    println(" 2.[calc_one_ticker] for this ticker="+ticker.ticker_id+" exists next bar properties:")
-     for (b <- bars) {
-       println("   3. b.bar_width_sec="+b.bar_width_sec + " b.ts_end_unx = " + b.ts_end_unx+" diff_last_bar_unxts_last_tick = "+ (ticker.last_tick_ts_unx -b.ts_end_unx)/1000 +" seconds")
-       //check new ticks data for bars calculation
-       if ((ticker.last_tick_ts_unx -b.ts_end_unx)/1000 > b.bar_width_sec) {
-         println("         --- "+(ticker.last_tick_ts_unx -b.ts_end_unx)/1000 +">"+ b.bar_width_sec+" CALCULATE THIS WIDTH_TICKER PAIR")
-       }
 
+  /** ===============================================================================================================
+    *  bars must contain only one Last bars(no one) by this ticker (for each widths) if this exists in db.
+    *
+    * @param ticker
+    * @param bars - Last bars by each width.
+    * @return
+    */
+  def calc_one_ticker(ticker : Ticker, bars : Seq[Bar], barsPropsTicker : Seq[bars_property]) : Seq[ticker_bars_save_result] ={
+    //check BARS property for this ticker
+    // && - AND
+    // || - OR
+    //LastBars must be empty if no one bar exists or it can be only one last bar.
+    println("  2.[calc_one_ticker] ticker="+ticker.ticker_id)
+    val res = for (bp <- barsPropsTicker) yield {
+       println("    3. bar_width_sec = " + bp.bar_width_sec)
+       val lastBar_ByWidth = bars.filter(b => b.bar_width_sec == bp.bar_width_sec)
+       val lastBar_ts_end_unx : Long =
+       if (lastBar_ByWidth.isEmpty) {
+        //no one bar in history by this width
+         0
+       } else {
+        //we have last bar for ticker
+         lastBar_ByWidth.head.ts_end_unx
+       }
+       val lastBat_tsendunx_Diff_ticker_lstunx_Sec = (ticker.last_tick_ts_unx -lastBar_ts_end_unx)/1000
+       println("      4.  ts_end_unx = " + lastBar_ts_end_unx + " Diff[seconds] = " + lastBat_tsendunx_Diff_ticker_lstunx_Sec)
+       if (lastBat_tsendunx_Diff_ticker_lstunx_Sec > bp.bar_width_sec) {
+         println("        5. diff more then width. Start calculation for ticker, width, ts in ticks from "+lastBar_ts_end_unx+" to "+ticker.last_tick_ts_unx)
+          // тут запускается сам рассчет по заданным тикер, ширина, интервал тиков через unxts
+          new ticker_bars_save_result(
+            ticker_id            = ticker.ticker_id,
+            bar_width_sec        = bp.bar_width_sec,
+            prev_last_bar_ts_unx = 1,
+            curr_last_bar_ts_unx = 2,
+            saved_bars_count     = 100
+          )
+        } else {
+         new ticker_bars_save_result(
+           ticker_id            = ticker.ticker_id,
+           bar_width_sec        = bp.bar_width_sec,
+           prev_last_bar_ts_unx = 0,
+           curr_last_bar_ts_unx = 0,
+           saved_bars_count     = 0
+         )
+       }
      }
+
+
+
+/* ticket -> ticker RENAME
+    val thisTicketLastBar = bars
+
+    println("   3. b.bar_width_sec="+thisTicketLastBar.bar_width_sec +
+            " b.ts_end_unx = " + thisTicketLastBar.ts_end_unx+
+            " diff_last_bar_unxts_last_tick = "+ (ticker.last_tick_ts_unx - thisTicketLastBar.ts_end_unx)/1000 +
+           " seconds")
+
+    if ((ticker.last_tick_ts_unx - thisTicketLastBar.ts_end_unx)/1000 > thisTicketLastBar.bar_width_sec) {
+      println("         --- "+(ticker.last_tick_ts_unx -thisTicketLastBar.ts_end_unx)/1000 +">"+ thisTicketLastBar.bar_width_sec+" CALCULATE THIS WIDTH_TICKER PAIR")
+      //check new ticks data for bars calculation
+    }
+*/
+
     // так мы пропускаем тикеты по которым вообще нет баров из расчета баров для них !!!
     //
     //  Наоборот поменять чтобы старт был с тикара! и уже дальше смотри есть по нему какие-то посчитанные бары или нет!
     //
     println(" ----------------------------------------------------------------------")
-
-    new ticker_bars_save_result(ticker.ticker_id,1,2,100)
+    res
+    /*
+    new ticker_bars_save_result(
+                                ticker_id            = ticker.ticker_id,
+                                bar_width_sec        = 30,
+                                prev_last_bar_ts_unx = 1,
+                                curr_last_bar_ts_unx = 2,
+                                saved_bars_count     = 100
+                               )
+    */
   }
 
 
-  /**
+
+
+  /** ===============================================================================================================
     * Make main bar calculations with Futures.
     * @param tickers
     */
-  def run_background_calcs(tickers : Seq[Ticker],bars : Seq[Bar]): Unit ={
+  def run_background_calcs(tickers : Seq[Ticker],bars : Seq[Bar], bars_properties : Seq[bars_property]): Unit ={
     //Seq[Future[Ticker]]
-    val listFut_Tickers : Seq[ticker_bars_save_result] = for(thisTicker <- tickers) yield {
+    val listFut_Tickers : Seq[Seq[ticker_bars_save_result]] = for(thisTicker <- tickers) yield {
                                                           println("1. [run_background_calcs] inside for(thisTicker <- tickers) ticker_id="+thisTicker.ticker_id)
-                                                          val resThisTicker = calc_one_ticker(thisTicker,bars.filter(b => b.ticker_id==thisTicker.ticker_id))
+                                                          //here return Seq because can be more them one bar properties, different widths
+                                                          val resThisTicker = calc_one_ticker(
+                                                                                              thisTicker,
+                                                                                              bars.filter(b => b.ticker_id == thisTicker.ticker_id),
+                                                                                              bars_properties.filter(bp => bp.ticker_id == thisTicker.ticker_id)
+                                                                                             )
                                                           resThisTicker
                                                           //new ticker_bars_save_result(thisTicker.ticker_id,1,2,100)
                                                          }
@@ -407,7 +476,7 @@ class BarCalculator(session: Session) {
     println("----------------------------------------------------------------------------------")
     //run recaclulation each ticker by each bar property
 
-    run_background_calcs(tickers,lBars.seqBars)
+    run_background_calcs(tickers,lBars.seqBars,bars_properties)
 
   }
 
