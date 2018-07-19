@@ -325,6 +325,22 @@ class BarCalculator(session: Session) {
 
     val min_unxts_in_bars = seqMinsBarUnxtsEnd.min
 
+    //common prepared sql
+    val resTicksByTsInterval = session.prepare(
+      """
+        select ticker_id,
+        	   ddate,
+               ts,
+               bid,
+               ask
+          from mts_src.ticks
+         where ticker_id = :tickerId and
+               ts > :ts_begin and -- minimum from all last bars by this ticker or 0
+               ts < :ts_end     -- last_tick ts
+               ALLOW FILTERING;
+      """)
+
+
     val res = for (bp <- barsPropsTicker) yield {
 
        println("    3. bar_width_sec = " + bp.bar_width_sec)
@@ -340,25 +356,57 @@ class BarCalculator(session: Session) {
        val lastBat_tsendunx_Diff_ticker_lstunx_Sec = (ticker.last_tick_ts_unx -lastBar_ts_end_unx)/1000
        println("      4.  ts_end_unx = " + lastBar_ts_end_unx + " Diff[seconds] = " + lastBat_tsendunx_Diff_ticker_lstunx_Sec)
        if (lastBat_tsendunx_Diff_ticker_lstunx_Sec > bp.bar_width_sec) {
-         println("        5. diff more then width. Start calculation for ticker, width, ts in ticks from "+min_unxts_in_bars /*lastBar_ts_end_unx*/+" to "+ticker.last_tick_ts_unx+" min tsunx_from_bars="+min_unxts_in_bars)
+         println("        5. diff more then width. Start calculation for ticker, width, ts in ticks from "+ min_unxts_in_bars /*lastBar_ts_end_unx*/+" to "+ticker.last_tick_ts_unx+" min tsunx_from_bars="+min_unxts_in_bars)
          // вначале общее чтение тиковых данных.
           // тут запускается сам рассчет по заданным тикер, ширина, интервал тиков через unxts
-         /*
+          val bound = resTicksByTsInterval.bind().setInt("tickerId", ticker.ticker_id)
+                                                 .setLong("ts_begin", min_unxts_in_bars)
+                                                 .setLong("ts_end", ticker.last_tick_ts_unx)
 
-         --одно чтение для всех ширин, для оптимизации, чтобы не перечитывать одно и тоже для каждой ширины.
--- 314 мс.
-select ticker_id,
-	   ddate,
-       ts,
-       bid,
-       ask
-  from mts_src.ticks
- where ticker_id=1 and
-       ts > 1531958334414 and -- mini from all last bars by this ticker
-       ts < 1531958392292 -- last_tick
-       ALLOW FILTERING;
+         val rsTicksRows = session.execute(bound).all()
 
-         */
+         val rsTicks : Seq[FinTick] = for(i <- 0 to rsTicksRows.size-1) yield {
+                                      new FinTick(
+                                        rsTicksRows.get(i).getTimestamp("ts"),
+                                        rsTicksRows.get(i).getDouble("ask"),
+                                        rsTicksRows.get(i).getDouble("big")
+                                      )
+                                     }
+         println(" >>>>>>>>>>>>> READ FROM DB "+ rsTicks.size+" TICKS.")
+
+         val seqSeqTicks : Seq[Seq[FinTick]] = rsTicks.sliding(bp.bar_width_sec,bp.bar_width_sec).filter(x => (x.size==bp.bar_width_sec)).toSeq
+
+         val seqBarsCalced = for (seqTicksOneBar <- seqSeqTicks) yield {
+           seqTicksOneBar.
+
+           /* YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+
+            val bNumBegin :Int = barTicks(0).tNum
+  val bNumEnd   :Int = barTicks.last.tNum
+
+  val bOpen     :Int = barTicks(0).tVal
+  val bHigh     :Int = barTicks.map(x=>x.tVal).max
+  val bLow      :Int = barTicks.map(x=>x.tVal).min
+  val bClose    :Int = barTicks.last.tVal
+
+  val bWidth    : Int = barTicks.size//bNumEnd - bNumBegin
+  val bHighBody : Int = math.abs(bClose-bOpen)
+  val bHighShad : Int = math.abs(bHigh-bLow)
+
+  val bType     : String = (bOpen compare bClose).signum match {
+                                                        case -1 => "g" // bOpen < bClose
+                                                        case  0 => "n" // bOpen = bClose
+                                                        case  1 => "r" // bOpen > bClose
+                                                      }
+
+           */
+
+                                                                       }
+
+         //new bars_property(row.getInt("ticker_id"), row.getInt("bar_width_sec"), row.getInt("is_enabled"))
+         //val calcedBarsNew = for()
+
+
 
          //1. читаем исходные данные запросом выше,
          //2. передаем их в калькулятор
