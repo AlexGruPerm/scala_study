@@ -43,9 +43,13 @@ object FutureTest extends App {
   val listFuturesForStart = for(c <- cars) yield c.getFuturAsFunc
 
   //run it
+
   for {
    c <- listFuturesForStart
   } yield c()
+
+
+
 
   Thread.sleep(20000)
   println("<<<")
