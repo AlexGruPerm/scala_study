@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/FutureTest.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/FutureTest.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -41,11 +40,20 @@
       <file leaf-file-name="BarCalculator.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-62">
-              <caret line="433" lean-forward="true" selection-start-line="433" selection-end-line="433" />
+            <state relative-caret-position="310">
+              <caret line="396" column="9" selection-start-line="396" selection-start-column="9" selection-end-line="396" selection-end-column="9" />
               <folding>
                 <element signature="e#24#49#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Bar.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Bar.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="59" lean-forward="true" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -62,23 +70,21 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ExecutionContext</find>
       <find>map</find>
       <find>succ</find>
       <find>overr</find>
       <find>rowToCurrPair</find>
       <find>CurrPair</find>
-      <find />
+      <find>yield</find>
       <find>yield</find>
       <find>zipWithIndex</find>
       <find>pair_ts_tsunx</find>
       <find>getLastTickDdate</find>
-      <find>getLastTickTs</find>
       <find>Emp</find>
       <find>rowToTicker</find>
-      <find />
+      <find>new D</find>
       <find>max(</find>
-      <find />
+      <find>LAST BAR</find>
       <find>calc_one_ticker</find>
       <find>run_background_calcs</find>
       <find>ticket</find>
@@ -87,11 +93,13 @@
       <find>BarsDS</find>
       <find>BarBuilder</find>
       <find>Bar</find>
-      <find />
+      <find>new Da</find>
       <find>LocalDate</find>
       <find>FinTick</find>
       <find>rowFinTick</find>
       <find>epo</find>
+      <find>getLastTickTs</find>
+      <find>Allow</find>
     </findStrings>
     <dirStrings>
       <dir>C:\scala_study</dir>
@@ -150,10 +158,10 @@
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/ReadCassandraExamples.scala" />
         <option value="$PROJECT_DIR$/../scala_study/conf/DB.sql" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/ReadCassandraExamples.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Bar.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculatorImpl.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/FutureTest.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala" />
+        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Bar.scala" />
       </list>
     </option>
   </component>
@@ -401,13 +409,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526274645461</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Task to elemenate Option">
-      <created>1528117408329</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1528117408329</updated>
     </task>
     <task id="LOCAL-00014" summary="Correct Step 5 output">
       <created>1528132090390</created>
@@ -745,12 +746,18 @@
       <option name="project" value="LOCAL" />
       <updated>1532011480521</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Bar calculated, made some optimization in getting ticks data for&#10;all widths.&#10;Try run it for each ticker in separate Future.&#10;And next last stape is saveing bars into db.">
+      <created>1532094268694</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1532094268695</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -759,7 +766,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.4625" side_tool="true" weight="0.3598726" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" weight="0.36836517" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.42038217" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.23248407" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32911393" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1375" />
@@ -830,7 +837,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Begin study parquet r/w in scala without Spark, hadoop" />
     <MESSAGE value="Success writing into parquet" />
     <MESSAGE value="Work, validate parquet file written in scala with Spark shell (windows)&#10;Look at file : spark_win_shell.txt" />
     <MESSAGE value="spark in src" />
@@ -855,7 +861,8 @@
     <MESSAGE value="Last perparation before real bars calculations." />
     <MESSAGE value="Founded simple way to calculate BarC(s) &#10;without any additional classes." />
     <MESSAGE value="Last step before get calulated Bars&#10;make fix in&#10;YYYYYYYY" />
-    <option name="LAST_COMMIT_MESSAGE" value="Last step before get calulated Bars&#10;make fix in&#10;YYYYYYYY" />
+    <MESSAGE value="Bar calculated, made some optimization in getting ticks data for&#10;all widths.&#10;Try run it for each ticker in separate Future.&#10;And next last stape is saveing bars into db." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bar calculated, made some optimization in getting ticks data for&#10;all widths.&#10;Try run it for each ticker in separate Future.&#10;And next last stape is saveing bars into db." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1044,13 +1051,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Bar.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="45" lean-forward="true" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CurryingFuncs.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -1092,10 +1092,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Bar.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="59" lean-forward="true" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-62">
-          <caret line="433" lean-forward="true" selection-start-line="433" selection-end-line="433" />
+        <state relative-caret-position="310">
+          <caret line="396" column="9" selection-start-line="396" selection-start-column="9" selection-end-line="396" selection-end-column="9" />
           <folding>
             <element signature="e#24#49#0" expanded="true" />
           </folding>

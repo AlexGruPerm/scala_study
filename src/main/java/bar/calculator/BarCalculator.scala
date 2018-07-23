@@ -4,6 +4,7 @@ import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.Date
 
+import com.datastax.driver.core
 import com.datastax.driver.core.{LocalDate, Row, Session}
 import io.netty.util.concurrent.Promise
 
@@ -108,7 +109,6 @@ class BarCalculator(session: Session) {
   val rowToBar = (row : Row) => {
     new BarC(
       row.getInt("ticker_id"),
-      //row.getTimestamp("ddate"),
       new Date(row.getDate("ddate").getMillisSinceEpoch),
       row.getInt("bar_width_sec"),
       row.getTimestamp("ts_begin"),
@@ -317,7 +317,10 @@ class BarCalculator(session: Session) {
     val seqMinsBarUnxtsEnd = for (bp <- barsPropsTicker) yield
       bars.filter(b => b.bar_width_sec == bp.bar_width_sec).map(b => b.ts_end_unx).reduceOption(_ min _).getOrElse(0.toLong)
 
-    val min_unxts_in_bars = seqMinsBarUnxtsEnd.min
+    val min_unxts_in_bars = {if (barsPropsTicker.size==0)
+                               0.toLong
+                             else
+                             seqMinsBarUnxtsEnd.min}
 
     val resTicksByTsInterval = session.prepare(
       """select ticker_id,
@@ -330,6 +333,35 @@ class BarCalculator(session: Session) {
                 ts > :ts_begin and
                 ts < :ts_end
                  ALLOW FILTERING; """)
+
+    val prepSaveBar = session.prepare(
+      """
+        insert into mts_bars.bars(
+        	  ticker_id,
+        	  ddate,
+        	  bar_width_sec,
+            ts_begin,
+            ts_end,
+            o,
+            h,
+            l,
+            c,
+            h_body,
+            h_shad,
+            btype)
+        values(
+        	  :p_ticker_id,
+        	  :p_ddate,
+        	  :p_bar_width_sec,
+            :p_ts_begin,
+            :p_ts_end,
+            :p_o,
+            :p_h,
+            :p_l,
+            :p_c,
+            :p_h_body,
+            :p_h_shad,
+            :p_btype); """)
 
     val bound = resTicksByTsInterval.bind().setInt("tickerId", ticker.ticker_id)
                                            .setTimestamp("ts_begin",  new Date(min_unxts_in_bars))
@@ -378,6 +410,25 @@ class BarCalculator(session: Session) {
          println("                ")
 
          //SAVE BARS
+         for (b <- seqBarsCalced) {
+           val boundSaveBar = prepSaveBar.bind()
+             .setInt("p_ticker_id", ticker.ticker_id)
+             .setDate("p_ddate",  core.LocalDate.fromMillisSinceEpoch( b.ddate.getTime()))
+             .setInt("p_bar_width_sec",b.bar_width_sec)
+             .setTimestamp("p_ts_begin", b.ts_begin)
+             .setTimestamp("p_ts_end", b.ts_end)
+             .setDouble("p_o",b.o)
+             .setDouble("p_h",b.h)
+             .setDouble("p_l",b.l)
+             .setDouble("p_c",b.c)
+             .setDouble("p_h_body",b.h_body)
+             .setDouble("p_h_shad",b.h_shad)
+             .setString("p_btype",b.btype)
+           session.execute(boundSaveBar)
+         }
+
+
+
 
           new ticker_bars_save_result(
             ticker_id            = ticker.ticker_id,
@@ -441,7 +492,7 @@ class BarCalculator(session: Session) {
   def run_background_calcs(tickers : Seq[Ticker],bars : Seq[BarC], bars_properties : Seq[bars_property]): Unit ={
     //Seq[Future[Ticker]]
     //scala.collection.immutable.Vector of Futures
-    val listFut_Tickers  /*Seq[Seq[ticker_bars_save_result]]*/ = for(thisTicker <- tickers /*if thisTicker.ticker_id == 2*/ ) yield Future{
+    val listFut_Tickers  /*Seq[Seq[ticker_bars_save_result]]*/ = for(thisTicker <- tickers  if bars_properties.map(bp => bp.ticker_id).contains(thisTicker.ticker_id)/*if thisTicker.ticker_id == 2*/ ) yield /*Future*/{
                                                           println("1. [run_background_calcs] inside for(thisTicker <- tickers) ticker_id="+thisTicker.ticker_id)
                                                           //here return Seq because can be more them one bar properties, different widths
                                                           val resThisTicker = calc_one_ticker(
@@ -451,8 +502,9 @@ class BarCalculator(session: Session) {
                                                                                              )
                                                           resThisTicker
                                                          }
-    println("listFut_Tickers class="+listFut_Tickers.getClass.getName)
+    //println("listFut_Tickers class="+listFut_Tickers.getClass.getName)
 
+    /*
     val futureOfList = Future.sequence(listFut_Tickers)
 
     futureOfList onComplete {
@@ -460,25 +512,11 @@ class BarCalculator(session: Session) {
       case Failure(ex) => println("Failed !!! " + ex)
     }
 
-    /*
-        val resBarsCals = for {
-          c <- listFut_Tickers
-        } yield c()
 
-
-         {
-          case Success(x) => println(s"OK result = $x")
-          case Failure(e) => e.printStackTrace
-        }
-        */
-
-
-    /*
       Future {
         calcThisTickersAll
       }
     */
-
 
     //если все футуры выполнились, то делаем паузу и запускам опять всё ??!!
     //ONE CALL WHILE !!!   run_background_calcs(tickers)
