@@ -394,15 +394,35 @@ class BarCalculator(session: Session) {
        if (lastBat_tsendunx_Diff_ticker_lstunx_Sec > bp.bar_width_sec) {
          println("        5. diff more then width. Start calculation for ticker, width, ts in ticks from "+ min_unxts_in_bars +" to "+ticker.last_tick_ts_unx+" min tsunx_from_bars="+min_unxts_in_bars)
 
-         val seqSeqTicks : Seq[Seq[FinTick]] = rsTicks.sliding(bp.bar_width_sec,bp.bar_width_sec).filter(x => (x.size==bp.bar_width_sec)).toSeq
+
+
+         //OLD BARS BY TICK, need seconds.
+         // val seqSeqTicks : Seq[Seq[FinTick]] = rsTicks.sliding(bp.bar_width_sec,bp.bar_width_sec).filter(x => (x.size==bp.bar_width_sec)).toSeq
+         //val fIdx = rsTicks.head.ts.getTime
+         //val lIdx = rsTicks.last.ts.getTime
+         val barsSides = rsTicks.head.ts.getTime.to(rsTicks.last.ts.getTime).by(bp.bar_width_sec*1000)
+
+         val seqBarSides = for ((bs,idx) <- barsSides.zipWithIndex) yield (bs,idx.toInt)
+
+         val seqBar2Sides = for(i <- 0 to seqBarSides.size-1) yield {
+           if (i < seqBarSides.last._2)
+             (seqBarSides(i)._1, seqBarSides(i+1)._1, seqBarSides(i)._2+1)
+           else
+             (seqBarSides(i)._1, seqBarSides(i)._1 + bp.bar_width_sec*1000, seqBarSides(i)._2+1)
+         }
+
+         def getGroupThisElement(elm : Long)={
+           seqBar2Sides.find(bs => (bs._1 <= elm && bs._2 > elm)).map(x => x._3).getOrElse(0)
+         }
+
+         val seqSeqTicks = rsTicks.groupBy(elm => getGroupThisElement(elm.ts.getTime)).filter(seqT => seqT._1!=0 ).toSeq.sortBy(gr => gr._1)
 
          val seqBarsCalced = for (seqTicksOneBar <- seqSeqTicks) yield
                            new Bar(
                                     p_ticker_id =ticker.ticker_id,
                                     p_bar_width_sec=bp.bar_width_sec,
-                                    barTicks = seqTicksOneBar
+                                    barTicks = seqTicksOneBar._2
                                    )
-
 
          println(" >>>>>>>>>>>>> CALCULATED BARS "+ seqBarsCalced.size)
 
