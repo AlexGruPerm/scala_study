@@ -317,14 +317,14 @@ class BarCalculator(session: Session) {
     val seqMinsBarUnxtsEnd = for (bp <- barsPropsTicker) yield
       bars.filter(b => b.bar_width_sec == bp.bar_width_sec).map(b => b.ts_end_unx).reduceOption(_ min _).getOrElse(0.toLong)
 
-    println("   2.1 [calc_one_ticker] seqMinsBarUnxtsEnd.size="+seqMinsBarUnxtsEnd.size)
-
+    //println("   2.1 [calc_one_ticker] seqMinsBarUnxtsEnd.size="+seqMinsBarUnxtsEnd.size)
     val min_unxts_in_bars = {if (barsPropsTicker.size==0)
                                0.toLong
                              else
                              seqMinsBarUnxtsEnd.min}
 
-    println("   2.2 [calc_one_ticker] min_unxts_in_bars="+min_unxts_in_bars)
+    //println("   2.2 [calc_one_ticker] min_unxts_in_bars="+min_unxts_in_bars)
+    //println(" BEFORE session.prepare resTicksByTsInterval min_unxts_in_bars=" + min_unxts_in_bars + " ticker.last_tick_ts_unx="+ticker.last_tick_ts_unx)
 
     val resTicksByTsInterval = session.prepare(
       """select ticker_id,
@@ -370,10 +370,8 @@ class BarCalculator(session: Session) {
             :p_h_shad,
             :p_btype,
             :p_ticks_cnt,
- |          :p_disp
+            :p_disp
             ); """)
-
-    println(" PREPARE resTicksByTsInterval min_unxts_in_bars=" + min_unxts_in_bars + " ticker.last_tick_ts_unx="+ticker.last_tick_ts_unx)
 
     val bound = resTicksByTsInterval.bind().setInt("tickerId", ticker.ticker_id)
                                            .setTimestamp("ts_begin",  new Date(min_unxts_in_bars))
@@ -387,8 +385,6 @@ class BarCalculator(session: Session) {
                                                                               tick.getDouble("ask"),
                                                                               tick.getDouble("bid")))
                                                .sortBy(ft => ft.ts)
-
-    println(" !!!!!!! READED FROM DB " + rsTicks.size + " TICKS.")
 
     if (rsTicks.nonEmpty) {
       println("      tick 1: " + rsTicks.head.ts.getTime)
@@ -529,13 +525,21 @@ class BarCalculator(session: Session) {
     * Make main bar calculations with Futures.
     * @param tickers
     */
-  def run_background_calcs(tickers : Seq[Ticker],bars : Seq[BarC], bars_properties : Seq[bars_property]): Unit ={
-    val listFut_Tickers   = for(thisTicker <- tickers  if bars_properties.map(bp => bp.ticker_id).contains(thisTicker.ticker_id)/*if thisTicker.ticker_id == 2*/ ) yield /*Future*/{
+  def run_background_calcs(tickers : Seq[Ticker],LastBars : Seq[BarC], bars_properties : Seq[bars_property]): Unit ={
+    val listFut_Tickers   = for(thisTicker <- tickers  if bars_properties.map(bp => bp.ticker_id).contains(thisTicker.ticker_id)
+                                                          /* thisTicker.ticker_id == 2*/
+                                                          //OPTIMIZATION, don't do anything if there are no necessary ticks for bar calculation.
+                                                          && (thisTicker.last_tick_ts_unx - {if (LastBars.nonEmpty && LastBars.map(b => b.ticker_id).contains(thisTicker.ticker_id))
+                                                                                                LastBars.filter(b => b.ticker_id == thisTicker.ticker_id).map(lb => lb.ts_end_unx).max
+                                                                                              else 0.toLong }
+                                                             )/1000 >=
+                                                              bars_properties.filter(bp => bp.ticker_id == thisTicker.ticker_id).map(bpt => bpt.bar_width_sec).min
+                                                         ) yield /*Future*/{
                                                           println("1. [run_background_calcs] inside for(thisTicker <- tickers) ticker_id="+thisTicker.ticker_id)
                                                           //here return Seq because can be more them one bar properties, different widths
                                                           val resThisTicker = calc_one_ticker(
                                                                                               thisTicker,
-                                                                                              bars.filter(b => b.ticker_id == thisTicker.ticker_id),
+                                                                                              LastBars.filter(b => b.ticker_id == thisTicker.ticker_id),
                                                                                               bars_properties.filter(bp => bp.ticker_id == thisTicker.ticker_id)
                                                                                              )
                                                           resThisTicker
@@ -588,6 +592,7 @@ class BarCalculator(session: Session) {
     //run recaclulation each ticker by each bar property
 
     run_background_calcs(tickers, lBars.seqBars, bars_properties)
+
   }
 
 

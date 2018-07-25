@@ -6,6 +6,10 @@ class Bar (p_ticker_id : Int, p_bar_width_sec : Int, barTicks : Seq[FinTick]) {
     (valueD * 10000).round / 10000.toDouble
   }
 
+  def simpleRound6Double(valueD : Double) = {
+    (valueD * 1000000).round / 1000000.toDouble
+  }
+
   val ticker_id       :Int = p_ticker_id
   val ddate           :java.util.Date = barTicks(0).ts
   val bar_width_sec   :Int= p_bar_width_sec
@@ -27,7 +31,7 @@ class Bar (p_ticker_id : Int, p_bar_width_sec : Int, barTicks : Seq[FinTick]) {
   val ticks_cnt       :Int = if (barTicks.nonEmpty) barTicks.size else 0
   //standard deviation
   val disp            :Double =  if (ticks_cnt != 0)
-                                  simpleRound4Double(
+                                  simpleRound6Double(
                                     Math.sqrt(
                                       barTicks.map(x => Math.pow((x.ask+x.bid)/2,2)).sum/ticks_cnt-
                                         Math.pow( barTicks.map(x => (x.ask+x.bid)/2).sum/ticks_cnt ,2)
