@@ -6,7 +6,6 @@ class Bar (p_ticker_id : Int, p_bar_width_sec : Int, barTicks : Seq[FinTick]) {
     (valueD * 10000).round / 10000.toDouble
   }
 
-
   val ticker_id       :Int = p_ticker_id
   val ddate           :java.util.Date = barTicks(0).ts
   val bar_width_sec   :Int= p_bar_width_sec
@@ -24,6 +23,18 @@ class Bar (p_ticker_id : Int, p_bar_width_sec : Int, barTicks : Seq[FinTick]) {
     case  1 => "r" // bOpen > bClose
   }
   val ts_end_unx      :Long   = barTicks.last.ts.getTime
+
+  val ticks_cnt       :Int = if (barTicks.nonEmpty) barTicks.size else 0
+  //standard deviation
+  val disp            :Double =  if (ticks_cnt != 0)
+                                  simpleRound4Double(
+                                    Math.sqrt(
+                                      barTicks.map(x => Math.pow((x.ask+x.bid)/2,2)).sum/ticks_cnt-
+                                        Math.pow( barTicks.map(x => (x.ask+x.bid)/2).sum/ticks_cnt ,2)
+                                    )
+                                  )
+                                 else 0
+
 
   override def toString =
     "[ "+ts_begin+":"+ts_end+"] ohlc=["+o+","+h+","+l+","+c+"] "+btype+"   body,shad=["+h_body+","+h_shad+"]"

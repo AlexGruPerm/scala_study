@@ -317,10 +317,14 @@ class BarCalculator(session: Session) {
     val seqMinsBarUnxtsEnd = for (bp <- barsPropsTicker) yield
       bars.filter(b => b.bar_width_sec == bp.bar_width_sec).map(b => b.ts_end_unx).reduceOption(_ min _).getOrElse(0.toLong)
 
+    println("   2.1 [calc_one_ticker] seqMinsBarUnxtsEnd.size="+seqMinsBarUnxtsEnd.size)
+
     val min_unxts_in_bars = {if (barsPropsTicker.size==0)
                                0.toLong
                              else
                              seqMinsBarUnxtsEnd.min}
+
+    println("   2.2 [calc_one_ticker] min_unxts_in_bars="+min_unxts_in_bars)
 
     val resTicksByTsInterval = session.prepare(
       """select ticker_id,
@@ -348,7 +352,10 @@ class BarCalculator(session: Session) {
             c,
             h_body,
             h_shad,
-            btype)
+            btype,
+            ticks_cnt,
+            disp
+            )
         values(
         	  :p_ticker_id,
         	  :p_ddate,
@@ -361,7 +368,12 @@ class BarCalculator(session: Session) {
             :p_c,
             :p_h_body,
             :p_h_shad,
-            :p_btype); """)
+            :p_btype,
+            :p_ticks_cnt,
+ |          :p_disp
+            ); """)
+
+    println(" PREPARE resTicksByTsInterval min_unxts_in_bars=" + min_unxts_in_bars + " ticker.last_tick_ts_unx="+ticker.last_tick_ts_unx)
 
     val bound = resTicksByTsInterval.bind().setInt("tickerId", ticker.ticker_id)
                                            .setTimestamp("ts_begin",  new Date(min_unxts_in_bars))
@@ -376,11 +388,15 @@ class BarCalculator(session: Session) {
                                                                               tick.getDouble("bid")))
                                                .sortBy(ft => ft.ts)
 
+    println(" !!!!!!! READED FROM DB " + rsTicks.size + " TICKS.")
+
     if (rsTicks.nonEmpty) {
       println("      tick 1: " + rsTicks.head.ts.getTime)
       println("      tick 2: " + rsTicks.tail.head.ts.getTime)
       println("      tick 3: " + rsTicks.tail.tail.head.ts.getTime)
       println(" >>>>>>>>>>>>> READED FROM DB " + rsTicks.size + " TICKS.")
+    } else {
+      println(" >>>>>>>>>>>>> READED FROM DB - rsTicks Empty.")
     }
 
     val res = for (bp <- barsPropsTicker if rsTicks.nonEmpty) yield {
@@ -446,6 +462,8 @@ class BarCalculator(session: Session) {
              .setDouble("p_h_body",b.h_body)
              .setDouble("p_h_shad",b.h_shad)
              .setString("p_btype",b.btype)
+             .setInt("p_ticks_cnt",b.ticks_cnt)
+             .setDouble("p_disp",b.disp)
            session.execute(boundSaveBar)
          }
 
@@ -512,9 +530,7 @@ class BarCalculator(session: Session) {
     * @param tickers
     */
   def run_background_calcs(tickers : Seq[Ticker],bars : Seq[BarC], bars_properties : Seq[bars_property]): Unit ={
-    //Seq[Future[Ticker]]
-    //scala.collection.immutable.Vector of Futures
-    val listFut_Tickers  /*Seq[Seq[ticker_bars_save_result]]*/ = for(thisTicker <- tickers  if bars_properties.map(bp => bp.ticker_id).contains(thisTicker.ticker_id)/*if thisTicker.ticker_id == 2*/ ) yield /*Future*/{
+    val listFut_Tickers   = for(thisTicker <- tickers  if bars_properties.map(bp => bp.ticker_id).contains(thisTicker.ticker_id)/*if thisTicker.ticker_id == 2*/ ) yield /*Future*/{
                                                           println("1. [run_background_calcs] inside for(thisTicker <- tickers) ticker_id="+thisTicker.ticker_id)
                                                           //here return Seq because can be more them one bar properties, different widths
                                                           val resThisTicker = calc_one_ticker(
@@ -524,24 +540,6 @@ class BarCalculator(session: Session) {
                                                                                              )
                                                           resThisTicker
                                                          }
-    //println("listFut_Tickers class="+listFut_Tickers.getClass.getName)
-
-    /*
-    val futureOfList = Future.sequence(listFut_Tickers)
-
-    futureOfList onComplete {
-      case Success(x)  => println("Success!!! " + x)
-      case Failure(ex) => println("Failed !!! " + ex)
-    }
-
-
-      Future {
-        calcThisTickersAll
-      }
-    */
-
-    //если все футуры выполнились, то делаем паузу и запускам опять всё ??!!
-    //ONE CALL WHILE !!!   run_background_calcs(tickers)
   }
 
 

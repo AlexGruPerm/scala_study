@@ -89,8 +89,10 @@ CREATE TABLE mts_bars.bars(
     h_body         double,
     h_shad         double,
     btype          varchar,
+    ticks_cnt      int,    -- тиковая плотность
+    disp           double, -- среднеквадратичное отклонение тиков в баре от Мо.
     PRIMARY KEY((ticker_id, ddate, bar_width_sec),ts_end)
-) WITH CLUSTERING ORDER BY (ts_end DESC)
+) WITH CLUSTERING ORDER BY (ts_end DESC);
 
 
 
