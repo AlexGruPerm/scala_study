@@ -1,5 +1,9 @@
 package bar.calculator
 
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, Future}
+
 object ReadCassandraExamples extends App {
   println("hello ")
   val client = new SimpleClient("127.0.0.1")
@@ -29,21 +33,26 @@ object ReadCassandraExamples extends App {
 
   //!!!!!!!!!!!!!
   val barCalc = new BarCalculator(client.session)
-  barCalc.calc()
+
+  def task1(): Future[Unit] = Future {
+    barCalc.calc()
+    Thread.sleep(30000)
+  }
+
+  def loopTask1(): Future[Unit] = {
+    task1.flatMap(_ => loopTask1())
+  }
+
+  def infiniteLoop(): Future[Unit] = {
+    Future.sequence(List(loopTask1()/*, loopTask2()*/)).map(_ => ())
+  }
+
+  Await.ready(infiniteLoop(), Duration.Inf)
 
   //val t1 = System.currentTimeMillis
   //client.getListTS()
   //val t2 = System.currentTimeMillis
 
-
-  //for ((elm,idx)  <- ticksData.zipWithIndex if idx<10) println(elm)
-
-  /*
-   val procSeq : Seq[Tuple3[Int,Int,Int]] = for ((elm,idx) <- srcSeq.zipWithIndex) yield {
-          val cntLT : Int = get_LT_Count(srcSeq,idx/*+1*/,searchDeep)
-          (elm._1,elm._2,cntLT)
-         }
-   */
 
   client.close
 }

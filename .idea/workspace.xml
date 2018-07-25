@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../scala_study/src/main/java/BarTaker.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Bar.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Bar.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/ReadCassandraExamples.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/ReadCassandraExamples.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -21,8 +20,11 @@
       <file leaf-file-name="ReadCassandraExamples.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/ReadCassandraExamples.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="48" column="1" lean-forward="true" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
+            <state relative-caret-position="224">
+              <caret line="37" column="18" lean-forward="true" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
+              <folding>
+                <element signature="e#24#81#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -30,8 +32,8 @@
       <file leaf-file-name="BarCalculator.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-753">
-              <caret line="511" column="6" selection-start-line="511" selection-start-column="6" selection-end-line="511" selection-end-column="6" />
+            <state relative-caret-position="743">
+              <caret line="595" lean-forward="true" selection-start-line="595" selection-end-line="595" />
               <folding>
                 <element signature="e#24#49#0" expanded="true" />
               </folding>
@@ -137,11 +139,11 @@
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/CassandraWriteRead.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/ReadCassandraExamples.scala" />
         <option value="$PROJECT_DIR$/../scala_study/conf/DB.sql" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/ReadCassandraExamples.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculatorImpl.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/FutureTest.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/BarTaker.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Bar.scala" />
+        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/ReadCassandraExamples.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala" />
       </list>
     </option>
@@ -390,13 +392,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526274645461</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Finish with Step 5, clear files before step 6.">
-      <created>1528134959090</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1528134959090</updated>
     </task>
     <task id="LOCAL-00016" summary="Before step 6">
       <created>1528135492583</created>
@@ -734,11 +729,19 @@
       <option name="project" value="LOCAL" />
       <updated>1532353041426</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="Final test on one ticker. Bar calculation, saving into DB.">
+      <created>1532415528217</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1532415528217</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -747,10 +750,10 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.4625" side_tool="true" weight="0.3598726" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" weight="0.36836517" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.23248407" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.28556263" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32911393" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1375" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1375" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32908705" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -818,7 +821,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Work, validate parquet file written in scala with Spark shell (windows)&#10;Look at file : spark_win_shell.txt" />
     <MESSAGE value="spark in src" />
     <MESSAGE value="New File,Class ParquetWriteRead with Full example:&#10;Write into parquet, read from parquet&#10;without Spark libs.&#10;Using: avro4s,avro,parquet" />
     <MESSAGE value="Final commit Work 20.06.2018 - next Cassandra" />
@@ -843,7 +845,8 @@
     <MESSAGE value="Last step before get calulated Bars&#10;make fix in&#10;YYYYYYYY" />
     <MESSAGE value="Bar calculated, made some optimization in getting ticks data for&#10;all widths.&#10;Try run it for each ticker in separate Future.&#10;And next last stape is saveing bars into db." />
     <MESSAGE value="sucess saving bars into db, but calculation way is bad, sliding&#10;with fixed size by elements. I need variable size by tickets and fixed &#10;size by seconds." />
-    <option name="LAST_COMMIT_MESSAGE" value="sucess saving bars into db, but calculation way is bad, sliding&#10;with fixed size by elements. I need variable size by tickets and fixed &#10;size by seconds." />
+    <MESSAGE value="Final test on one ticker. Bar calculation, saving into DB." />
+    <option name="LAST_COMMIT_MESSAGE" value="Final test on one ticker. Bar calculation, saving into DB." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1075,8 +1078,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-753">
-          <caret line="511" column="6" selection-start-line="511" selection-start-column="6" selection-end-line="511" selection-end-column="6" />
+        <state relative-caret-position="743">
+          <caret line="595" lean-forward="true" selection-start-line="595" selection-end-line="595" />
           <folding>
             <element signature="e#24#49#0" expanded="true" />
           </folding>
@@ -1085,8 +1088,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/ReadCassandraExamples.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="48" column="1" lean-forward="true" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
+        <state relative-caret-position="224">
+          <caret line="37" column="18" lean-forward="true" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
+          <folding>
+            <element signature="e#24#81#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
