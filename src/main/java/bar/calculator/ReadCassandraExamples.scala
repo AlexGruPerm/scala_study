@@ -8,10 +8,6 @@ import scala.concurrent.{Await, Future}
 
 object ReadCassandraExamples extends App {
     val logger = LoggerFactory.getLogger(ReadCassandraExamples.getClass)
-
-    logger.trace("BEGIN APPLICATION.")
-    logger.error("BEGIN APPLICATION.")
-    logger.debug("BEGIN APPLICATION.")
     logger.info("BEGIN APPLICATION.")
 
     val client = new SimpleClient("127.0.0.1")
@@ -24,15 +20,9 @@ object ReadCassandraExamples extends App {
 
     def taskBarPatternSearch(): Future[Unit] = Future {
       //barCalc.calc()
-      println("=================================================")
-      //println("....... I am here - taskBarPatternSearch  .......")
-
-      logger.trace("....... I am here - taskBarPatternSearch  .......")
-      logger.error("....... I am here - taskBarPatternSearch  .......")
-      logger.debug("....... I am here - taskBarPatternSearch  .......")
+      logger.info("=================================================")
       logger.info("....... I am here - taskBarPatternSearch  .......")
-
-      println("=================================================")
+      logger.info("=================================================")
       Thread.sleep(5000) // 30000
     }
 
