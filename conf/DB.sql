@@ -124,33 +124,7 @@ CREATE TABLE mts_bars.bars(
  	'g'
  );
 
-  insert into mts_bars.bars(
- 	ticker_id,
-	ddate,
-	bar_width_sec,
-    ts_begin,
-    ts_end,
-    o,
-    h,
-    l,
-    c,
-    h_body,
-    h_shad,
-    btype
- ) values(
- 	4,
- 	'2018-07-17',
- 	30,
- 	1531807510245,
- 	1531807516245,
- 	1.23,
- 	2.34,
- 	3.35,
- 	4.36,
- 	3.12,
- 	4.15,
- 	'r'
- );
+
 
  select
 	ticker_id,
@@ -179,14 +153,14 @@ CREATE TABLE mts_meta.tickers(
     PRIMARY KEY(ticker_id, ticker_code)
 );
 
-insert into mts_meta.tickers(ticker_id,ticker_code) values(1,'EURUSD');
-insert into mts_meta.tickers(ticker_id,ticker_code) values(2,'AUDUSD');
-insert into mts_meta.tickers(ticker_id,ticker_code) values(3,'GBPUSD');
-insert into mts_meta.tickers(ticker_id,ticker_code) values(4,'NZDUSD');
-insert into mts_meta.tickers(ticker_id,ticker_code) values(5,'EURCHF');
-insert into mts_meta.tickers(ticker_id,ticker_code) values(6,'USDCAD');
-insert into mts_meta.tickers(ticker_id,ticker_code) values(7,'USDCHF');
-insert into mts_meta.tickers(ticker_id,ticker_code) values(8,'EURCAD');
+INSERT INTO tickers (ticker_id,ticker_code) VALUES (1,'EURUSD');
+INSERT INTO tickers (ticker_id,ticker_code) VALUES (2,'AUDUSD');
+INSERT INTO tickers (ticker_id,ticker_code) VALUES (3,'GBPUSD');
+INSERT INTO tickers (ticker_id,ticker_code) VALUES (4,'NZDUSD');
+INSERT INTO tickers (ticker_id,ticker_code) VALUES (5,'EURCHF');
+INSERT INTO tickers (ticker_id,ticker_code) VALUES (6,'USDCAD');
+INSERT INTO tickers (ticker_id,ticker_code) VALUES (7,'USDCHF');
+INSERT INTO tickers (ticker_id,ticker_code) VALUES (8,'EURCAD');
 
 select * from mts_meta.tickers;
 
@@ -202,26 +176,73 @@ CREATE TABLE mts_meta.bars_property(
 );
 
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(1,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(4,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(5,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(6,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(7,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(8,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(1,90,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(1,600,1);
 
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(1,60,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,60,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,60,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(4,60,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(5,60,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(6,60,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(7,60,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(8,60,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,90,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,600,1);
+
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,90,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,600,1);
+
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(4,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(4,90,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(4,600,1);
+
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(5,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(5,90,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(5,600,1);
+
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(6,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(6,90,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(6,600,1);
+
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(7,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(7,90,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(7,600,1);
+
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(8,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(8,90,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(8,600,1);
+
 
 select * from mts_meta.bars_property where ticker_id=1;
 
 //==================================================================================================================
 
-WARN  [PERIODIC-COMMIT-LOG-SYNCER] 2018-07-17 11:58:12,563
-  NoSpamLogger.java:94 - Out of 39 commit log syncs over the past 198,47s with average duration of 51,70ms, 4 have exceeded the configured commit interval by an average of 177,59ms
+CREATE TABLE mts_bars.lastbars(
+	ticker_id      int,
+	bar_width_sec  int,
+    ts_begin       timestamp,
+    ts_end         timestamp,
+    o              double,
+    h              double,
+    l              double,
+    c              double,
+    h_body         double,
+    h_shad         double,
+    btype          varchar,
+    ticks_cnt       int,
+    disp           double,
+    PRIMARY KEY((ticker_id, bar_width_sec))
+);
+
+
+select * from mts_meta.tickers;
+
+select count(*) from mts_src.ticks;
+
+select * from mts_bars.bars;
+
+select * from mts_bars.lastbars where bar_width_sec=30 allow filtering;
+
+select * from mts_bars.lastbars where bar_width_sec=90 allow filtering;
+
+select * from mts_bars.lastbars where bar_width_sec=600 allow filtering;
+
+
+truncate mts_src.ticks;
+truncate mts_bars.bars;
+truncate mts_bars.lastbars;

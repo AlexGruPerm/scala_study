@@ -1,18 +1,18 @@
 package bar.calculator
 
-import java.sql.Timestamp
+//import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.Date
 
 import com.datastax.driver.core
 import com.datastax.driver.core.{LocalDate, Row, Session}
-import io.netty.util.concurrent.Promise
+//import io.netty.util.concurrent.Promise
 
 import scala.collection.JavaConverters
-import scala.concurrent.{Await, Future}
-import scala.concurrent.duration._
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.util.{Failure, Success}
+//import scala.concurrent.{Await, Future}
+//import scala.concurrent.duration._
+//import scala.concurrent.ExecutionContext.Implicits.global
+//import scala.util.{Failure, Success}
 
 
 
@@ -373,6 +373,39 @@ class BarCalculator(session: Session) {
             :p_disp
             ); """)
 
+    val prepSaveOnlineLastBars = session.prepare(
+      """
+        insert into mts_bars.lastbars(
+        	  ticker_id,
+        	  bar_width_sec,
+            ts_begin,
+            ts_end,
+            o,
+            h,
+            l,
+            c,
+            h_body,
+            h_shad,
+            btype,
+            ticks_cnt,
+            disp
+            )
+        values(
+        	  :p_ticker_id,
+        	  :p_bar_width_sec,
+            :p_ts_begin,
+            :p_ts_end,
+            :p_o,
+            :p_h,
+            :p_l,
+            :p_c,
+            :p_h_body,
+            :p_h_shad,
+            :p_btype,
+            :p_ticks_cnt,
+            :p_disp
+            ); """)
+
     val bound = resTicksByTsInterval.bind().setInt("tickerId", ticker.ticker_id)
                                            .setTimestamp("ts_begin",  new Date(min_unxts_in_bars))
                                            .setTimestamp("ts_end",  new Date(ticker.last_tick_ts_unx))
@@ -402,13 +435,16 @@ class BarCalculator(session: Session) {
        val lastBar_ts_end_unx : Long = if (lastBar_ByWidth.isEmpty) 0
                                         else lastBar_ByWidth.head.ts_end_unx
 
-       val lastBat_tsendunx_Diff_ticker_lstunx_Sec = (ticker.last_tick_ts_unx -lastBar_ts_end_unx)/1000
+       val lastBat_tsendunx_Diff_ticker_lstunx_Sec = (ticker.last_tick_ts_unx - lastBar_ts_end_unx )/1000
 
-       println("      4.  ts_end_unx = " + lastBar_ts_end_unx + " Diff[seconds] = " + lastBat_tsendunx_Diff_ticker_lstunx_Sec)
-       if (lastBat_tsendunx_Diff_ticker_lstunx_Sec > bp.bar_width_sec) {
+       val dataWidthSec = (ticker.last_tick_ts_unx - Math.max(lastBar_ts_end_unx,rsTicks.head.ts.getTime) )/1000
+
+       println("       4.   rsTicks.head.ts.getTime="+rsTicks.head.ts.getTime+" lastBar_ts_end_unx="+lastBar_ts_end_unx+"  dataWidthSec=" + dataWidthSec)
+
+       //println("       4.  lastBar_ts_end_unx = " + lastBar_ts_end_unx +"  Diff[seconds] = " + lastBat_tsendunx_Diff_ticker_lstunx_Sec)
+      //Value lastBat_tsendunx_Diff_ticker_lstunx_Sec can be extremaly BIG because lastBar_ts_end_unx can be equal 0.
+       if (dataWidthSec/*lastBat_tsendunx_Diff_ticker_lstunx_Sec*/ > bp.bar_width_sec) {
          println("        5. diff more then width. Start calculation for ticker, width, ts in ticks from "+ min_unxts_in_bars +" to "+ticker.last_tick_ts_unx+" min tsunx_from_bars="+min_unxts_in_bars)
-
-
 
          //OLD BARS BY TICK, need seconds.
          // val seqSeqTicks : Seq[Seq[FinTick]] = rsTicks.sliding(bp.bar_width_sec,bp.bar_width_sec).filter(x => (x.size==bp.bar_width_sec)).toSeq
@@ -422,27 +458,30 @@ class BarCalculator(session: Session) {
            if (i < seqBarSides.last._2)
              (seqBarSides(i)._1, seqBarSides(i+1)._1, seqBarSides(i)._2+1)
            else
-             (seqBarSides(i)._1, seqBarSides(i)._1 + bp.bar_width_sec*1000, seqBarSides(i)._2+1)
+             (seqBarSides(i)._1, seqBarSides(i)._1 /*+ bp.bar_width_sec*1000*/, seqBarSides(i)._2+1)  //#########
          }
 
          def getGroupThisElement(elm : Long)={
-           seqBar2Sides.find(bs => (bs._1 <= elm && bs._2 > elm)).map(x => x._3).getOrElse(0)
+           seqBar2Sides.find(bs => (bs._1 <= elm && bs._2 > elm) && (bs._2 - bs._1)/1000 == bp.bar_width_sec).map(x => x._3).getOrElse(0)
          }
 
          val seqSeqTicks = rsTicks.groupBy(elm => getGroupThisElement(elm.ts.getTime)).filter(seqT => seqT._1!=0 ).toSeq.sortBy(gr => gr._1)
+                                                                //Not last group where can be less then bar_width_sec
+         val seqBarsCalced = for (seqTicksOneBar <- seqSeqTicks if seqTicksOneBar._1 != 0 ) yield {
+           println("          6. GROUP ID - seqTicksOneBar._1 = "+seqTicksOneBar._1)
+           new Bar(
+             p_ticker_id = ticker.ticker_id,
+             p_bar_width_sec = bp.bar_width_sec,
+             barTicks = seqTicksOneBar._2
+           )
+         }
 
-         val seqBarsCalced = for (seqTicksOneBar <- seqSeqTicks) yield
-                           new Bar(
-                                    p_ticker_id =ticker.ticker_id,
-                                    p_bar_width_sec=bp.bar_width_sec,
-                                    barTicks = seqTicksOneBar._2
-                                   )
-
-         println(" >>>>>>>>>>>>> CALCULATED BARS "+ seqBarsCalced.size)
+         println(" >>>>>>>>>>>>> CALCULATED BARS "+ seqBarsCalced.size+"  ... may be not full size.")
 
          println("                ")
          println("                ")
 
+         if (seqBarsCalced.nonEmpty) {
          //SAVE BARS
          for (b <- seqBarsCalced) {
            val boundSaveBar = prepSaveBar.bind()
@@ -463,14 +502,31 @@ class BarCalculator(session: Session) {
            session.execute(boundSaveBar)
          }
 
+         //UPSERT LAST BAR FROM CALCED BARS seqBarsCalced
+           val lastBarFromBars = seqBarsCalced.filter(b => b.ts_end_unx == seqBarsCalced.map(bfs => bfs.ts_end_unx).max).head //only one !?
 
-
+           val boundSaveBarLast = prepSaveOnlineLastBars.bind()
+             .setInt("p_ticker_id", ticker.ticker_id)
+             .setInt("p_bar_width_sec", lastBarFromBars.bar_width_sec)
+             .setTimestamp("p_ts_begin", lastBarFromBars.ts_begin)
+             .setTimestamp("p_ts_end", lastBarFromBars.ts_end)
+             .setDouble("p_o", lastBarFromBars.o)
+             .setDouble("p_h", lastBarFromBars.h)
+             .setDouble("p_l", lastBarFromBars.l)
+             .setDouble("p_c", lastBarFromBars.c)
+             .setDouble("p_h_body", lastBarFromBars.h_body)
+             .setDouble("p_h_shad", lastBarFromBars.h_shad)
+             .setString("p_btype", lastBarFromBars.btype)
+             .setInt("p_ticks_cnt", lastBarFromBars.ticks_cnt)
+             .setDouble("p_disp", lastBarFromBars.disp)
+           session.execute(boundSaveBarLast)
+         }
 
           new ticker_bars_save_result(
             ticker_id            = ticker.ticker_id,
             bar_width_sec        = bp.bar_width_sec,
             prev_last_bar_ts_unx = lastBar_ts_end_unx,
-            curr_last_bar_ts_unx = seqBarsCalced.map(b => b.ts_end_unx).max,
+            curr_last_bar_ts_unx = if (seqBarsCalced.nonEmpty) seqBarsCalced.map(b => b.ts_end_unx).max else 0,
             saved_bars_count     = seqBarsCalced.size
           )
         } else {
