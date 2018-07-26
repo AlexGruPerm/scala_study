@@ -1,50 +1,63 @@
 package bar.calculator
 
+import org.slf4j.LoggerFactory
+
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 
 object ReadCassandraExamples extends App {
+    val logger = LoggerFactory.getLogger(ReadCassandraExamples.getClass)
 
-  println("hello ")
+    logger.trace("BEGIN APPLICATION.")
+    logger.error("BEGIN APPLICATION.")
+    logger.debug("BEGIN APPLICATION.")
+    logger.info("BEGIN APPLICATION.")
 
-  val client = new SimpleClient("127.0.0.1")
-  val barCalc = new BarCalculator(client.session)
+    val client = new SimpleClient("127.0.0.1")
+    val barCalc = new BarCalculator(client.session)
 
-  def taskCalcBars(): Future[Unit] = Future {
-    barCalc.calc()
-    Thread.sleep(10000) // 30000
-  }
+    def taskCalcBars(): Future[Unit] = Future {
+      barCalc.calc()
+      Thread.sleep(10000) // 30000
+    }
 
-  def taskBarPatternSearch(): Future[Unit] = Future {
-    //barCalc.calc()
-    println("=================================================")
-    println("....... I am here - taskBarPatternSearch  .......")
-    println("=================================================")
-    Thread.sleep(5000) // 30000
-  }
+    def taskBarPatternSearch(): Future[Unit] = Future {
+      //barCalc.calc()
+      println("=================================================")
+      //println("....... I am here - taskBarPatternSearch  .......")
 
-  def loopCalcBars(): Future[Unit] = {
-    taskCalcBars.flatMap(_ => loopCalcBars())
-  }
+      logger.trace("....... I am here - taskBarPatternSearch  .......")
+      logger.error("....... I am here - taskBarPatternSearch  .......")
+      logger.debug("....... I am here - taskBarPatternSearch  .......")
+      logger.info("....... I am here - taskBarPatternSearch  .......")
 
-  def looptaskBarPatternSearch():  Future[Unit] = {
-    taskBarPatternSearch.flatMap(_ => looptaskBarPatternSearch())
-  }
+      println("=================================================")
+      Thread.sleep(5000) // 30000
+    }
 
-  def infiniteLoop(): Future[Unit] = {
-    Future.sequence(List(loopCalcBars())).map(_ => ())
-    Future.sequence(List(looptaskBarPatternSearch())).map(_ => ())
-  }
+    def loopCalcBars(): Future[Unit] = {
+      taskCalcBars.flatMap(_ => loopCalcBars())
+    }
 
-  Await.ready(infiniteLoop(), Duration.Inf)
+    def looptaskBarPatternSearch(): Future[Unit] = {
+      taskBarPatternSearch.flatMap(_ => looptaskBarPatternSearch())
+    }
 
-  /*
+    def infiniteLoop(): Future[Unit] = {
+      Future.sequence(List(loopCalcBars())).map(_ => ())
+      Future.sequence(List(looptaskBarPatternSearch())).map(_ => ())
+    }
+
+    Await.ready(infiniteLoop(), Duration.Inf)
+
+    /*
   val t1 = System.currentTimeMillis
   client.queryTicks
   val t2 = System.currentTimeMillis
   println((t2 - t1) + " msecs")
   */
 
-  client.close
+    client.close
 }
+

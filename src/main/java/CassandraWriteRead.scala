@@ -1,7 +1,7 @@
-import bar.calculator.CurrPair
+//import bar.calculator.CurrPair
 import com.datastax.driver.core._
 import com.google.common.util.concurrent.{FutureCallback, Futures, ListenableFuture}
-import org.joda.time.DateTime
+//import org.joda.time.DateTime
 
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.language.implicitConversions

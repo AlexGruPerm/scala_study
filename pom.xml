@@ -7,138 +7,22 @@
     <artifactId>scala_study</artifactId>
     <version>1.0-SNAPSHOT</version>
 <dependencies>
-    <!--
+    <!-- http://saltnlight5.blogspot.com/2013/08/how-to-configure-slf4j-with-different.html -->
+    <!-- http://artamonov.ru/2007/04/06/vvedenie-v-log4j/ -->
     <dependency>
-        <groupId>com.typesafe.scala-logging</groupId>
-        <artifactId>scala-logging_2.12</artifactId>
-        <version>3.6.0</version>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.25</version>
     </dependency>
     <dependency>
-        <groupId>com.typesafe.play</groupId>
-        <artifactId>play-json_2.12</artifactId>
-        <version>2.6.9</version>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.7.25</version>
     </dependency>
-    <dependency>
-        <groupId>com.typesafe.play</groupId>
-        <artifactId>play_2.12</artifactId>
-        <version>2.6.15</version>
-    </dependency>
-    <dependency>
-        <groupId>com.typesafe.akka</groupId>
-        <artifactId>akka-actor_2.12</artifactId>
-        <version>2.5.13</version>
-    </dependency>
-    <dependency>
-        <groupId>com.typesafe.akka</groupId>
-        <artifactId>akka-http_2.12</artifactId>
-        <version>10.1.1</version>
-    </dependency>
--->
-    <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-core_2.11</artifactId>
-        <version>2.3.1</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql -->
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-sql_2.11</artifactId>
-        <version>2.3.1</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming -->
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-streaming_2.11</artifactId>
-        <version>2.3.1</version>
-        <scope>provided</scope>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka -->
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-streaming-kafka_2.11</artifactId>
-        <version>1.6.3</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/com.datastax.cassandra/cassandra-driver-core -->
     <dependency>
         <groupId>com.datastax.cassandra</groupId>
         <artifactId>cassandra-driver-core</artifactId>
         <version>3.5.0</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.avro/avro -->
-    <dependency>
-        <groupId>org.apache.avro</groupId>
-        <artifactId>avro</artifactId>
-        <version>1.8.2</version>
-    </dependency>
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>1.8.0-beta2</version>
-    </dependency>
-    <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>1.2.3</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-core</artifactId>
-        <version>1.2.3</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/com.sksamuel.avro4s/avro4s-core -->
-    <dependency>
-        <groupId>com.sksamuel.avro4s</groupId>
-        <artifactId>avro4s-core_2.12</artifactId>
-        <version>1.9.0</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common -->
-    <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-common</artifactId>
-        <version>3.1.0</version>
-        <scope>provided</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-core</artifactId>
-        <version>1.2.1</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-hdfs</artifactId>
-        <version>3.1.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.parquet</groupId>
-        <artifactId>parquet-scala_2.10</artifactId>
-        <version>1.10.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.parquet</groupId>
-        <artifactId>parquet-common</artifactId>
-        <version>1.10.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.parquet</groupId>
-        <artifactId>parquet-encoding</artifactId>
-        <version>1.10.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.parquet</groupId>
-        <artifactId>parquet-column</artifactId>
-        <version>1.10.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.parquet</groupId>
-        <artifactId>parquet-hadoop</artifactId>
-        <version>1.10.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.parquet</groupId>
-        <artifactId>parquet-avro</artifactId>
-        <version>1.10.0</version>
     </dependency>
 </dependencies>
 </project>

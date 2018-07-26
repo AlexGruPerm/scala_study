@@ -246,3 +246,32 @@ select * from mts_bars.lastbars where bar_width_sec=600 allow filtering;
 truncate mts_src.ticks;
 truncate mts_bars.bars;
 truncate mts_bars.lastbars;
+
+
+1)
+LAST BAR: ticker_id = 3 ddate=26.07.2018 width=600 ts_end_unx = 1532589979729
+----------------------------------------------------------------------------------
+[getLastTickDdate] p_ticker=5  max_dates=[Some((2018-07-26,Thu Jul 26 05:00:00 YEKT 2018))]
+[cluster1-worker-3] WARN com.datastax.driver.core.Cluster - Re-preparing already prepared query is generally an anti-pattern and will likely affect performance. Consider preparing the statement only once. Query=' select max(ts) as ts,
+                                              toUnixTimestamp(max(ts)) as tsunx
+                                       from mts_src.ticks
+                                      where ticker_id = :tickerId and
+                                            ddate     = :maxDDate
+                                   '
+2)
+----------------------------------------------------------------------
+1. [run_background_calcs] inside for(thisTicker <- tickers) ticker_id=4
+  2.[calc_one_ticker] ticker=4
+[cluster1-worker-2] WARN com.datastax.driver.core.Cluster - Re-preparing already prepared query is generally an anti-pattern and will likely affect performance. Consider preparing the statement only once. Query='select ticker_id,
+
+
+
+
+
+
+
+
+
+
+
+
