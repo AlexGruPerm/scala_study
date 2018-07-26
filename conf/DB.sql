@@ -248,24 +248,48 @@ truncate mts_bars.bars;
 truncate mts_bars.lastbars;
 
 
-1)
-LAST BAR: ticker_id = 3 ddate=26.07.2018 width=600 ts_end_unx = 1532589979729
-----------------------------------------------------------------------------------
-[getLastTickDdate] p_ticker=5  max_dates=[Some((2018-07-26,Thu Jul 26 05:00:00 YEKT 2018))]
-[cluster1-worker-3] WARN com.datastax.driver.core.Cluster - Re-preparing already prepared query is generally an anti-pattern and will likely affect performance. Consider preparing the statement only once. Query=' select max(ts) as ts,
-                                              toUnixTimestamp(max(ts)) as tsunx
-                                       from mts_src.ticks
-                                      where ticker_id = :tickerId and
-                                            ddate     = :maxDDate
-                                   '
-2)
-----------------------------------------------------------------------
-1. [run_background_calcs] inside for(thisTicker <- tickers) ticker_id=4
-  2.[calc_one_ticker] ticker=4
-[cluster1-worker-2] WARN com.datastax.driver.core.Cluster - Re-preparing already prepared query is generally an anti-pattern and will likely affect performance. Consider preparing the statement only once. Query='select ticker_id,
+--задает для каждого тикера+бар(ширина) сколкьо последних баров хранить,
+-- для одного тикера+бар(ширина) может быть задано одно значение.
+CREATE TABLE mts_meta.bars_property_last_deeps(
+	ticker_id      int,
+	bar_width_sec  int,
+	is_enabled     int,
+	deep_count     int,
+    PRIMARY KEY(ticker_id, bar_width_sec, is_enabled, deep_count)
+);
+
+-- для тиекра 1 и баров с шириной 30 секунд, хранить последние 10 баров в таблице - mts_bars.lastNbars
+insert into mts_meta.bars_property_last_deeps(ticker_id,bar_width_sec,is_enabled,deep_count) values(1,30,1,10);
+
+CREATE TABLE mts_bars.lastNbars(
+	deep           int,
+	ticker_id      int,
+	bar_width_sec  int,
+    ts_begin       timestamp,
+    ts_end         timestamp,
+    o              double,
+    h              double,
+    l              double,
+    c              double,
+    h_body         double,
+    h_shad         double,
+    btype          varchar,
+    ticks_cnt      int,
+    disp           double,
+    PRIMARY KEY((deep, ticker_id, bar_width_sec))
+);
 
 
+-----------------
 
+ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF.
+
+If set WARN =>                WARN , ERROR , FATAL
+IF set INFO =>         INFO , WARN , ERROR , FATAL
+IF set DEBUG => DEBUG, INFO , WARN , ERROR , FATAL
+
+Use TRACE when you need finer-grained detail than DEBUG can provide, most likely when you
+are troubleshooting a particularly difficult problem.
 
 
 
