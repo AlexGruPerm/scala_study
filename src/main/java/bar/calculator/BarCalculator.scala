@@ -101,7 +101,6 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
 
   }
 
-
   /**
     * Return seq of Ticker with additional information about timestamps.
     */

@@ -8,8 +8,6 @@ class SimpleClient(node: String) {
   private val cluster = Cluster.builder().addContactPoint(node).build()
   val session = cluster.connect()
 
-
-
   def loadData() = {
     session.execute(
       """INSERT INTO simplex.songs (id, title, album, artist, tags)
