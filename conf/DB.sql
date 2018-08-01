@@ -147,20 +147,30 @@ CREATE TABLE mts_bars.bars(
 /*
  * Tickers dictionary.
  */
+drop table mts_meta.tickers;
+
 CREATE TABLE mts_meta.tickers(
 	ticker_id      int,
 	ticker_code    text,
-    PRIMARY KEY(ticker_id, ticker_code)
+	ticker_first   text,
+	ticker_seconds text,
+    PRIMARY KEY((ticker_id, ticker_code,ticker_first))
 );
 
-INSERT INTO tickers (ticker_id,ticker_code) VALUES (1,'EURUSD');
-INSERT INTO tickers (ticker_id,ticker_code) VALUES (2,'AUDUSD');
-INSERT INTO tickers (ticker_id,ticker_code) VALUES (3,'GBPUSD');
-INSERT INTO tickers (ticker_id,ticker_code) VALUES (4,'NZDUSD');
-INSERT INTO tickers (ticker_id,ticker_code) VALUES (5,'EURCHF');
-INSERT INTO tickers (ticker_id,ticker_code) VALUES (6,'USDCAD');
-INSERT INTO tickers (ticker_id,ticker_code) VALUES (7,'USDCHF');
-INSERT INTO tickers (ticker_id,ticker_code) VALUES (8,'EURCAD');
+INSERT INTO mts_meta.tickers (ticker_id,ticker_code,ticker_first,ticker_seconds) VALUES (1,'EURUSD','EUR','USD');
+INSERT INTO mts_meta.tickers (ticker_id,ticker_code,ticker_first,ticker_seconds) VALUES (2,'AUDUSD','AUD','USD');
+INSERT INTO mts_meta.tickers (ticker_id,ticker_code,ticker_first,ticker_seconds) VALUES (3,'GBPUSD','GBP','USD');
+INSERT INTO mts_meta.tickers (ticker_id,ticker_code,ticker_first,ticker_seconds) VALUES (4,'NZDUSD','NZD','USD');
+INSERT INTO mts_meta.tickers (ticker_id,ticker_code,ticker_first,ticker_seconds) VALUES (5,'EURCHF','EUR','CHF');
+INSERT INTO mts_meta.tickers (ticker_id,ticker_code,ticker_first,ticker_seconds) VALUES (6,'USDCAD','USD','CAD');
+INSERT INTO mts_meta.tickers (ticker_id,ticker_code,ticker_first,ticker_seconds) VALUES (7,'USDCHF','USD','CHF');
+INSERT INTO mts_meta.tickers (ticker_id,ticker_code,ticker_first,ticker_seconds) VALUES (8,'EURCAD','EUR','CAD');
+INSERT INTO mts_meta.tickers (ticker_id,ticker_code,ticker_first,ticker_seconds) VALUES (9,'GBPAUD','GBP','AUD');
+INSERT INTO mts_meta.tickers (ticker_id,ticker_code,ticker_first,ticker_seconds) VALUES (10,'GBPCAD','GBP','CAD');
+INSERT INTO mts_meta.tickers (ticker_id,ticker_code,ticker_first,ticker_seconds) VALUES (11,'GBPCHF','GBP','CHF');
+INSERT INTO mts_meta.tickers (ticker_id,ticker_code,ticker_first,ticker_seconds) VALUES (12,'EURGBP','EUR','GBP');
+INSERT INTO mts_meta.tickers (ticker_id,ticker_code,ticker_first,ticker_seconds) VALUES (13,'GBPNZD','GBP','NZD');
+INSERT INTO mts_meta.tickers (ticker_id,ticker_code,ticker_first,ticker_seconds) VALUES (14,'NZDCAD','NZD','CAD');
 
 select * from mts_meta.tickers;
 
@@ -175,38 +185,20 @@ CREATE TABLE mts_meta.bars_property(
     PRIMARY KEY(ticker_id, bar_width_sec, is_enabled)
 );
 
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(1,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(1,90,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(1,600,1);
-
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,90,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,600,1);
-
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,90,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,600,1);
-
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(4,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(4,90,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(4,600,1);
-
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(5,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(5,90,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(5,600,1);
-
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(6,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(6,90,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(6,600,1);
-
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(7,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(7,90,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(7,600,1);
-
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(8,30,1);
-insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(8,90,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(8,600,1);
-
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(9,600,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(10,600,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(11,600,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(12,600,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(13,600,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(14,600,1);
 
 select * from mts_meta.bars_property where ticker_id=1;
 
@@ -262,22 +254,23 @@ CREATE TABLE mts_meta.bars_property_last_deeps(
 insert into mts_meta.bars_property_last_deeps(ticker_id,bar_width_sec,is_enabled,deep_count) values(1,30,1,10);
 
 CREATE TABLE mts_bars.lastNbars(
-	deep           int,
-	ticker_id      int,
-	bar_width_sec  int,
-    ts_begin       timestamp,
-    ts_end         timestamp,
-    o              double,
-    h              double,
-    l              double,
-    c              double,
-    h_body         double,
-    h_shad         double,
-    btype          varchar,
-    ticks_cnt      int,
-    disp           double,
-    PRIMARY KEY((deep, ticker_id, bar_width_sec))
-);
+	last_bar_ts_end timestamp,
+	deep            int,
+	ticker_id       int,
+	bar_width_sec   int,
+    ts_begin        timestamp,
+    ts_end          timestamp,
+    o               double,
+    h               double,
+    l               double,
+    c               double,
+    h_body          double,
+    h_shad          double,
+    btype           varchar,
+    ticks_cnt       int,
+    disp            double,
+    PRIMARY KEY((last_bar_ts_end, deep, ticker_id, bar_width_sec),ts_end)
+) WITH CLUSTERING ORDER BY (ts_end asc)
 
 
 -----------------
@@ -291,10 +284,64 @@ IF set DEBUG => DEBUG, INFO , WARN , ERROR , FATAL
 Use TRACE when you need finer-grained detail than DEBUG can provide, most likely when you
 are troubleshooting a particularly difficult problem.
 
+//------------------------------------------------------
+
+// советники по индивидуальным тикерам.
+//  ticker_id  - по какому тикеру работает данный советник
+//  s_desc     - текстовое описание алгоритма.
+//  func_name  - имя функции в scala, пакет bar.adviser class TradeAdviser
+//  is_enabled - 0,1 признак включения, выключения советника.
+drop TABLE mts_meta.trade_advisers_ticker;
+// -------------------------------------------------------
+CREATE TABLE mts_meta.trade_advisers_ticker(
+	adviser_id     int,
+	ticker_id      int,
+	s_desc         text,
+	func_name      text,
+	is_enabled     int,
+    PRIMARY KEY(adviser_id,ticker_id, is_enabled, func_name)
+);
+
+insert into mts_meta.trade_advisers_ticker(adviser_id,ticker_id,s_desc,func_name,is_enabled)
+                                    values(1,1,'Если последние 3 (bar_width_sec = 600 сек. = 10 мин.) бара
+                                              EUR растет/падает к доллару (EURUSD) и все прочие тикеры EURXXX имеют сходное движение:
+                                              все 3 бара в одну сторону или 2 в одну и один нейтральный, причем нейтральный не последний.
+                                              Тогда рекомендуется входить по EURUSD в направлении движения.
+                                             ','trd_adv_1_simple',1);
+
+select * from mts_meta.trade_advisers_ticker;
 
 
+//================================================================
+// Результаты работы советника.
+CREATE TABLE mts_meta.trade_advisers_results(
+	adviser_id int,
+    ts         timestamp,
+    PRIMARY KEY((adviser_id),ts)
+) WITH CLUSTERING ORDER BY (ts DESC);
 
+//для некоторых советников записывается состояние бара(ов) в моммент рекомендации
+CREATE TABLE mts_bars.trade_advisers_results_bars(
+	adviser_id     int,
+    ts             timestamp,
+	ticker_id      int,
+	ddate          date,
+	bar_width_sec  int,
+    ts_begin       timestamp,
+    ts_end         timestamp,
+    o              double,
+    h              double,
+    l              double,
+    c              double,
+    h_body         double,
+    h_shad         double,
+    btype          varchar,
+    ticks_cnt       int,
+    disp           double,
+     PRIMARY KEY((adviser_id,ts),ticker_id,ts_end)
+) WITH CLUSTERING ORDER BY (ticker_id desc,ts_end DESC);
 
+//================================================================
 
 
 

@@ -1,84 +1,46 @@
-import java.io.FileReader
-import java.io.FileNotFoundException
-import java.io.IOException
+
+case class FinTick(ts : Int)
 
 object Primitiv extends App {
 
-/*
-  def op1 = {
-    println("op1")
-    true
+ // val seqTicks = Seq(FinTick(1), FinTick(3), FinTick(5), FinTick(8), FinTick(10), FinTick(12), FinTick(14), FinTick(16), FinTick(18), FinTick(19), FinTick(27), FinTick(47) )
+ // val seqTicks = Seq(FinTick(1), FinTick(3), FinTick(5), FinTick(12) )
+
+  val seqTicks = Seq(1,3,5,7,8,10,12,14,16,18,19,27,47)
+
+  /*
+  val wdth = 10.toInt
+
+  val seqBars = seqTicks.foldLeft(Seq.empty[Seq[Int]]){ (acc : Seq[Seq[Int]], curr : Int) =>
+
+    if (acc.nonEmpty) {
+
+      println("acc.size="+acc.size+" curr="+curr)
+
+      if ((acc.last.last - acc.last.head) <= wdth) {
+        val al : Seq[Int] = acc.last
+        val res1 = acc.init :+ Seq(al :+ curr)
+        println("R1="+res1)
+        res1
+      } else {
+        val res2 =  acc :+ Seq(curr)
+        println("R2="+res2)
+        res2
+      }
+
+    } else
+      Seq(Seq(curr))
   }
 
-  def op2 = {
-    println("op2")
-    true
+
+
+  println("                      ")
+  println("                      ")
+  println("seqBars.size="+seqBars)
+  for(b <- seqBars) {
+    println(b)
   }
 
-  if (op1 || op2) println("[TRUE]")
-  else
-    println("[ELSE]")
-*/
-
-  //1) With the “file <- filesHere” syntax, which is called a generator,
-  for (x <- Seq(1,2,3))
-    println(x)
-
-  //2) 1 to 5 - Range
-  for(i <- 1 until 6)
-    println("i="+i)
-
-  //3) for with filter
-  for(j <- 1 until 10 if j<=5)
-    println("j="+j)
-
-  //4) for with filters
-  for(t <- 1 until 10 if t >=3 if t<=7)
-    println("t="+t)
-
-  //5) Nested iteration
-  val ds1 : Seq[Int] = Seq(1,2,3)
-  val ds2: Seq[String] = Seq("x","y","z")
-
-   for (num <- ds1; st <- ds2)
-     println(num+" "+st)
-
-  // При использовании фигурных скобок, ; можно опустить !?
-
-  //curly braces instead of parentheses
-  //6) Mid-stream variable bindings
-  for {num <- ds1
-       st <- ds2
-        comb = num+st
-      } println("comb="+comb)
-
-  //Producing a new collection
-  val newCol = for {xn <- ds1} yield (xn,xn*2)
-  println(newCol)
-
-  //try catch - catch обязательно должен быть в скобках
-  //try and finally do not require parentheses if they contain only one expression.
-  val x:Int=4
-  val y:Int=1
-
-  try {
-    if (x/y==2)
-      println("Ok")
-    else
-      throw new RuntimeException("x/y must be equal 2")
-  } catch {
-     case ex : RuntimeException => println("RuntimeException="+ex.getMessage)
-     case ex : IOException => println("IOException")
-  }
-
-  def getEx = throw new RuntimeException("Just Ex for test")
-
-  try
-   getEx
-  catch {
-    case ex : RuntimeException => println("RuntimeException="+ex.getMessage)
-    case ex : IOException => println("IOException")
-  } finally
-    println("Finally block of code")
+  */
 
 }
