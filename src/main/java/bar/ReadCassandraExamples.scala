@@ -42,6 +42,11 @@ object ReadCassandraExamples extends App {
   def taskAdviser(): Future[Unit] = Future {
     val t1 = System.currentTimeMillis
     adviser.calc()
+    /**
+      * Последние 3 бара достаются не правильно, не учитывается партиция по дате, м.б. взята не за последнюю дату!!!
+      * надо так
+      * select * from val where: Nothing = null ticker_id = 12 val ddate: Nothing = '2018-08-02' val bar_width_sec: Nothing = 600 val by: Nothing = null val desc: Nothing = null
+      */
     val t2 = System.currentTimeMillis
     logger.info("Duration of taskAdviser.calc() - "+(t2 - t1) + " msecs.")
     Thread.sleep(10000)

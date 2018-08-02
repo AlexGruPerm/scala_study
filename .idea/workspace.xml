@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TradeAdviser.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TradeAdviser.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -15,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TradeAdviser.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TradeAdviser.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TradeAdviser.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+            <state relative-caret-position="484">
+              <caret line="106" selection-start-line="106" selection-end-line="106" />
               <folding>
                 <element signature="e#21#63#0" expanded="true" />
               </folding>
@@ -27,11 +30,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReadCassandraExamples.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BarCalculator.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rowToX.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="20" />
+              <folding>
+                <element signature="e#13#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReadCassandraExamples.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="70" column="43" lean-forward="true" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
+            <state relative-caret-position="314">
+              <caret line="41" column="44" lean-forward="true" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
               <folding>
                 <element signature="e#13#36#0" expanded="true" />
               </folding>
@@ -51,8 +75,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>4.</find>
-      <find>println</find>
       <find>session.prepare</find>
       <find>6. GROUP ID -</find>
       <find>6.</find>
@@ -81,6 +103,8 @@
       <find>ByID</find>
       <find>rowToBar</find>
       <find>get(</find>
+      <find>2.2</find>
+      <find>barProps</find>
     </findStrings>
     <replaceStrings>
       <replace>logger.info</replace>
@@ -144,9 +168,9 @@
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/SimpleClient.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/resources/log4j.properties" />
+        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TradeAdviser.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala" />
       </list>
     </option>
   </component>
@@ -411,13 +435,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526274645461</updated>
-    </task>
-    <task id="LOCAL-00025" summary="One more control point before Step 6">
-      <created>1528365980204</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1528365980204</updated>
     </task>
     <task id="LOCAL-00026" summary="Work Step 6 to home">
       <created>1528375458178</created>
@@ -755,11 +772,19 @@
       <option name="project" value="LOCAL" />
       <updated>1533131520665</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="no files in git, fixing">
+      <created>1533140514400</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1533140514400</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="816" height="576" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -768,10 +793,10 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.4625" side_tool="true" weight="0.3598726" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" weight="0.36836517" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5375" weight="1.0" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.3280255" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32911393" />
       <window_info id="Designer" order="1" />
-      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.45125" />
+      <window_info content_ui="combo" id="Project" order="4" visible="true" weight="0.18802084" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32908705" />
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -863,7 +888,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="read dataset of ticks from cassandra for symbol=3, get UnixTimeStamp &#10;from ts." />
     <MESSAGE value="Final ticks data Tbale and CPP DLL for saving ticks into cassandra. &#10;Source cpp files." />
     <MESSAGE value="Final ticks data Table and CPP DLL for saving ticks into cassandra. &#10;Source cpp files." />
     <MESSAGE value="Final step between Bar calculator." />
@@ -888,7 +912,8 @@
     <MESSAGE value="Added saving list of last bar, individually settings for ticker+width_sec." />
     <MESSAGE value="Added new tickers, begin with first simple adviser.&#10;try any ways to split seq of ticks on bars. groupBy -&gt; foldLeft." />
     <MESSAGE value="preparation for adviser id = 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="preparation for adviser id = 1" />
+    <MESSAGE value="no files in git, fixing" />
+    <option name="LAST_COMMIT_MESSAGE" value="no files in git, fixing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1146,10 +1171,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="41" column="44" lean-forward="true" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
+          <folding>
+            <element signature="e#13#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="51" column="36" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
+        <state relative-caret-position="195">
+          <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="20" />
           <folding>
             <element signature="e#13#34#0" expanded="true" />
           </folding>
@@ -1159,29 +1194,16 @@
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#24#66#0" expanded="true" />
-          </folding>
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TradeAdviser.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+        <state relative-caret-position="484">
+          <caret line="106" selection-start-line="106" selection-end-line="106" />
           <folding>
             <element signature="e#21#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="70" column="43" lean-forward="true" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
-          <folding>
-            <element signature="e#13#36#0" expanded="true" />
           </folding>
         </state>
       </provider>

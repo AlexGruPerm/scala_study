@@ -51,9 +51,12 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
              disp,
              toUnixTimestamp(ts_end) as ts_end_unx
         from mts_bars.bars
-        where ticker_id = :tickerId
-        limit :plimit
-        allow filtering;
+        where
+             ticker_id     = :tickerId and
+             ddate         = :pddate   and
+             bar_width_sec = :p_bar_width_sec
+        order by ts_end desc
+        LIMIT :plimit allow filtering;
     """)
 
   val resLastBarPrep = session.prepare(
