@@ -314,11 +314,14 @@ select * from mts_meta.trade_advisers_ticker;
 
 //================================================================
 // Результаты работы советника.
+
 CREATE TABLE mts_meta.trade_advisers_results(
 	adviser_id int,
     ts         timestamp,
+    main_way   text,
     PRIMARY KEY((adviser_id),ts)
 ) WITH CLUSTERING ORDER BY (ts DESC);
+
 
 //для некоторых советников записывается состояние бара(ов) в моммент рекомендации
 CREATE TABLE mts_bars.trade_advisers_results_bars(

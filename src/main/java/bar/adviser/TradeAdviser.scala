@@ -49,6 +49,7 @@ class TradeAdviser(session: Session) extends rowToX(session, LoggerFactory.getLo
     12 - EURGBP
     -----------
     */
+   val p_adviser_id = 1
    val barsWidth = 600
    val barsLimit  = 3.toInt
    val mainTicker = 1.toInt // ID of main ticker
@@ -130,6 +131,13 @@ class TradeAdviser(session: Session) extends rowToX(session, LoggerFactory.getLo
                  logger.info("  3. [R] There are SAME bar types in MAIN ticker. NEXT!!!  ")
                  logger.info("                                                           ")
                  logger.info("###########################################################")
+
+                 val boundSaveAdvRes = prepSaveAdviserRes.bind()
+                   .setInt("p_adviser_id", p_adviser_id)
+                   .setTimestamp("p_ts", seq_1.map(b => b.ts_end).max)
+                   .setString("p_main_way","R - main go down")
+                 session.execute(boundSaveAdvRes)
+
                }
                else if
                  (
@@ -144,6 +152,13 @@ class TradeAdviser(session: Session) extends rowToX(session, LoggerFactory.getLo
                  logger.info("  3. [G] There are SAME bar types in MAIN ticker. NEXT!!!  ")
                  logger.info("                                                           ")
                  logger.info("###########################################################")
+
+                 val boundSaveAdvRes = prepSaveAdviserRes.bind()
+                   .setInt("p_adviser_id", p_adviser_id)
+                   .setTimestamp("p_ts", seq_1.map(b => b.ts_end).max)
+                   .setString("p_main_way","G - main go up")
+                 session.execute(boundSaveAdvRes)
+
                } else {
                  logger.info("3. There are different bar types in MAIN ticker.")
                }

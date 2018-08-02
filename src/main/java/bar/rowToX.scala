@@ -163,6 +163,8 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
             :p_disp
             ); """)
 
+  val prepSaveAdviserRes = session.prepare(""" insert into mts_meta.trade_advisers_results(adviser_id,ts,main_way) values(:p_adviser_id,:p_ts,:p_main_way); """)
+
   val rowToBarProperty = (row: Row) => {
     //if (row.getInt("is_enabled") == 1)
     new bars_property(row.getInt("ticker_id"), row.getInt("bar_width_sec"), row.getInt("is_enabled"))
