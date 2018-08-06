@@ -27,12 +27,22 @@ class TradeAdviser(session: Session) extends rowToX(session, LoggerFactory.getLo
       * val rsLastDate = session.execute(boundLastDate).one()
       * new barProps(bp.ticker_id, rsLastDate.getDate("ddate"), bp.bar_width_sec)
        */
-      val res : Seq[(Int,LocalDate)] = for(tick <- listTickers) yield {
-        val boundLastDate = resLastDateBar.bind().setInt("tickerId", tick)
-                                                 .setInt("barWidth", p_bar_width)
-        val rsLastDate = session.execute(boundLastDate).one()
-        //new barProps(tick, rsLastDate.getDate("ddate"), p_bar_width)
-        (tick, rsLastDate.getDate("ddate"))
+      val res = for(tick <- listTickers) yield {
+        val OptMaxDate = try {
+          val boundLastDate = resLastDateBar.bind().setInt("tickerId", tick)
+            .setInt("barWidth", p_bar_width)
+          val rsLastDate = session.execute(boundLastDate).one()
+          if (rsLastDate.getDate("ddate") != null)
+            Some(rsLastDate.getDate("ddate"))
+          else
+            None
+        } catch {
+          case e: Exception => {
+            logger.info("ERROR: getDatesByTickers - no bars calculated -"+e.getMessage)
+            None
+          }
+        }
+        (tick,OptMaxDate)
       }
     res
   }
@@ -51,17 +61,26 @@ class TradeAdviser(session: Session) extends rowToX(session, LoggerFactory.getLo
     */
    val p_adviser_id = 1
    val barsWidth = 600
-   val barsLimit  = 3.toInt
+   val barsLimit  = 2.toInt
    val mainTicker = 1.toInt // ID of main ticker
    val listTickers = Seq(1,5,8,12) //list of main and companion tickers.
     logger.info("Main [" + mainTicker + "] symbol = " + getCurrTickerByID(mainTicker).ticker_code)
-   val max_dates : Seq[(Int,LocalDate)] = getDatesByTickers(listTickers,barsWidth)
-    val seqSeqBar :Seq[Seq[BarC]] = for (compTicker <- listTickers) yield {
+
+   //flatten remove all None elements from Seq of Option and stay only Same
+   val max_dates = getDatesByTickers(listTickers,barsWidth)
+
+    logger.info("max_dates.flatteen.size="+max_dates.size)
+
+    for (md <- max_dates) {
+      logger.info("md="+md._1+" ddate="+md._2)
+    }
+
+    val seqSeqBar :Seq[Seq[BarC]] = for (compTicker <- max_dates.withFilter(md => md._2!=None).map(mdt => mdt._1)/*compTicker <- listTickers*/) yield {
                                       logger.debug("Companion ["+compTicker+"] symbol = "+getCurrTickerByID(compTicker).ticker_code)
                                       logger.debug(" BIND compTicker="+compTicker+" plimit="+barsLimit)
 
                                       val bound = resNLastBars.bind().setInt("tickerId", compTicker)
-                                                                     .setDate("pddate",max_dates.filter(md => md._1==compTicker).head._2)
+                                                                     .setDate("pddate", max_dates.filter(md => md._1==compTicker).head._2.getOrElse(null))
                                                                      .setInt("p_bar_width_sec",600)
                                                                      .setInt("plimit", barsLimit)
 
@@ -70,6 +89,8 @@ class TradeAdviser(session: Session) extends rowToX(session, LoggerFactory.getLo
                                       logger.debug("barsByThisTicker.size="+barsByThisTicker.size+"  -  "+barsByThisTicker)
                                       barsByThisTicker
                                     }
+
+
 /**
     logger.info("             ")
     logger.info("  SeqSeq: seqSeqBar.size="+seqSeqBar.size)
@@ -78,7 +99,7 @@ class TradeAdviser(session: Session) extends rowToX(session, LoggerFactory.getLo
 
     /**
       *  Here we need check that seqSeqBar contains 4 subSeq, 1 for each ticker_id for this adviser.
-      *  And each subseq contains exact 3 Bars.
+      *  And each subseq contains exact N Bars.
       *
       */
 
@@ -95,7 +116,6 @@ class TradeAdviser(session: Session) extends rowToX(session, LoggerFactory.getLo
                val seq_8  = seqSeqBar.flatten.filter(sb => sb.ticker_id == 8)
                val seq_12 = seqSeqBar.flatten.filter(sb => sb.ticker_id == 12)
 
-
           //   DEBUG OUTPUT
           for (debugTicker <- Seq(1,5,8,12)) {
             logger.info("-ticker = " + debugTicker + " [" + getCurrTickerByID(debugTicker).ticker_code + "]")
@@ -106,25 +126,22 @@ class TradeAdviser(session: Session) extends rowToX(session, LoggerFactory.getLo
             logger.info("-------------------")
           }
 
-
-
           //logger.info(" >>>  seq_1.size="+seq_1.size)
           //logger.info(" >>>  seq_1.filter(b => b.btype=='r').size="+seq_1.count(b => b.btype=="r")+"    seq_1.filter(b => b.btype=='g').size="+seq_1.filter(b => b.btype=="g").size)
 
-              if (seq_1.count(b => b.btype=="r")==3) {
-                logger.info("2.2 Main ticker [3R]")
+              if (seq_1.count(b => b.btype=="r")==barsLimit) {
+                logger.info("2.2 Main ticker ["+barsLimit+"R]")
               }
 
-              if (seq_1.count(b => b.btype=="g")==3) {
-                logger.info("2.2 Main ticker [3G]")
+              if (seq_1.count(b => b.btype=="g")==barsLimit) {
+                logger.info("2.2 Main ticker ["+barsLimit+"G]")
               }
-
 
                if (
-                   seq_1.count(b => b.btype=="r")==3  &&
-                     (seq_5.count( b => b.btype=="r")==3 || (seq_5.count(b  => b.btype=="r")==2 && seq_5.count(b  => b.btype=="n")==1 )) &&
-                     (seq_8.count( b => b.btype=="r")==3 || (seq_8.count(b  => b.btype=="r")==2 && seq_8.count(b  => b.btype=="n")==1 )) &&
-                     (seq_12.count(b => b.btype=="r")==3 || (seq_12.count(b => b.btype=="r")==2 && seq_12.count(b => b.btype=="n")==1 ))
+                   seq_1.count(b => b.btype=="r")==barsLimit  &&
+                     (seq_5.count( b => b.btype=="r")==barsLimit || (seq_5.count(b  => b.btype=="r")==(barsLimit-1) && seq_5.count(b  => b.btype=="n")==1 )) &&
+                     (seq_8.count( b => b.btype=="r")==barsLimit || (seq_8.count(b  => b.btype=="r")==(barsLimit-1) && seq_8.count(b  => b.btype=="n")==1 )) &&
+                     (seq_12.count(b => b.btype=="r")==barsLimit || (seq_12.count(b => b.btype=="r")==(barsLimit-1) && seq_12.count(b => b.btype=="n")==1 ))
                ) {
                  logger.info("###########################################################")
                  logger.info("                                                           ")
@@ -141,10 +158,10 @@ class TradeAdviser(session: Session) extends rowToX(session, LoggerFactory.getLo
                }
                else if
                  (
-                 seq_1.count(b => b.btype=="g")==3  &&
-                   (seq_5.count( b => b.btype=="g")==3 || (seq_5.count(b  => b.btype=="g")==2 && seq_5.count(b  => b.btype=="n")==1 )) &&
-                   (seq_8.count( b => b.btype=="g")==3 || (seq_8.count(b  => b.btype=="g")==2 && seq_8.count(b  => b.btype=="n")==1 )) &&
-                   (seq_12.count(b => b.btype=="g")==3 || (seq_12.count(b => b.btype=="g")==2 && seq_12.count(b => b.btype=="n")==1 ))
+                 seq_1.count(b => b.btype=="g")==barsLimit  &&
+                   (seq_5.count( b => b.btype=="g")==barsLimit || (seq_5.count(b  => b.btype=="g")==(barsLimit-1) && seq_5.count(b  => b.btype=="n")==1 )) &&
+                   (seq_8.count( b => b.btype=="g")==barsLimit || (seq_8.count(b  => b.btype=="g")==(barsLimit-1) && seq_8.count(b  => b.btype=="n")==1 )) &&
+                   (seq_12.count(b => b.btype=="g")==barsLimit || (seq_12.count(b => b.btype=="g")==(barsLimit-1) && seq_12.count(b => b.btype=="n")==1 ))
                  )
                {
                  logger.info("###########################################################")

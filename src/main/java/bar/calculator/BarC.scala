@@ -15,5 +15,6 @@ case class 	BarC(
                  btype           :String,
                  ts_end_unx      :Long,
                  ticks_cnt       :Int,
-                 disp            :Double
+                 disp            :Double,
+                 log_co          :Double
                 )

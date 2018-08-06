@@ -75,7 +75,7 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
   def get_bars_property() ={
     val results = session.execute("select * from mts_meta.bars_property;")
     val rsList = results.all()
-    val bp = for(i <- 0 to rsList.size()-1) yield rowToBarProperty(rsList.get(i))//.asInstanceOf[bars_property]
+    val bp = for(i <- 0 to rsList.size()-1) yield rowToBarProperty(rsList.get(i))
     bp.filter(b => b.is_enabled==1)
   }
 
@@ -90,8 +90,12 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
           new barProps(bp.ticker_id, rsLastDate.getDate("ddate"), bp.bar_width_sec)
     }
 
-    val seqOfSeqBarPropNN = seqOfSeqBarProp.filter(bp => bp.ddate!=null)
+    logger.info("seqOfSeqBarProp.size="+seqOfSeqBarProp.size)
+    val seqOfSeqBarPropNN = seqOfSeqBarProp.filter(bp => bp.ddate != null)
+    logger.info("seqOfSeqBarPropNN.size="+seqOfSeqBarPropNN.size)
+
     for (oneBarProp <- seqOfSeqBarPropNN) yield {
+      logger.info("SEARCH BUG: ticker_id ["+oneBarProp.ticker_id+"]  MAX(ddate)="+oneBarProp.ddate+"  getDaysSinceEpoch="+oneBarProp.ddate.getDaysSinceEpoch)
       val bound = resLastBarPrep.bind().setInt("tickerId", oneBarProp.ticker_id)
                                        .setDate("maxDdate", oneBarProp.ddate)
                                        .setInt("barWidth", oneBarProp.bar_width_sec)
@@ -218,6 +222,7 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
            val boundSaveBar = prepSaveBar.bind()
              .setInt("p_ticker_id", ticker.ticker_id)
              .setDate("p_ddate",  core.LocalDate.fromMillisSinceEpoch( b.ddate.getTime()))
+            // .setTimestamp("p_ddate",b.ddate) // from 06.08.2018
              .setInt("p_bar_width_sec",b.bar_width_sec)
              .setTimestamp("p_ts_begin", b.ts_begin)
              .setTimestamp("p_ts_end", b.ts_end)
@@ -230,6 +235,7 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
              .setString("p_btype",b.btype)
              .setInt("p_ticks_cnt",b.ticks_cnt)
              .setDouble("p_disp",b.disp)
+             .setDouble("p_log_co",b.log_co)
            session.execute(boundSaveBar)
          }
 
@@ -326,7 +332,7 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
     logger.debug("----------------------------------------------------------------------------------")
     val bars_properties : Seq[bars_property] = get_bars_property()
     for(oneProp <- bars_properties)
-      logger.info("ticker_id = "+oneProp.ticker_id+" bar_width_sec = "+oneProp.bar_width_sec+" "+oneProp.is_enabled)
+      logger.info("bars_properties:  ticker_id = "+oneProp.ticker_id+" bar_width_sec = "+oneProp.bar_width_sec+" "+oneProp.is_enabled)
 
     logger.debug("----------------------------------------------------------------------------------")
     //Here we need read only !LAST! bars by each ticker_id and bar_width from property

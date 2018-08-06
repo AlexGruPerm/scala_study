@@ -24,7 +24,7 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
                                             ALLOW FILTERING; """);
 
   val prepared = session.prepare(""" select max(ts) as ts,
-                                              toUnixTimestamp(max(ts)) as tsunx
+                                            toUnixTimestamp(max(ts)) as tsunx
                                        from mts_src.ticks
                                       where ticker_id = :tickerId and
                                             ddate     = :maxDDate
@@ -49,7 +49,8 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
              btype,
              ticks_cnt,
              disp,
-             toUnixTimestamp(ts_end) as ts_end_unx
+             toUnixTimestamp(ts_end) as ts_end_unx,
+             log_co
         from mts_bars.bars
         where
              ticker_id     = :tickerId and
@@ -76,7 +77,8 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
                   btype,
                   toUnixTimestamp(max(ts_end)) as ts_end_unx,
                   ticks_cnt,
-                  disp
+                  disp,
+                  log_co
                from mts_bars.bars
                where ticker_id     = :tickerId and
                      ddate         = :maxDdate and
@@ -111,7 +113,8 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
             h_shad,
             btype,
             ticks_cnt,
-            disp
+            disp,
+            log_co
             )
         values(
         	  :p_ticker_id,
@@ -127,7 +130,8 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
             :p_h_shad,
             :p_btype,
             :p_ticks_cnt,
-            :p_disp
+            :p_disp,
+            :p_log_co
             ); """)
 
   val prepSaveOnlineLastBars = session.prepare(
@@ -186,63 +190,14 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
                 btype,
                 toUnixTimestamp(ts_end) as ts_end_unx,
                 ticks_cnt,
-                disp
+                disp,
+                log_co
            from mts_bars.bars
           where ticker_id     = :p_ticker_id and
                 bar_width_sec = :p_bar_width_sec
           limit :p_limit
           allow filtering
     """)
-/*
-  val prepOneOfLastBars = session.prepare(
-    """insert into mts_bars.lastNbars(
-            last_bar_ts_end,
-            deep,
-        	  ticker_id,
-        	  bar_width_sec,
-            ts_begin,
-            ts_end,
-            o,
-            h,
-            l,
-            c,
-            h_body,
-            h_shad,
-            btype,
-            ticks_cnt,
-            disp
-            )
-        values(
-            :p_last_bar_ts_end,
-            :p_deep,
-        	  :p_ticker_id,
-        	  :p_bar_width_sec,
-            :p_ts_begin,
-            :p_ts_end,
-            :p_o,
-            :p_h,
-            :p_l,
-            :p_c,
-            :p_h_body,
-            :p_h_shad,
-            :p_btype,
-            :p_ticks_cnt,
-            :p_disp
-            ); """)
-
-  val prepClearLastNBars = session.prepare("""delete from mts_bars.lastNbars where last_bar_ts_end=:p_last_bar_ts_end and deep=:p_deep and ticker_id=:p_ticker_id and bar_width_sec=:p_bar_width_sec; """)
-*/
-
-  /*
-  def getTickerName(ticker_id: Int) ={
-    ticker_id match
-    {
-      case 1 => "EURUSD"
-      case _ => "NNNNNN"
-    }
-  }
-  */
-
 
 
   val rowToBar = (row : Row) => {
@@ -261,7 +216,8 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
       row.getString("btype"),
       row.getLong("ts_end_unx"),
       row.getInt("ticks_cnt"),
-      row.getDouble("disp")
+      row.getDouble("disp"),
+      row.getDouble("log_co")
     )
   }
 

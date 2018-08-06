@@ -39,6 +39,7 @@ class Bar (p_ticker_id : Int, p_bar_width_sec : Int, barTicks : Seq[FinTick]) {
                                   )
                                  else 0
 
+  val log_co          :Double = simpleRound4Double(Math.log(c)-Math.log(o))
 
   override def toString =
     "[ "+ts_begin+":"+ts_end+"] ohlc=["+o+","+h+","+l+","+c+"] "+btype+"   body,shad=["+h_body+","+h_shad+"]"

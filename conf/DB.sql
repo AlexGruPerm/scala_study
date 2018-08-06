@@ -4,6 +4,25 @@
 --
 -- ---------------------------------------------------------------
 
+to elemenate messgaes
+Out of 28 commit log syncs over the past 142,06s with average duration of 47,92ms, 1 have exceeded the configured commit interval by an average of 393,31ms
+need change
+commitlog_sync: periodic commitlog_sync_period_in_ms: 10000
+
+/**
+
+Commit log settings
+
+commitlog_sync
+(Default: periodic) The method that Cassandra uses to acknowledge writes in milliseconds:
+periodic: (Default: 10000 milliseconds [10 seconds])
+With commitlog_sync_period_in_ms, controls how often the commit log is synchronized to disk. Periodic syncs are acknowledged immediately.
+
+batch: (Default: disabled)note
+Used with commitlog_sync_batch_window_in_ms (Default: 2 ms), which is the maximum length of time that queries may be batched together.
+
+*/
+
 -- Keyspace only for source ticks data.
 CREATE KEYSPACE IF NOT EXISTS mts_src
   WITH REPLICATION = {
@@ -89,8 +108,9 @@ CREATE TABLE mts_bars.bars(
     h_body         double,
     h_shad         double,
     btype          varchar,
-    ticks_cnt      int,    -- тиковая плотность
-    disp           double, -- среднеквадратичное отклонение тиков в баре от Мо.
+    ticks_cnt       int,
+    disp           double,
+    log_co         double,
     PRIMARY KEY((ticker_id, ddate, bar_width_sec),ts_end)
 ) WITH CLUSTERING ORDER BY (ts_end DESC);
 

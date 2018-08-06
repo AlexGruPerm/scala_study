@@ -74,7 +74,8 @@ class PatternSeacher(session: Session) extends rowToX(session, LoggerFactory.get
           row.getString("btype"),
           row.getLong("ts_end_unx"),
           row.getInt("ticks_cnt"),
-          row.getDouble("disp")
+          row.getDouble("disp"),
+          row.getDouble("log_co")
         )
       )
       //head - last bar in history, fresh
