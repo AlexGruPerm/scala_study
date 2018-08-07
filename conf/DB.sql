@@ -44,30 +44,37 @@ CREATE KEYSPACE IF NOT EXISTS mts_bars
    'replication_factor' : 1
   };
 
--- Table for all tickers tick data.
+
 drop table mts_src.ticks;
 
 /*
  * PRIMARY KEY ((ticker_id, ddate), ts)
  * The composite partition key is (ticker_id, day)
- * The clustering key is ts - data in partitions sorted by ts
- * ddate - date of year like dd.mm.yyyy
  *
- * ddate populated with  TODATE(now())
- * ts    populated with  toUnixTimestamp(now())
  *
  */
 CREATE TABLE mts_src.ticks(
 	ticker_id  int,
-	ddate      date,
-    ts         timestamp,
+	ddate      date,     //Trade servser - date from TimeCurrent
+	ts         bigint,   //Trade servser - 64 bits, Date and time with second precision, encoded as 8 bytes since epoch.
+	db_tsunx   bigint,   //db layer - calculated as toUnixTimestamp(now())
     bid        double,
     ask        double,
-    PRIMARY KEY((ticker_id, ddate),ts)
-) WITH CLUSTERING ORDER BY (ts DESC);
-
+    PRIMARY KEY((ticker_id, ddate),ts,db_tsunx)
+) WITH CLUSTERING ORDER BY (ts DESC,db_tsunx DESC);
 
 truncate mts_src.ticks;
+
+select
+	ticker_id  ,
+	ddate      ,
+    ts         ,
+    srv_time,
+    db_tsunx   ,
+    db_ts      ,
+    bid        ,
+    ask
+from mts_src.ticks;
 
 -- typical queries
 select count(*) from mts_src.ticks;
@@ -99,8 +106,8 @@ CREATE TABLE mts_bars.bars(
 	ticker_id      int,
 	ddate          date,
 	bar_width_sec  int,
-    ts_begin       timestamp,
-    ts_end         timestamp,
+    ts_begin       bigint,
+    ts_end         bigint,
     o              double,
     h              double,
     l              double,
@@ -227,8 +234,8 @@ select * from mts_meta.bars_property where ticker_id=1;
 CREATE TABLE mts_bars.lastbars(
 	ticker_id      int,
 	bar_width_sec  int,
-    ts_begin       timestamp,
-    ts_end         timestamp,
+    ts_begin       bigint,
+    ts_end         bigint,
     o              double,
     h              double,
     l              double,
@@ -239,7 +246,7 @@ CREATE TABLE mts_bars.lastbars(
     ticks_cnt       int,
     disp           double,
     PRIMARY KEY((ticker_id, bar_width_sec))
-);
+)
 
 
 select * from mts_meta.tickers;
@@ -337,10 +344,10 @@ select * from mts_meta.trade_advisers_ticker;
 
 CREATE TABLE mts_meta.trade_advisers_results(
 	adviser_id int,
-    ts         timestamp,
+    ts         bigint,
     main_way   text,
     PRIMARY KEY((adviser_id),ts)
-) WITH CLUSTERING ORDER BY (ts DESC);
+) WITH CLUSTERING ORDER BY (ts DESC)
 
 
 //для некоторых советников записывается состояние бара(ов) в моммент рекомендации

@@ -151,7 +151,7 @@ class TradeAdviser(session: Session) extends rowToX(session, LoggerFactory.getLo
 
                  val boundSaveAdvRes = prepSaveAdviserRes.bind()
                    .setInt("p_adviser_id", p_adviser_id)
-                   .setTimestamp("p_ts", seq_1.map(b => b.ts_end).max)
+                   .setLong("p_ts", seq_1.map(b => b.ts_end).max)
                    .setString("p_main_way","R - main go down")
                  session.execute(boundSaveAdvRes)
 
@@ -172,7 +172,7 @@ class TradeAdviser(session: Session) extends rowToX(session, LoggerFactory.getLo
 
                  val boundSaveAdvRes = prepSaveAdviserRes.bind()
                    .setInt("p_adviser_id", p_adviser_id)
-                   .setTimestamp("p_ts", seq_1.map(b => b.ts_end).max)
+                   .setLong("p_ts", seq_1.map(b => b.ts_end).max)
                    .setString("p_main_way","G - main go up")
                  session.execute(boundSaveAdvRes)
 

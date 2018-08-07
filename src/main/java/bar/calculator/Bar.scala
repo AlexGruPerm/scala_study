@@ -11,10 +11,10 @@ class Bar (p_ticker_id : Int, p_bar_width_sec : Int, barTicks : Seq[FinTick]) {
   }
 
   val ticker_id       :Int = p_ticker_id
-  val ddate           :java.util.Date = barTicks(0).ts
+  val ddate           :Long = barTicks(0).ts
   val bar_width_sec   :Int= p_bar_width_sec
-  val ts_begin        :java.util.Date = barTicks(0).ts
-  val ts_end          :java.util.Date = barTicks.last.ts
+  val ts_begin        :Long = barTicks(0).ts
+  val ts_end          :Long = barTicks.last.ts
   val o               :Double = simpleRound4Double((barTicks(0).ask + barTicks(0).bid)/2)// (barTicks(0).ask + barTicks(0).bid)/2
   val h               :Double = simpleRound4Double(barTicks.map(x => (x.ask+x.bid)/2).max)
   val l               :Double = simpleRound4Double(barTicks.map(x => (x.ask+x.bid)/2).min)
@@ -26,7 +26,7 @@ class Bar (p_ticker_id : Int, p_bar_width_sec : Int, barTicks : Seq[FinTick]) {
     case  0 => "n" // bOpen = bClose
     case  1 => "r" // bOpen > bClose
   }
-  val ts_end_unx      :Long   = barTicks.last.ts.getTime
+  val ts_end_unx      :Long   = barTicks.last.ts
 
   val ticks_cnt       :Int = if (barTicks.nonEmpty) barTicks.size else 0
   //standard deviation

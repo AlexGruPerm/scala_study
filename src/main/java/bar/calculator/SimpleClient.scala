@@ -66,6 +66,8 @@ class SimpleClient(node: String) {
   }
 
   // blahs.toIterator.map{ do something }.takeWhile(condition)
+  /*
+  *
     def queryTicks() = {
       val results = session.execute("select ts,ask,bid from finance.tickdata where id_symbol=3 order by ts desc;")
       val rowToFinTick = (row: Row) => new FinTick(row.getTimestamp("ts"), row.getDouble("ask"), row.getDouble("bid"))
@@ -83,6 +85,7 @@ class SimpleClient(node: String) {
       }
       println("counter="+counter)
   }
+  */
 
 
 
@@ -96,7 +99,7 @@ class SimpleClient(node: String) {
 
   def getTicks() = {
     val results = session.execute("select ts,ask,bid from mts_src.ticks where ticker_id=4 and ddate='2018-07-13' order by ts desc;")
-    val rowToFinTick = (row: Row) => new FinTick(row.getTimestamp("ts"), row.getDouble("ask"), row.getDouble("bid"))
+    val rowToFinTick = (row: Row) => new FinTick(row.getLong("ts"), row.getLong("db_tsunx"),row.getDouble("ask"), row.getDouble("bid"))
 
     val rsList = results.all()
     for(i <- 0 to rsList.size()-1) yield rowToFinTick(rsList.get(i))
