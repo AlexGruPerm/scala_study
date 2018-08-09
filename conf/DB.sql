@@ -212,6 +212,36 @@ CREATE TABLE mts_meta.bars_property(
     PRIMARY KEY(ticker_id, bar_width_sec, is_enabled)
 );
 
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(1,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(4,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(5,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(6,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(7,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(8,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(9,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(10,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(11,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(12,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(13,30,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(14,30,1);
+
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(1,300,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,300,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,300,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(4,300,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(5,300,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(6,300,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(7,300,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(8,300,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(9,300,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(10,300,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(11,300,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(12,300,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(13,300,1);
+insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(14,300,1);
+
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(1,600,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(2,600,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(3,600,1);
@@ -226,6 +256,7 @@ insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(11
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(12,600,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(13,600,1);
 insert into mts_meta.bars_property(ticker_id,bar_width_sec,is_enabled) values(14,600,1);
+
 
 select * from mts_meta.bars_property where ticker_id=1;
 

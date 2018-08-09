@@ -53,7 +53,6 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
              btype,
              ticks_cnt,
              disp,
-             toUnixTimestamp(ts_end) as ts_end_unx,
              log_co
         from mts_bars.bars
         where
@@ -79,7 +78,6 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
                   h_body,
                   h_shad,
                   btype,
-                  max(ts_end) as ts_end_unx,
                   ticks_cnt,
                   disp,
                   log_co
@@ -101,6 +99,18 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
            where ticker_id = :tickerId and
                  ts > :ts_begin and
                  ts < :ts_end
+                  ALLOW FILTERING;
+    """)
+
+  val resTinyTicksByTsInterval = session.prepare(
+    """
+          select ts,
+                 bid,
+                 ask
+            from mts_src.ticks
+           where ticker_id = :tickerId and
+                 ts >= :ts_begin and
+                 ts <= :ts_end
                   ALLOW FILTERING;
     """)
 
@@ -221,7 +231,6 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
       row.getDouble("h_body"),
       row.getDouble("h_shad"),
       row.getString("btype"),
-      row.getLong("ts_end_unx"),
       row.getInt("ticks_cnt"),
       row.getDouble("disp"),
       row.getDouble("log_co")
@@ -249,17 +258,17 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
     */
   def getLastTickDdate(p_ticker : Int) ={
     val rsList = session.execute("select distinct ddate,ticker_id FROM mts_src.ticks;").all()
-    alogger.info(" getLastTickDdate rsList.size="+rsList.size)
+    //alogger.info(" getLastTickDdate rsList.size="+rsList.size)
     val res = for(i <- 0 to rsList.size()-1) yield
       (
         rsList.get(i).getInt("ticker_id"),
         rsList.get(i).getDate("ddate"),
         new Date(rsList.get(i).getDate("ddate").getMillisSinceEpoch)
       )
-    alogger.info("getLastTickDdate BEFORE max_dates = res.find")
+    //alogger.info("getLastTickDdate BEFORE max_dates = res.find")
     val getLastTickDdate_Res_Max = {if (res.nonEmpty) res.map(x => x._3).max else 0 }
     val max_dates = res.find(x => x._3 == getLastTickDdate_Res_Max &&  x._1 == p_ticker).map(x => (x._2,x._3))
-    alogger.info("[getLastTickDdate] p_ticker="+p_ticker+"  max_dates=["+max_dates+"]")
+    //alogger.info("[getLastTickDdate] p_ticker="+p_ticker+"  max_dates=["+max_dates+"]")
     max_dates
 
   }
@@ -281,20 +290,17 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
 
   val rowToTicker = (row : Row) => {
     val dd = getLastTickDdate(row.getInt("ticker_id"))
-
-    alogger.info("rowToTicker ")
-
     dd match {
       case Some(s) => {
 
         val l_ticker_id = row.getInt("ticker_id")
 
-        alogger.info("INSIDE Some(s) l_ticker_id="+l_ticker_id+" s._1="+s._1+"  s._2="+s._2)
+        //alogger.info("INSIDE Some(s) l_ticker_id="+l_ticker_id+" s._1="+s._1+"  s._2="+s._2)
 
         val last_tick_ddate = s._2
         val last_tisk_tss : pair_ts_tsunx = getLastTickTs(l_ticker_id/*row.getInt("ticker_id")*/,s._1)
 
-        alogger.info("AFTER last_tisk_tss (last_tisk_tss) ts="+last_tisk_tss.ts+"  ts_unx="+last_tisk_tss.ts_unx)
+        //alogger.info("AFTER last_tisk_tss (last_tisk_tss) ts="+last_tisk_tss.ts+"  ts_unx="+last_tisk_tss.ts_unx)
 
         new Ticker(
           ticker_id        = l_ticker_id,

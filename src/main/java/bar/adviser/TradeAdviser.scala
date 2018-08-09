@@ -120,7 +120,7 @@ class TradeAdviser(session: Session) extends rowToX(session, LoggerFactory.getLo
           for (debugTicker <- Seq(1,5,8,12)) {
             logger.info("-ticker = " + debugTicker + " [" + getCurrTickerByID(debugTicker).ticker_code + "]")
             for (sb <- seqSeqBar.flatten.filter(sb => sb.ticker_id == debugTicker)) {
-              logger.info("[" + sb.ticker_id + "]   TSBEGIN=" + sb.ts_begin + " TSEND=" + sb.ts_end + " TSEND_UNX=" + sb.ts_end_unx + " BTYPE=" + sb.btype + " C=" + sb.c)
+              logger.info("[" + sb.ticker_id + "]   TSBEGIN=" + sb.ts_begin + " TSEND=" + sb.ts_end  + " BTYPE=" + sb.btype + " C=" + sb.c)
             }
             // !!!!! HEAD it's a first element in Seq !!!!!
             logger.info("-------------------")

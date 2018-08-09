@@ -13,7 +13,6 @@ case class 	BarC(
                  h_body          :Double,
                  h_shad          :Double,
                  btype           :String,
-                 ts_end_unx      :Long,
                  ticks_cnt       :Int,
                  disp            :Double,
                  log_co          :Double

@@ -111,7 +111,7 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
   def get_Tickers(ds_tikers_ddates : java.util.List[Row]) = {
     val listTicker : Seq[Ticker] = for(i <- 0 to ds_tikers_ddates.size-1) yield
         rowToTicker(ds_tikers_ddates.get(i))
-    logger.info("get_Tickers listTicker.size="+listTicker.size)
+    //logger.info("get_Tickers listTicker.size="+listTicker.size)
     listTicker
   }
 
@@ -126,6 +126,32 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
   }
 
 
+  /**
+    *
+    * @return Seq of ticks, only ts,ask,bid.  ts - trade server time.
+    */
+  def read_Ticks_by_ts_interval(p_ticker_id : Int, p_ts_begin :Long, p_ts_end : Long) : Seq[TinyTick] = {
+    val bound = resTinyTicksByTsInterval.bind().setInt("tickerId",  p_ticker_id)
+                                               .setLong("ts_begin", p_ts_begin)
+                                               .setLong("ts_end",   p_ts_end)
+    val rsTicks : Seq[TinyTick] = JavaConverters.asScalaIteratorConverter(session.execute(bound).all().iterator())
+                                                .asScala
+                                                .toSeq.map(tick => new TinyTick(tick.getLong("ts"),
+                                                                                tick.getDouble("ask"),
+                                                                                tick.getDouble("bid")))
+                                                       .sortBy(ft => ft.ts) // sort by asc, head the oldest element.
+    if (rsTicks.nonEmpty) {
+      logger.info("    READ " + rsTicks.size + " TICKS.")
+      if (rsTicks.size >= 2)
+        logger.info("     FIRST TICK TS:"+rsTicks.head.ts+" LAST TICK TS:"+rsTicks.last.ts)
+      else
+        logger.info("    rsTicks.size less then 2.")
+    } else {
+      logger.info("    READ 0 TICKS.")
+    }
+    rsTicks
+  }
+
 
   /** ===============================================================================================================
     *  bars must contain only one Last bars(no one) by this ticker (for each widths) if this exists in db.
@@ -133,72 +159,69 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
     * @param bars - Last bars by each width.
     * @return
     */
-  def calc_one_ticker(ticker : Ticker, bars : Seq[BarC], barsPropsTicker : Seq[bars_property]/*, barsNLast_Property : Seq[bar_last_deep]*/) : Seq[ticker_bars_save_result] ={
+  def calc_one_ticker(ticker : Ticker, bars : Seq[BarC], barsPropsTicker : Seq[bars_property]) : Seq[ticker_bars_save_result] ={
     logger.info("  2.[calc_one_ticker] ticker=" + ticker.ticker_id)
 
-    val seqMinsBarUnxtsEnd = for (bp <- barsPropsTicker) yield
-      bars.filter(b => b.bar_width_sec == bp.bar_width_sec).map(b => b.ts_end_unx).reduceOption(_ min _).getOrElse(0.toLong)
+    /**
+      * OPTIMIZATION, here we need extract min ddate also from bars.
+      * And compare with ddate from ticker, if they are equal then use another query to get ticks by interval:
+      * with sending ddate to reduce partitions scan.
+      */
+    val seqMinsBarTsEnd = for (bp <- barsPropsTicker) yield
+                               bars.filter(b => b.bar_width_sec == bp.bar_width_sec).map(b => b.ts_end).reduceOption(_ min _).getOrElse(0.toLong)
 
-    logger.info("   2.1 [calc_one_ticker] seqMinsBarUnxtsEnd.size="+seqMinsBarUnxtsEnd.size)
+    logger.info("   2.1 [calc_one_ticker] seqMinsBarTsEnd.size="+seqMinsBarTsEnd.size)
 
-    val min_unxts_in_bars = {if (barsPropsTicker.size==0)
+    val min_ts_in_bars = {if (barsPropsTicker.size==0)
                                0.toLong
                              else
-                             seqMinsBarUnxtsEnd.min}
-    logger.info("   2.2 [calc_one_ticker] min_unxts_in_bars="+min_unxts_in_bars)
-    logger.info("    BEFORE session.prepare resTicksByTsInterval min_unxts_in_bars=" + min_unxts_in_bars + " ticker.last_tick_ts="+ticker.last_tick_ts+" ticker.last_tick_ts_unx="+ticker.last_tick_ts_unx)
+                             seqMinsBarTsEnd.min}
 
+    logger.info("   2.2 [calc_one_ticker] min_unxts_in_bars="+min_ts_in_bars)
+    logger.info("    BEFORE session.prepare resTicksByTsInterval min_unxts_in_bars=" + min_ts_in_bars + " ticker.last_tick_ts="+ticker.last_tick_ts+" ticker.last_tick_ts_unx="+ticker.last_tick_ts)
     logger.info(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    logger.info(" NO 0 each time,  min_unxts_in_bars="+min_unxts_in_bars+"   bars.size="+bars.size)
+    logger.info(" NO 0 each time,  min_ts_in_bars = "+min_ts_in_bars+"   bars.size="+bars.size)
     logger.info(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
-    val bound = resTicksByTsInterval.bind().setInt("tickerId", ticker.ticker_id)
-                                           .setLong("ts_begin",  min_unxts_in_bars)
-                                           .setLong("ts_end",  ticker.last_tick_ts/*last_tick_ts_unx*/)
-
-    val rsTicks : Seq[FinTick] = JavaConverters.asScalaIteratorConverter(session.execute(bound).all().iterator())
-                                               .asScala
-                                               .toSeq.map(tick => new FinTick(tick.getLong("ts"),
-                                                                              tick.getLong("db_tsunx"),
-                                                                              tick.getDouble("ask"),
-                                                                              tick.getDouble("bid")))
-                                               .sortBy(ft => ft.ts)
-
-    if (rsTicks.nonEmpty) {
-      logger.debug("      tick 1: " + rsTicks.head.db_tsunx)
-      logger.debug("      tick 2: " + rsTicks.tail.head.db_tsunx)
-      logger.debug("      tick 3: " + rsTicks.tail.tail.head.db_tsunx)
-      logger.info("    READED FROM DB " + rsTicks.size + " TICKS.")
-    } else {
-      logger.info("    READED FROM DB - rsTicks Empty.")
-    }
+    val rsTicks : Seq[TinyTick] = read_Ticks_by_ts_interval(ticker.ticker_id,
+                                                            min_ts_in_bars,
+                                                            ticker.last_tick_ts);
 
     val res = for (bp <- barsPropsTicker if rsTicks.nonEmpty) yield {
 
        logger.debug("    3. bar_width_sec = " + bp.bar_width_sec)
        val lastBar_ByWidth = bars.filter(b => b.bar_width_sec == bp.bar_width_sec)
-       val lastBar_ts_end_unx : Long = if (lastBar_ByWidth.isEmpty) 0
-                                        else lastBar_ByWidth.head.ts_end_unx
+       val lastBar_ts_end : Long = if (lastBar_ByWidth.isEmpty) 0
+                                        else lastBar_ByWidth.head.ts_end
 
-       val lastBat_tsendunx_Diff_ticker_lstunx_Sec = (ticker.last_tick_ts_unx - lastBar_ts_end_unx )/1000
+       //val lastBat_tsendunx_Diff_ticker_lstunx_Sec = (ticker.last_tick_ts - lastBar_ts_end )/1000
+       val dataWidthSec = ticker.last_tick_ts - Math.max(lastBar_ts_end,rsTicks.head.ts) // removed because short ts format /1000
 
-
-       val dataWidthSec = (ticker.last_tick_ts_unx - Math.max(lastBar_ts_end_unx,rsTicks.head.db_tsunx) )/1000
-
-       logger.debug("    !!!   4.   ticker.last_tick_ts_unx="+ticker.last_tick_ts_unx+" lastBar_ts_end_unx="+lastBar_ts_end_unx+" rsTicks.head.db_tsunx="+rsTicks.head.db_tsunx+"   dataWidthSec=" + dataWidthSec)
+       logger.debug("    !!!   4.   ticker.last_tick_ts="+ticker.last_tick_ts+" lastBar_ts_end="+lastBar_ts_end+" rsTicks.head.db_tsunx="+rsTicks.head.ts+"   dataWidthSec=" + dataWidthSec)
 
 
-      //Value lastBat_tsendunx_Diff_ticker_lstunx_Sec can be extremaly BIG because lastBar_ts_end_unx can be equal 0.
+      //Value lastBat_tsendunx_Diff_ticker_lstunx_Sec can be extremaly BIG because lastBar_ts_end can be equal 0.
        if (dataWidthSec/*lastBat_tsendunx_Diff_ticker_lstunx_Sec*/ > bp.bar_width_sec) {
-         logger.debug("        5. diff more then width. Start calculation for ticker, width, ts in ticks from "+ min_unxts_in_bars +" to "+ticker.last_tick_ts_unx+" min tsunx_from_bars="+min_unxts_in_bars)
+         logger.debug("        5. diff more then width. Start calculation for ticker, width, ts in ticks from "+ min_ts_in_bars +" to "+ticker.last_tick_ts+" min tsunx_from_bars="+min_ts_in_bars)
 
          //OLD BARS BY TICK, need seconds.
          // val seqSeqTicks : Seq[Seq[FinTick]] = rsTicks.sliding(bp.bar_width_sec,bp.bar_width_sec).filter(x => (x.size==bp.bar_width_sec)).toSeq
          //val fIdx = rsTicks.head.ts.getTime
          //val lIdx = rsTicks.last.ts.getTime
-         val barsSides = rsTicks.head.db_tsunx.to(rsTicks.last.db_tsunx).by(bp.bar_width_sec*1000)
+         val barsSides = rsTicks.head.ts.to(rsTicks.last.ts).by(bp.bar_width_sec/* *1000 */) //removed *1000 because short ts format
 
-         val seqBarSides = for ((bs,idx) <- barsSides.zipWithIndex) yield (bs,idx.toInt)
+         logger.info("barsSides.size="+barsSides.size)
+
+         logger.info("from : "+rsTicks.head.ts)
+         logger.info("to   : "+rsTicks.last.ts)
+
+         val seqBarSides = for ((bs,idx) <- barsSides.zipWithIndex) yield {
+            //logger.info("bs="+bs+"  idx.toInt="+idx.toInt)
+           (bs,idx.toInt)
+         }
+
+
+         logger.info("seqBarSides.size= "+seqBarSides.size)
 
          val seqBar2Sides = for(i <- 0 to seqBarSides.size-1) yield {
            if (i < seqBarSides.last._2)
@@ -207,11 +230,18 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
              (seqBarSides(i)._1, seqBarSides(i)._1 /*+ bp.bar_width_sec*1000*/, seqBarSides(i)._2+1)  //#########
          }
 
+         /*
+         for (bts <- seqBar2Sides) {
+           logger.info("brs ("+ bts._1 + " - " +bts._2+")")
+         }
+         */
+
          def getGroupThisElement(elm : Long)={
-           seqBar2Sides.find(bs => (bs._1 <= elm && bs._2 > elm) && (bs._2 - bs._1)/1000.toInt == bp.bar_width_sec).map(x => x._3).getOrElse(0)
+           //changed  (bs._2 - bs._1)/1000.toInt because short ts format.
+           seqBar2Sides.find(bs => ((bs._1 <= elm && bs._2 > elm) && (bs._2 - bs._1) == bp.bar_width_sec)).map(x => x._3).getOrElse(0)
          }
 
-         val seqSeqTicks = rsTicks.groupBy(elm => getGroupThisElement(elm.db_tsunx)).filter(seqT => seqT._1!=0 ).toSeq.sortBy(gr => gr._1)
+         val seqSeqTicks = rsTicks.groupBy(elm => getGroupThisElement(elm.ts)).filter(seqT => seqT._1!=0 ).toSeq.sortBy(gr => gr._1)
                                                                 //Not last group where can be less then bar_width_sec
          val seqBarsCalced = for (seqTicksOneBar <- seqSeqTicks if seqTicksOneBar._1 != 0 ) yield {
            logger.debug("          6. GROUP ID - seqTicksOneBar._1 = "+seqTicksOneBar._1)
@@ -230,7 +260,7 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
          for (b <- seqBarsCalced) {
 
            //           logger.info("EACH BAR: p_ddate="+core.LocalDate.fromMillisSinceEpoch( b.ddate.getTime())+"   b.ddate="+b.ddate+"   p_ts_begin="+b.ts_begin)
-           logger.info("EACH BAR: p_ddate="+ b.ddate+"   b.ddate="+b.ddate+"   p_ts_begin="+b.ts_begin)
+           //logger.info("EACH BAR: p_ddate="+ b.ddate+"   b.ddate="+b.ddate+"   p_ts_begin="+b.ts_begin)
 
            val boundSaveBar = prepSaveBar.bind()
              .setInt("p_ticker_id", ticker.ticker_id)
@@ -253,7 +283,7 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
          }
 
          //UPSERT LAST BAR FROM CALCED BARS seqBarsCalced
-           val lastBarFromBars = seqBarsCalced.filter(b => b.ts_end_unx == seqBarsCalced.map(bfs => bfs.ts_end_unx).max).head //only one !?
+           val lastBarFromBars = seqBarsCalced.filter(b => b.ts_end == seqBarsCalced.map(bfs => bfs.ts_end).max).head //only one !?
 
            logger.info("LAST BAR: lastBarFromBars.ddate="+lastBarFromBars.ddate)
 
@@ -283,8 +313,8 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
           new ticker_bars_save_result(
             ticker_id            = ticker.ticker_id,
             bar_width_sec        = bp.bar_width_sec,
-            prev_last_bar_ts_unx = lastBar_ts_end_unx,
-            curr_last_bar_ts_unx = if (seqBarsCalced.nonEmpty) seqBarsCalced.map(b => b.ts_end_unx).max else 0,
+            prev_last_bar_ts_unx = lastBar_ts_end,
+            curr_last_bar_ts_unx = if (seqBarsCalced.nonEmpty) seqBarsCalced.map(b => b.ts_end).max else 0,
             saved_bars_count     = seqBarsCalced.size
           )
         } else {
@@ -314,7 +344,7 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
                                                           /* thisTicker.ticker_id == 2*/
                                                           //OPTIMIZATION, don't do anything if there are no necessary ticks for bar calculation.
                                                           && (thisTicker.last_tick_ts_unx - {if (LastBars.nonEmpty && LastBars.map(b => b.ticker_id).contains(thisTicker.ticker_id))
-                                                                                                LastBars.filter(b => b.ticker_id == thisTicker.ticker_id).map(lb => lb.ts_end_unx).max
+                                                                                                LastBars.filter(b => b.ticker_id == thisTicker.ticker_id).map(lb => lb.ts_end).max
                                                                                               else 0.toLong }
                                                              )/1000 >= bars_properties.filter(bp => bp.ticker_id == thisTicker.ticker_id).map(bpt => bpt.bar_width_sec).min
                                                          ) yield /*Future*/{
@@ -353,7 +383,7 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
     //Here we need read only !LAST! bars by each ticker_id and bar_width from property
     val seqBars : Seq[BarC] = get_Bars(bars_properties)
     val lBars = new LastBars(seqBars)
-    for(oneBar <- lBars.seqBars) logger.debug("LAST BAR: ticker_id = "+oneBar.ticker_id +" ddate="+formatDate(oneBar.ddate,"dd.MM.yyyy")+" width="+oneBar.bar_width_sec +" ts_end_unx = " +oneBar.ts_end_unx)
+    for(oneBar <- lBars.seqBars) logger.debug("LAST BAR: ticker_id = "+oneBar.ticker_id +" ddate="+formatDate(oneBar.ddate,"dd.MM.yyyy")+" width="+oneBar.bar_width_sec +" ts_end_unx = " +oneBar.ts_end)
 
     logger.debug("----------------------------------------------------------------------------------")
     /**
@@ -363,16 +393,14 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
     val tickers : Seq[Ticker] = get_Tickers(get_ds_tickers_ddates())
 
     logger.debug("----------------------------------------------------------------------------------")
-    for (oneTicker <- tickers) {
+    for (oneTicker <- tickers if oneTicker.ticker_id != 0) {
       logger.info(" ticker_id [ "+oneTicker.ticker_id+
               " ] "+oneTicker.ticker_code+" "+
               "  "+ formatDate(oneTicker.last_tick_ddate,"dd.MM.yyyy")+
               "   last_tick_ts(Long) = "+ oneTicker.last_tick_ts  +
               "   last_tick_ts_unx = "+oneTicker.last_tick_ts_unx)
-    } //formatDate(oneTicker.last_tick_ts,"dd.MM.yyyy HH:mm:ss")
-
+    }
     logger.debug("----------------------------------------------------------------------------------")
-    //run recaclulation each ticker by each bar property
 
     run_background_calcs(tickers, lBars.seqBars, bars_properties)
   }

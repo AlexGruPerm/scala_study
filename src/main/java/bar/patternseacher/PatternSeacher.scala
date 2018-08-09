@@ -72,7 +72,7 @@ class PatternSeacher(session: Session) extends rowToX(session, LoggerFactory.get
           row.getDouble("h_body"),
           row.getDouble("h_shad"),
           row.getString("btype"),
-          row.getLong("ts_end_unx"),
+          //row.getLong("ts_end_unx"),
           row.getInt("ticks_cnt"),
           row.getDouble("disp"),
           row.getDouble("log_co")
@@ -80,7 +80,7 @@ class PatternSeacher(session: Session) extends rowToX(session, LoggerFactory.get
       )
       //head - last bar in history, fresh
       //last - older
-      logger.info("rsLBars.size="+rsLBars.size+" FIRST(most fresh)="+ rsLBars.head.ts_end_unx +" OLDER(back in history)="+rsLBars.last.ts_end_unx)
+      logger.info("rsLBars.size="+rsLBars.size+" FIRST(most fresh)="+ rsLBars.head.ts_end +" OLDER(back in history)="+rsLBars.last.ts_end)
       logger.info("Next it will use for pattern search and save result for ticker, width_sec, deep, ts_begin (first bar), ts_end (last bar)  ")
       /*
       if (rsLBars.nonEmpty && rsLBars.size == oneBarWdthLDeepProp.deep_count) {

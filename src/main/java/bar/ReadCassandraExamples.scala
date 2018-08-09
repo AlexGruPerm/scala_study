@@ -1,10 +1,9 @@
 package bar
 
+import bar.adviser._
 import bar.calculator._
 import bar.patternseacher._
-import bar.adviser._
 import org.slf4j.LoggerFactory
-import bar.patternseacher._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
@@ -57,6 +56,12 @@ object ReadCassandraExamples extends App {
       logger.info("=================================================")
       logger.info("....... I am here - taskBarPatternSearch  .......")
       logger.info("=================================================")
+      /**
+        * Раз в минуту.
+        *  Расчет средних и статистических характеристик.
+        *  Среднее количество тиков в секунду по каждому тикеру и ширине.
+        *  Распределения приращений, за последние N часов и как оно меняется к текущему моменту, поиск общих тенденций.
+        */
       Thread.sleep(5000)
     }
 
@@ -77,12 +82,10 @@ object ReadCassandraExamples extends App {
   }
 
     def infiniteLoop(): Future[Unit] = {
-      Future.sequence(List(loopCalcBars())).map(_ => ())
-      /*
+       //Future.sequence(List(loopCalcBars())).map(_ => ())
        Future.sequence(List(loopCalcBars(),loopPatSearch())).map(_ => ())
        Future.sequence(List(loopTaskAnyCalc())).map(_ => ())
        Future.sequence(List(loopAdviser())).map(_ => ())
-      */
     }
 
     Await.ready(infiniteLoop(), Duration.Inf)
