@@ -5,14 +5,7 @@
       <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/conf/DB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/conf/DB.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TradeAdviser.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TradeAdviser.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Bar.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Bar.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarC.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarC.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/FinTick.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/FinTick.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/patternseacher/PatternSeacher.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/patternseacher/PatternSeacher.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/resources/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/resources/log4j.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -28,35 +21,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BarCalculator.scala" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rowToX.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="50" column="20" lean-forward="true" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
-              <folding>
-                <element signature="e#13#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReadCassandraExamples.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ReadCassandraExamples.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="27" lean-forward="true" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+            <state relative-caret-position="253">
+              <caret line="54" column="48" lean-forward="true" selection-start-line="54" selection-start-column="48" selection-end-line="54" selection-end-column="48" />
               <folding>
                 <element signature="e#13#33#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DB.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../scala_study/conf/DB.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="394">
+              <caret line="437" column="47" lean-forward="true" selection-start-line="437" selection-start-column="47" selection-end-line="437" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -73,11 +54,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>case</find>
-      <find>prepSaveBar</find>
-      <find>setDa</find>
-      <find>MAX(ddate)</find>
-      <find />
       <find>mts_src.ticks</find>
       <find>0642</find>
       <find>setDate</find>
@@ -86,23 +62,28 @@
       <find>listTicker.size</find>
       <find>prepared</find>
       <find>db_ts</find>
-      <find />
+      <find>NO 0 each tim</find>
       <find>XXXX</find>
       <find>XXX</find>
-      <find />
+      <find>SEARCH BUG:</find>
       <find>trade_advisers_results</find>
       <find>prepSaveAdviserRes</find>
       <find>4.</find>
       <find>resLastDateBar</find>
       <find>resLastBarPrep</find>
       <find>1000</find>
-      <find />
+      <find>EACH BAR</find>
       <find>rowToTicker</find>
       <find>getLastTickDdate</find>
-      <find />
+      <find>NO 0 each time</find>
       <find>JavaConverters</find>
       <find>BarC</find>
       <find>rowToBar</find>
+      <find>round</find>
+      <find>roun</find>
+      <find>sort</find>
+      <find>execute</find>
+      <find>prepSaveOnlineLastBars</find>
     </findStrings>
     <replaceStrings>
       <replace>logger.info</replace>
@@ -118,7 +99,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/log4j2.xml" />
         <option value="$PROJECT_DIR$/src/main/java/AkkTestHttpServer.scala" />
         <option value="$PROJECT_DIR$/src/main/java/TestCollectFunctions.scala" />
         <option value="$PROJECT_DIR$/src/main/java/TestCollectFunctions.scala" />
@@ -166,9 +146,10 @@
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/patternseacher/PatternSeacher.scala" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/resources/log4j.properties" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala" />
+        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala" />
+        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TendAdviser.scala" />
         <option value="$PROJECT_DIR$/../scala_study/conf/DB.sql" />
         <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala" />
       </list>
     </option>
   </component>
@@ -180,7 +161,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2" />
+    <option name="x" value="398" />
+    <option name="y" value="134" />
     <option name="width" value="798" />
     <option name="height" value="560" />
   </component>
@@ -199,6 +181,11 @@
             <path>
               <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
               <item name="scala_study" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scala_study" type="462c0819:PsiDirectoryNode" />
+              <item name="conf" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="scala_study" type="b2602c69:ProjectViewProjectNode" />
@@ -231,7 +218,9 @@
               <item name="scala_study" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bar" type="462c0819:PsiDirectoryNode" />
+              <item name="adviser" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -428,13 +417,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526274645461</updated>
-    </task>
-    <task id="LOCAL-00030" summary="commit before new internal design and change IDE theme">
-      <created>1528884295043</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1528884295043</updated>
     </task>
     <task id="LOCAL-00031" summary="commit before fetch from github">
       <created>1528953284564</created>
@@ -772,12 +754,18 @@
       <option name="project" value="LOCAL" />
       <updated>1533641893624</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="Success bars calculation for 14 tickers.&#10;Need refactoring code, clear old comments, remove debug info. &#10;Begin second project scaladiff &#10;https://github.com/AlexGruPerm/scaladiff.git&#10;For tests in separate project.&#10;Here - Middle commit.">
+      <created>1533817330399</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1533817330399</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -786,7 +774,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.4625" side_tool="true" weight="0.3598726" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" weight="0.36836517" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.29193205" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.48301485" />
       <window_info anchor="right" id="Coverage" side_tool="true" weight="0.3296875" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32911393" />
       <window_info id="Designer" order="1" />
@@ -882,7 +870,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Bar calculator middle point, solve read problem with&#10;select distinct ddate,ticker_id FROM mts_src.ticks&#10;!!!" />
     <MESSAGE value="A lot of optimization, cql queries and code. Date format.&#10;correct information from Bars pulled into Tickers.&#10;Next step is writing non blocking recursive function with pause, &#10;for calculate and save bars into table." />
     <MESSAGE value="Was mistake in Tickers population. Need select only last (by ddate) &#10;bar of each pairs ticket_id + width.&#10;18.08.2018 Planning to rewrite this part more carefully." />
     <MESSAGE value="Was mistake in Tickers population - solved &#10;Need select only last (by ddate) - solved with cql query&#10;Now we are near real Bars calculation." />
@@ -907,7 +894,8 @@
     <MESSAGE value="Added saving results into trade_advisers_results&#10;Run and stay on night" />
     <MESSAGE value="Stop all next development, found bugs related with Bar calculation.&#10;filed ddate in Bars contains old dates.&#10;on 06.08.2018 all bars has date 03.08.2018" />
     <MESSAGE value="step back, a lot of modifications and refactoring. &#10;Modifying DLL, table structures.&#10;Move to Terminal date/time. &#10;Need spend more time to verify bar calculator and any aspects before going&#10;next." />
-    <option name="LAST_COMMIT_MESSAGE" value="step back, a lot of modifications and refactoring. &#10;Modifying DLL, table structures.&#10;Move to Terminal date/time. &#10;Need spend more time to verify bar calculator and any aspects before going&#10;next." />
+    <MESSAGE value="Success bars calculation for 14 tickers.&#10;Need refactoring code, clear old comments, remove debug info. &#10;Begin second project scaladiff &#10;https://github.com/AlexGruPerm/scaladiff.git&#10;For tests in separate project.&#10;Here - Middle commit." />
+    <option name="LAST_COMMIT_MESSAGE" value="Success bars calculation for 14 tickers.&#10;Need refactoring code, clear old comments, remove debug info. &#10;Begin second project scaladiff &#10;https://github.com/AlexGruPerm/scaladiff.git&#10;For tests in separate project.&#10;Here - Middle commit." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -915,7 +903,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/FirstClass.scala" />
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/HOFuncs.scala" />
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/StudyClass.scala" />
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CollectStudy.scala" />
@@ -1126,24 +1113,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TradeAdviser.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/FinTick.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/conf/DB.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="613">
-          <caret line="239" column="88" lean-forward="true" selection-start-line="239" selection-start-column="88" selection-end-line="239" selection-end-column="88" />
         </state>
       </provider>
     </entry>
@@ -1168,13 +1141,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Bar.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="44" lean-forward="true" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarC.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -1182,30 +1148,67 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Bar.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="44" lean-forward="true" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="298" column="59" selection-start-line="289" selection-end-line="303" selection-end-column="44" />
+          <folding>
+            <element signature="e#24#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TendAdviser.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1463">
+          <caret line="125" column="75" lean-forward="true" selection-start-line="125" selection-start-column="75" selection-end-line="125" selection-end-column="75" />
+          <folding>
+            <element signature="e#21#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="50" column="20" lean-forward="true" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+        <state relative-caret-position="17">
+          <caret line="10" column="65" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
           <folding>
             <element signature="e#13#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala">
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TradeAdviser.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="27" lean-forward="true" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+        <state relative-caret-position="202">
+          <caret line="193" lean-forward="true" selection-start-line="193" selection-end-line="193" />
           <folding>
-            <element signature="e#13#33#0" expanded="true" />
+            <element signature="e#21#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala">
+    <entry file="file://$PROJECT_DIR$/../scala_study/conf/DB.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+        <state relative-caret-position="394">
+          <caret line="437" column="47" lean-forward="true" selection-start-line="437" selection-start-column="47" selection-end-line="437" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="54" column="48" lean-forward="true" selection-start-line="54" selection-start-column="48" selection-end-line="54" selection-end-column="48" />
+          <folding>
+            <element signature="e#13#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1226,7 +1229,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited />
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -217,6 +217,94 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
     """)
 
 
+  val queryTickersWW =
+    """ select ticker_id
+          from mts_meta.bars_property
+         where bar_width_sec = 600 and
+               is_enabled    = 1
+         allow filtering; """
+
+  val prepqueryTickersWW = session.prepare(queryTickersWW)
+
+  val queryMinMax = """select count(ticker_id)  as bars_cnt,
+                               min(ts_begin)    as ts_begin,
+                               max(ts_end)      as ts_end
+                        from mts_bars.bars
+                       where ticker_id     = :p_ticker_id and
+                             bar_width_sec = :p_width_sec
+                       allow filtering """
+
+  val prepQuery = session.prepare(queryMinMax)
+
+  val queryBars = """      select
+                                  ticker_id,
+                                  ddate,
+                                  bar_width_sec,
+                                  ts_begin,
+                                  ts_end,
+                                  o,
+                                  h,
+                                  l,
+                                  c,
+                                  h_body,
+                                  h_shad,
+                                  btype,
+                                  ticks_cnt,
+                                  disp,
+                                  log_co
+                             from mts_bars.bars
+                             where
+                                  ticker_id     = :p_ticker_id and
+                                  bar_width_sec = :p_width_sec and
+                                  ts_begin     >= :p_ts_begin and
+                                  ts_end       <= :p_ts_end
+                             allow filtering;  """
+
+  val prepQueryBars = session.prepare(queryBars)
+
+
+  val queryInsertRes =
+    """insert into mts_meta.way_adviser_n_hours(
+      	ticker_id,
+      	bar_width_sec,
+      	ts_res,
+          way,
+          deep_sec,
+          adv_bars_in_part,
+          p1_size_bars,
+          p2_size_bars,
+          p3_size_bars,
+          p1_cnt,
+          p2_cnt,
+          p3_cnt,
+          p1_logco,
+          p2_logco,
+          p3_logco)
+         values(
+      	  :ticker_id,
+      	  :bar_width_sec,
+      	  :ts_res,
+          :way,
+          :deep_sec,
+          :adv_bars_in_part,
+          :p1_size_bars,
+          :p2_size_bars,
+          :p3_size_bars,
+          :p1_cnt,
+          :p2_cnt,
+          :p3_cnt,
+          :p1_logco,
+          :p2_logco,
+          :p3_logco
+         );
+    """
+  val prepInsertRes = session.prepare(queryInsertRes)
+
+
+
+
+
+
   val rowToBar = (row : Row) => {
     new BarC(
       row.getInt("ticker_id"),

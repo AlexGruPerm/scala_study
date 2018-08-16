@@ -405,5 +405,39 @@ CREATE TABLE mts_bars.trade_advisers_results_bars(
 //================================================================
 
 
+/*
+  Table for results of Tend adviser (n hours), must be divided on 3 parts
+  with equal size in seconds:
+  barsList.sliding(6,6).toList = 3 parts.
+  ---------------------------------------------------------------------
+   For example: width_sec  = 600 sec.
+                l_deep_sec = 3*3600 sec.
+                3*3600/600 = 18 bars / 3 = 6 bars in each of 3 parts.
+  ---------------------------------------------------------------------
+  Look "TendAdviser" in code.
+ */
+CREATE TABLE mts_meta.way_adviser_n_hours(
+	ticker_id        int,
+	bar_width_sec    int,
+	ts_res           bigint,
+    way              text,
+    deep_sec         int,
+    adv_bars_in_part int,
+    -------------------
+    p1_size_bars   int,
+    p2_size_bars   int,
+    p3_size_bars   int,
+    -------------------
+    p1_cnt         int,
+    p2_cnt         int,
+    p3_cnt         int,
+    -------------------
+    p1_logco       double,
+    p2_logco       double,
+    p3_logco       double,
+ PRIMARY KEY((ticker_id, bar_width_sec),ts_res)
+) WITH CLUSTERING ORDER BY (ts_res DESC);
 
+truncate mts_meta.way_adviser_n_hours;
 
+select * from mts_meta.way_adviser_n_hours;
