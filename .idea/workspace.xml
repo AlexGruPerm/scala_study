@@ -62,20 +62,20 @@
       <find>listTicker.size</find>
       <find>prepared</find>
       <find>db_ts</find>
-      <find>NO 0 each tim</find>
+      <find />
       <find>XXXX</find>
       <find>XXX</find>
-      <find>SEARCH BUG:</find>
+      <find />
       <find>trade_advisers_results</find>
       <find>prepSaveAdviserRes</find>
       <find>4.</find>
       <find>resLastDateBar</find>
       <find>resLastBarPrep</find>
       <find>1000</find>
-      <find>EACH BAR</find>
+      <find />
       <find>rowToTicker</find>
       <find>getLastTickDdate</find>
-      <find>NO 0 each time</find>
+      <find />
       <find>JavaConverters</find>
       <find>BarC</find>
       <find>rowToBar</find>
@@ -1229,7 +1229,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>No facets are configured</last-edited>
+          <last-edited />
           <splitter-proportions>
             <option name="proportions">
               <list>
