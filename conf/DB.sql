@@ -441,3 +441,21 @@ CREATE TABLE mts_meta.way_adviser_n_hours(
 truncate mts_meta.way_adviser_n_hours;
 
 select * from mts_meta.way_adviser_n_hours;
+
+
+drop table mts_meta.bar_price_distrib;
+
+truncate mts_meta.bar_price_distrib;
+
+/*
+ Distribution bars by prices
+ */
+CREATE TABLE mts_meta.bar_price_distrib(
+	ticker_id        int,
+	bar_width_sec    int,
+	price            double,
+	cnt              int,
+ PRIMARY KEY((ticker_id, bar_width_sec),price)
+) WITH CLUSTERING ORDER BY (price ASC);
+
+select * from mts_meta.bar_price_distrib;

@@ -4,8 +4,8 @@
     <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/conf/DB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/conf/DB.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scala_study/conf/MATHLIBRARY/MATHLIBRARY.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/conf/MATHLIBRARY/MATHLIBRARY.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scala_study/conf/tickcass.mq4" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/conf/tickcass.mq4" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -21,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ReadCassandraExamples.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReadCassandraExamples.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="54" column="48" lean-forward="true" selection-start-line="54" selection-start-column="48" selection-end-line="54" selection-end-column="48" />
+            <state relative-caret-position="-109">
+              <caret line="56" column="18" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
               <folding>
                 <element signature="e#13#33#0" expanded="true" />
               </folding>
@@ -33,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DB.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../scala_study/conf/DB.sql">
+      <file leaf-file-name="tickcass.mq4" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../scala_study/conf/tickcass.mq4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="437" column="47" lean-forward="true" selection-start-line="437" selection-start-column="47" selection-end-line="437" selection-end-column="47" />
+            <state relative-caret-position="765">
+              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
             </state>
           </provider>
         </entry>
@@ -62,20 +62,20 @@
       <find>listTicker.size</find>
       <find>prepared</find>
       <find>db_ts</find>
-      <find />
+      <find>NO 0 each tim</find>
       <find>XXXX</find>
       <find>XXX</find>
-      <find />
+      <find>SEARCH BUG:</find>
       <find>trade_advisers_results</find>
       <find>prepSaveAdviserRes</find>
       <find>4.</find>
       <find>resLastDateBar</find>
       <find>resLastBarPrep</find>
       <find>1000</find>
-      <find />
+      <find>EACH BAR</find>
       <find>rowToTicker</find>
       <find>getLastTickDdate</find>
-      <find />
+      <find>NO 0 each time</find>
       <find>JavaConverters</find>
       <find>BarC</find>
       <find>rowToBar</find>
@@ -99,8 +99,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/AkkTestHttpServer.scala" />
-        <option value="$PROJECT_DIR$/src/main/java/TestCollectFunctions.scala" />
         <option value="$PROJECT_DIR$/src/main/java/TestCollectFunctions.scala" />
         <option value="$PROJECT_DIR$/src/main/java/TestJSON.scala" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -127,29 +125,31 @@
         <option value="$PROJECT_DIR$/conf/DB.sql" />
         <option value="$PROJECT_DIR$/src/main/java/bar/calculator/Bar.scala" />
         <option value="$PROJECT_DIR$/src/main/java/bar/calculator/BarCalculator.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/resources/log4j2.xml" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/resources/log4j2.properties" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/CassandraWriteRead.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/resources/simplelogger.properties" />
-        <option value="$PROJECT_DIR$/../scala_study/pom.xml" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/ReadCassandraExamples.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/Primitiv.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Adviser.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Tickers.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/conf/tickcass.mq4" />
+        <option value="$PROJECT_DIR$/src/main/resources/log4j2.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/log4j2.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/CassandraWriteRead.scala" />
+        <option value="$PROJECT_DIR$/src/main/resources/simplelogger.properties" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/bar/calculator/ReadCassandraExamples.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/Primitiv.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/bar/calculator/Adviser.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/bar/calculator/Tickers.scala" />
+        <option value="$PROJECT_DIR$/conf/tickcass.mq4" />
+        <option value="$PROJECT_DIR$/conf/MATHLIBRARY/MATHLIBRARY.cpp" />
+        <option value="$PROJECT_DIR$/src/main/java/bar/calculator/SimpleClient.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/bar/calculator/FinTick.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/bar/calculator/BarC.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/bar/calculator/Bar.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/bar/adviser/TradeAdviser.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/bar/patternseacher/PatternSeacher.scala" />
+        <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/bar/calculator/BarCalculator.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/bar/rowToX.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/bar/adviser/TendAdviser.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/bar/ReadCassandraExamples.scala" />
+        <option value="$PROJECT_DIR$/conf/DB.sql" />
         <option value="$PROJECT_DIR$/../scala_study/conf/MATHLIBRARY/MATHLIBRARY.cpp" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/SimpleClient.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/FinTick.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarC.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/Bar.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TradeAdviser.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/patternseacher/PatternSeacher.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/resources/log4j.properties" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/calculator/BarCalculator.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TendAdviser.scala" />
-        <option value="$PROJECT_DIR$/../scala_study/conf/DB.sql" />
-        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala" />
+        <option value="$PROJECT_DIR$/../scala_study/conf/tickcass.mq4" />
       </list>
     </option>
   </component>
@@ -174,7 +174,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -227,10 +226,11 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../scaladiffasp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/..//scaladiffasp" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3275862" />
@@ -417,20 +417,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526274645461</updated>
-    </task>
-    <task id="LOCAL-00031" summary="commit before fetch from github">
-      <created>1528953284564</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1528953284564</updated>
-    </task>
-    <task id="LOCAL-00032" summary="FROM WORK: Begin read &quot;Prokopec, Aleksandar - Learning Concurrent Programming in Scala (2017, Packt Publishing)&quot;">
-      <created>1528979771761</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1528979771761</updated>
     </task>
     <task id="LOCAL-00033" summary="FROM WORK: Begin read &quot;Prokopec, Aleksandar - Learning Concurrent Programming in Scala (2017, Packt Publishing)&quot; #2">
       <created>1529040846029</created>
@@ -761,11 +747,26 @@
       <option name="project" value="LOCAL" />
       <updated>1533817330399</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="Added new class TendAdviser from &#10;https://github.com/AlexGruPerm/scaladiff&#10;Next step developing VSA calculations in scaladiff">
+      <created>1534409718756</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1534409718756</updated>
+    </task>
+    <task id="LOCAL-00081" summary="Lose files in prev commit.">
+      <created>1534409793485</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1534409793486</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -774,43 +775,43 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.4625" side_tool="true" weight="0.3598726" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" weight="0.36836517" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.48301485" />
-      <window_info anchor="right" id="Coverage" side_tool="true" weight="0.3296875" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.513544" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32911393" />
       <window_info id="Designer" order="1" />
-      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.14166667" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32908705" />
+      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.2125" />
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.3296875" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32908705" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" weight="0.36836517" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.41082802" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1375" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.41082802" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32908705" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32911393" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.4625" side_tool="true" weight="0.3598726" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" weight="0.36836517" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32908705" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.5239583" weight="0.25265393" />
       <window_info anchor="right" id="Maven Projects" order="5" />
       <window_info id="Favorites" order="4" side_tool="true" />
@@ -870,8 +871,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="A lot of optimization, cql queries and code. Date format.&#10;correct information from Bars pulled into Tickers.&#10;Next step is writing non blocking recursive function with pause, &#10;for calculate and save bars into table." />
-    <MESSAGE value="Was mistake in Tickers population. Need select only last (by ddate) &#10;bar of each pairs ticket_id + width.&#10;18.08.2018 Planning to rewrite this part more carefully." />
     <MESSAGE value="Was mistake in Tickers population - solved &#10;Need select only last (by ddate) - solved with cql query&#10;Now we are near real Bars calculation." />
     <MESSAGE value="It needs start function calc_one_ticker&#10;from ticker? not from bars.&#10;otherwise we lose tickers without no one bar in history." />
     <MESSAGE value="Last perparation before real bars calculations." />
@@ -895,7 +894,9 @@
     <MESSAGE value="Stop all next development, found bugs related with Bar calculation.&#10;filed ddate in Bars contains old dates.&#10;on 06.08.2018 all bars has date 03.08.2018" />
     <MESSAGE value="step back, a lot of modifications and refactoring. &#10;Modifying DLL, table structures.&#10;Move to Terminal date/time. &#10;Need spend more time to verify bar calculator and any aspects before going&#10;next." />
     <MESSAGE value="Success bars calculation for 14 tickers.&#10;Need refactoring code, clear old comments, remove debug info. &#10;Begin second project scaladiff &#10;https://github.com/AlexGruPerm/scaladiff.git&#10;For tests in separate project.&#10;Here - Middle commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="Success bars calculation for 14 tickers.&#10;Need refactoring code, clear old comments, remove debug info. &#10;Begin second project scaladiff &#10;https://github.com/AlexGruPerm/scaladiff.git&#10;For tests in separate project.&#10;Here - Middle commit." />
+    <MESSAGE value="Added new class TendAdviser from &#10;https://github.com/AlexGruPerm/scaladiff&#10;Next step developing VSA calculations in scaladiff" />
+    <MESSAGE value="Lose files in prev commit." />
+    <option name="LAST_COMMIT_MESSAGE" value="Lose files in prev commit." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -903,8 +904,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/HOFuncs.scala" />
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/StudyClass.scala" />
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CollectStudy.scala" />
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/BarsPatternSearch.scala" />
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CSVAnalyze.scala" />
@@ -937,9 +936,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="45" column="10" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="15" />
-          <folding>
-            <element signature="e#981#1000#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -962,9 +958,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="7" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -995,9 +988,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
           <caret line="28" column="3" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="28" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1005,9 +995,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="295">
           <caret line="153" selection-start-line="153" selection-end-line="153" />
-          <folding>
-            <element signature="e#207#223#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1021,36 +1008,16 @@
     <entry file="file://$PROJECT_DIR$/../scala_study/conf/conf.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/ParquetWriteRead.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/ParquetWriteRead.scala" />
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/CassandraWriteRead.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="24" selection-start-column="24" selection-end-column="24" />
-          <folding>
-            <element signature="e#33#66#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/resources/log4j2.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="16" lean-forward="true" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/target/classes/log4j2.properties">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/resources/log4j2.xml" />
+    <entry file="file://$PROJECT_DIR$/../scala_study/target/classes/log4j2.properties" />
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/resources/log4j_backup.properties">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1089,27 +1056,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/conf/tickcass.mq4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/conf/MATHLIBRARY/MATHLIBRARY.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="133" column="1" selection-start-line="133" selection-start-column="1" selection-end-line="133" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/patternseacher/PatternSeacher.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1035">
           <caret line="104" column="48" lean-forward="true" selection-start-line="104" selection-start-column="48" selection-end-line="104" selection-end-column="48" />
-          <folding>
-            <element signature="e#28#70#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1159,29 +1109,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="298" column="59" selection-start-line="289" selection-end-line="303" selection-end-column="44" />
-          <folding>
-            <element signature="e#24#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TendAdviser.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1463">
-          <caret line="125" column="75" lean-forward="true" selection-start-line="125" selection-start-column="75" selection-end-line="125" selection-end-column="75" />
-          <folding>
-            <element signature="e#21#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="10" column="65" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
-          <folding>
-            <element signature="e#13#34#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1189,26 +1116,60 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
           <caret line="193" lean-forward="true" selection-start-line="193" selection-end-line="193" />
-          <folding>
-            <element signature="e#21#63#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/conf/DB.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="437" column="47" lean-forward="true" selection-start-line="437" selection-start-column="47" selection-end-line="437" selection-end-column="47" />
+        <state relative-caret-position="428">
+          <caret line="461" lean-forward="true" selection-start-line="461" selection-end-line="461" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TendAdviser.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" selection-start-line="22" selection-end-line="22" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/conf/MATHLIBRARY/MATHLIBRARY.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5508">
+          <caret line="324" column="2" selection-start-line="324" selection-start-column="2" selection-end-line="324" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="44" column="22" lean-forward="true" selection-start-line="44" selection-start-column="22" selection-end-line="44" selection-end-column="22" />
+          <folding>
+            <element signature="e#13#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/conf/MATHLIBRARY/stdafx.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/conf/MATHLIBRARY/stdafx.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="54" column="48" lean-forward="true" selection-start-line="54" selection-start-column="48" selection-end-line="54" selection-end-column="48" />
+        <state relative-caret-position="-109">
+          <caret line="56" column="18" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
           <folding>
             <element signature="e#13#33#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/conf/tickcass.mq4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
         </state>
       </provider>
     </entry>
@@ -1229,7 +1190,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited />
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
