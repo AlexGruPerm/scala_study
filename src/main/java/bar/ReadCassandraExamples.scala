@@ -95,12 +95,10 @@ object ReadCassandraExamples extends App {
 
     def infiniteLoop(): Future[Unit] = {
        Future.sequence(List(loopCalcBars())).map(_ => ())
-      /*
-       Future.sequence(List(loopCalcBars(),loopPatSearch())).map(_ => ())
-       Future.sequence(List(loopTaskAnyCalc())).map(_ => ())
+      // Future.sequence(List(loopPatSearch())).map(_ => ())
+      // Future.sequence(List(loopTaskAnyCalc())).map(_ => ())
        Future.sequence(List(loopAdviser())).map(_ => ())
        Future.sequence(List(loopTendAdviser())).map(_ => ())
-      */
     }
 
     Await.ready(infiniteLoop(), Duration.Inf)
