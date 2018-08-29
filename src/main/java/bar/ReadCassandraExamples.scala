@@ -28,7 +28,7 @@ object ReadCassandraExamples extends App {
       barCalc.calc()
       val t2 = System.currentTimeMillis
       logger.info("Duration of barCalc.calc() - "+(t2 - t1) + " msecs.")
-      Thread.sleep(10000)
+      Thread.sleep(30000)
     }
 
     def taskPattSearch(): Future[Unit] = Future {
@@ -95,11 +95,11 @@ object ReadCassandraExamples extends App {
 
     def infiniteLoop(): Future[Unit] = {
        Future.sequence(List(loopCalcBars())).map(_ => ())
-       Future.sequence(List(loopTendAdviser())).map(_ => ())
       /*
        Future.sequence(List(loopCalcBars(),loopPatSearch())).map(_ => ())
        Future.sequence(List(loopTaskAnyCalc())).map(_ => ())
        Future.sequence(List(loopAdviser())).map(_ => ())
+       Future.sequence(List(loopTendAdviser())).map(_ => ())
       */
     }
 

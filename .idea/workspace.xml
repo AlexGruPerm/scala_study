@@ -4,8 +4,7 @@
     <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/conf/DB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/conf/DB.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/conf/MATHLIBRARY/MATHLIBRARY.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/conf/MATHLIBRARY/MATHLIBRARY.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/conf/tickcass.mq4" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/conf/tickcass.mq4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -21,23 +20,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ReadCassandraExamples.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ReadCassandraExamples.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-109">
-              <caret line="56" column="18" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
+            <state relative-caret-position="116">
+              <caret line="96" column="57" selection-start-line="96" selection-start-column="57" selection-end-line="96" selection-end-column="57" />
               <folding>
                 <element signature="e#13#33#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tickcass.mq4" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../scala_study/conf/tickcass.mq4">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
             </state>
           </provider>
         </entry>
@@ -99,8 +89,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/TestCollectFunctions.scala" />
-        <option value="$PROJECT_DIR$/src/main/java/TestJSON.scala" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -150,6 +138,8 @@
         <option value="$PROJECT_DIR$/conf/DB.sql" />
         <option value="$PROJECT_DIR$/../scala_study/conf/MATHLIBRARY/MATHLIBRARY.cpp" />
         <option value="$PROJECT_DIR$/../scala_study/conf/tickcass.mq4" />
+        <option value="$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala" />
+        <option value="$PROJECT_DIR$/../scala_study/conf/DB.sql" />
       </list>
     </option>
   </component>
@@ -417,13 +407,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526274645461</updated>
-    </task>
-    <task id="LOCAL-00033" summary="FROM WORK: Begin read &quot;Prokopec, Aleksandar - Learning Concurrent Programming in Scala (2017, Packt Publishing)&quot; #2">
-      <created>1529040846029</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1529040846029</updated>
     </task>
     <task id="LOCAL-00034" summary="Begin study parquet r/w in scala without Spark, hadoop">
       <created>1529067300076</created>
@@ -761,11 +744,18 @@
       <option name="project" value="LOCAL" />
       <updated>1534409793486</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="Solved very big bug (3 days) related with tick data mixing inside DataStax driver and cpp DLL.&#10;It was used one statment for all tickers and sometimes bid,ask from one ticker ware in another.&#10;Now there is map of CassStatement&#10;typedef std::map&lt;cass_int32_t, CassStatement*&gt; MapOftickerStatement;&#10;Also, remove IFs from mql4. Send symbol name.&#10;Inside DLL query db with all tickers and make map &#10;symbol-tickerID.&#10;More flexibility and usability. &#10;Need clean CPP code of DLL. Add more symbols(now 14).">
+      <created>1535486626631</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1535486626632</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -775,10 +765,10 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.4625" side_tool="true" weight="0.3598726" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" weight="0.36836517" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.513544" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.48301485" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32911393" />
       <window_info id="Designer" order="1" />
-      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.2125" />
+      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.14166667" />
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -871,7 +861,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Was mistake in Tickers population - solved &#10;Need select only last (by ddate) - solved with cql query&#10;Now we are near real Bars calculation." />
     <MESSAGE value="It needs start function calc_one_ticker&#10;from ticker? not from bars.&#10;otherwise we lose tickers without no one bar in history." />
     <MESSAGE value="Last perparation before real bars calculations." />
     <MESSAGE value="Founded simple way to calculate BarC(s) &#10;without any additional classes." />
@@ -896,7 +885,8 @@
     <MESSAGE value="Success bars calculation for 14 tickers.&#10;Need refactoring code, clear old comments, remove debug info. &#10;Begin second project scaladiff &#10;https://github.com/AlexGruPerm/scaladiff.git&#10;For tests in separate project.&#10;Here - Middle commit." />
     <MESSAGE value="Added new class TendAdviser from &#10;https://github.com/AlexGruPerm/scaladiff&#10;Next step developing VSA calculations in scaladiff" />
     <MESSAGE value="Lose files in prev commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="Lose files in prev commit." />
+    <MESSAGE value="Solved very big bug (3 days) related with tick data mixing inside DataStax driver and cpp DLL.&#10;It was used one statment for all tickers and sometimes bid,ask from one ticker ware in another.&#10;Now there is map of CassStatement&#10;typedef std::map&lt;cass_int32_t, CassStatement*&gt; MapOftickerStatement;&#10;Also, remove IFs from mql4. Send symbol name.&#10;Inside DLL query db with all tickers and make map &#10;symbol-tickerID.&#10;More flexibility and usability. &#10;Need clean CPP code of DLL. Add more symbols(now 14)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Solved very big bug (3 days) related with tick data mixing inside DataStax driver and cpp DLL.&#10;It was used one statment for all tickers and sometimes bid,ask from one ticker ware in another.&#10;Now there is map of CassStatement&#10;typedef std::map&lt;cass_int32_t, CassStatement*&gt; MapOftickerStatement;&#10;Also, remove IFs from mql4. Send symbol name.&#10;Inside DLL query db with all tickers and make map &#10;symbol-tickerID.&#10;More flexibility and usability. &#10;Need clean CPP code of DLL. Add more symbols(now 14)." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1119,13 +1109,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/conf/DB.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="461" lean-forward="true" selection-start-line="461" selection-end-line="461" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/adviser/TendAdviser.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -1156,20 +1139,27 @@
     <entry file="file://$PROJECT_DIR$/../scala_study/conf/MATHLIBRARY/stdafx.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala">
+    <entry file="file://$PROJECT_DIR$/../scala_study/conf/tickcass.mq4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-109">
-          <caret line="56" column="18" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
-          <folding>
-            <element signature="e#13#33#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="51">
+          <caret line="3" column="38" lean-forward="true" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/conf/tickcass.mq4">
+    <entry file="file://$PROJECT_DIR$/../scala_study/conf/DB.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+        <state relative-caret-position="554">
+          <caret line="317" column="88" selection-start-line="317" selection-start-column="88" selection-end-line="317" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/ReadCassandraExamples.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="96" column="57" selection-start-line="96" selection-start-column="57" selection-end-line="96" selection-end-column="57" />
+          <folding>
+            <element signature="e#13#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
