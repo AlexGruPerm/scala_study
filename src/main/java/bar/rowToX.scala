@@ -302,7 +302,36 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
 
 
 
+  val prepTickersWidths = session.prepare(""" select ticker_id,bar_width_sec from mts_meta.bars_property """)
 
+  val prepMaxTsEndFuture = session.prepare(""" select max(ts_end) as max_ts_end
+                                                 from mts_bars.bars_future
+                                                where ticker_id     = :p_ticker_id and
+                                                      bar_width_sec = :p_bar_width_sec """)
+
+  val prepReadBarsFromTS = session.prepare(
+    """                           select
+                                        ticker_id,
+                                        ddate,
+                                        bar_width_sec,
+                                        ts_begin,
+                                        ts_end,
+                                        o,
+                                        h,
+                                        l,
+                                        c,
+                                        h_body,
+                                        h_shad,
+                                        btype,
+                                        ticks_cnt,
+                                        disp,
+                                        log_co
+                                   from mts_bars.bars
+                                  where
+                                        ticker_id     = :p_ticker_id and
+                                        bar_width_sec = :p_width_sec and
+                                        ts_begin     >= :p_read_from_ts
+                                  allow filtering; """)
 
 
   val rowToBar = (row : Row) => {
@@ -324,6 +353,47 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
       row.getDouble("log_co")
     )
   }
+
+  case class TickersWidth(ticker_id :Int,bar_width_sec :Int) {
+
+    val maxTsEnd :Long = JavaConverters.asScalaIteratorConverter(session.execute(prepMaxTsEndFuture.bind()
+      .setInt("p_ticker_id",ticker_id)
+      .setInt("p_bar_width_sec",bar_width_sec))
+      .all().iterator())
+      .asScala.toSeq.map(r => r.getLong("max_ts_end"))
+      .toList
+      .headOption.getOrElse(0)
+
+    val seqBars =  JavaConverters.asScalaIteratorConverter(session.execute(prepReadBarsFromTS.bind()
+      .setInt("p_ticker_id", ticker_id)
+      .setInt("p_width_sec", bar_width_sec)
+      .setLong("p_read_from_ts", maxTsEnd))
+      .all().iterator())
+      .asScala.toSeq.map(row => new BarC(
+      row.getInt("ticker_id"),
+      new Date(row.getDate("ddate").getMillisSinceEpoch),
+      row.getInt("bar_width_sec"),
+      row.getLong("ts_begin"),
+      row.getLong("ts_end"),
+      row.getDouble("o"),
+      row.getDouble("h"),
+      row.getDouble("l"),
+      row.getDouble("c"),
+      row.getDouble("h_body"),
+      row.getDouble("h_shad"),
+      row.getString("btype"),
+      row.getInt("ticks_cnt"),
+      row.getDouble("disp"),
+      row.getDouble("log_co")
+    )).toList.sortBy(_.ts_begin).toSeq
+
+    def get_maxTsEnd = maxTsEnd
+
+    def get_seqBars = seqBars
+
+  }
+
+
 
   def rowToAdviser (row : Row) = {
     new Adviser(

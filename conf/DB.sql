@@ -115,7 +115,7 @@ CREATE TABLE mts_bars.bars(
     h_body         double,
     h_shad         double,
     btype          varchar,
-    ticks_cnt       int,
+    ticks_cnt      int,
     disp           double,
     log_co         double,
     PRIMARY KEY((ticker_id, ddate, bar_width_sec),ts_end)
@@ -519,3 +519,50 @@ CREATE TABLE mts_meta.bar_price_distrib(
 ) WITH CLUSTERING ORDER BY (price ASC);
 
 select * from mts_meta.bar_price_distrib;
+
+
+//==========================================================
+
+
+/*
+ Хранится анализируемый тик: ticker_id, bar_width_sec, ts_end
+ и данные его анализа из будущего,
+ для дальнейшей работы с паттернами и ранжированием баров.
+ ln(exit) - ln(enter) =
+  0.0017 ~ 20 b.p. eurusd
+  0.0034 ~ 40
+  0.0051 ~ 60
+*/
+CREATE TABLE mts_bars.bars_future(
+	ticker_id      int,
+	bar_width_sec  int,
+    ts_end         bigint,
+    c              double,
+    ft_log_0017_ts_end     bigint,
+    ft_log_0017_res        varchar,//u,d
+    ft_log_0017_cls_price  double,
+    ft_log_0034_ts_end     bigint,
+    ft_log_0034_res        varchar,//u,d
+    ft_log_0034_cls_price  double,
+    ft_log_0051_ts_end     bigint,
+    ft_log_0051_res        varchar,//u,d
+    ft_log_0051_cls_price  double,
+    PRIMARY KEY((ticker_id, bar_width_sec),ts_end)
+) WITH CLUSTERING ORDER BY (ts_end DESC);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
