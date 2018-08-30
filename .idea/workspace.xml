@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2502c32b-3f93-4589-a47b-b64c7868ce2f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/BarFutureAnal.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/conf/DB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/conf/DB.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -51,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rowToX.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="rowToX.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="306" column="6" selection-start-line="306" selection-start-column="6" selection-end-line="306" selection-end-column="6" />
+            <state relative-caret-position="-625">
+              <caret line="320" column="42" lean-forward="true" selection-start-line="320" selection-start-column="42" selection-end-line="320" selection-end-column="42" />
               <folding>
                 <element signature="e#13#34#0" expanded="true" />
               </folding>
@@ -63,7 +60,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BarFutureAnal.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BarFutureAnal.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/BarFutureAnal.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
@@ -446,13 +443,6 @@
       <option name="presentableId" value="Default" />
       <updated>1526274645461</updated>
     </task>
-    <task id="LOCAL-00036" summary="Work, validate parquet file written in scala with Spark shell (windows)&#10;Look at file : spark_win_shell.txt">
-      <created>1529323798997</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1529323798997</updated>
-    </task>
     <task id="LOCAL-00037" summary="spark in src">
       <created>1529431227914</created>
       <option name="number" value="00037" />
@@ -789,11 +779,18 @@
       <option name="project" value="LOCAL" />
       <updated>1535552741608</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="Some new classes for BarFutureAnalyzer.">
+      <created>1535642957823</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1535642957824</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -803,10 +800,10 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.4625" side_tool="true" weight="0.3598726" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49895832" weight="0.36836517" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.28556263" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5375" visible="true" weight="0.28556263" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32911393" />
       <window_info id="Designer" order="1" />
-      <window_info content_ui="combo" id="Project" order="4" visible="true" weight="0.14166667" />
+      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.14166667" />
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -899,7 +896,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Founded simple way to calculate BarC(s) &#10;without any additional classes." />
     <MESSAGE value="Last step before get calulated Bars&#10;make fix in&#10;YYYYYYYY" />
     <MESSAGE value="Bar calculated, made some optimization in getting ticks data for&#10;all widths.&#10;Try run it for each ticker in separate Future.&#10;And next last stape is saveing bars into db." />
     <MESSAGE value="sucess saving bars into db, but calculation way is bad, sliding&#10;with fixed size by elements. I need variable size by tickets and fixed &#10;size by seconds." />
@@ -924,7 +920,8 @@
     <MESSAGE value="Solved very big bug (3 days) related with tick data mixing inside DataStax driver and cpp DLL.&#10;It was used one statment for all tickers and sometimes bid,ask from one ticker ware in another.&#10;Now there is map of CassStatement&#10;typedef std::map&lt;cass_int32_t, CassStatement*&gt; MapOftickerStatement;&#10;Also, remove IFs from mql4. Send symbol name.&#10;Inside DLL query db with all tickers and make map &#10;symbol-tickerID.&#10;More flexibility and usability. &#10;Need clean CPP code of DLL. Add more symbols(now 14)." />
     <MESSAGE value="Long test of ticks load and bar calculations. With Excel, csv uploading." />
     <MESSAGE value="Control save commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="Control save commit." />
+    <MESSAGE value="Some new classes for BarFutureAnalyzer." />
+    <option name="LAST_COMMIT_MESSAGE" value="Some new classes for BarFutureAnalyzer." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1176,16 +1173,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="306" column="6" selection-start-line="306" selection-start-column="6" selection-end-line="306" selection-end-column="6" />
-          <folding>
-            <element signature="e#13#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../scala_study/conf/DB.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
@@ -1204,6 +1191,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="62" lean-forward="true" selection-start-line="7" selection-start-column="62" selection-end-line="7" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../scala_study/src/main/java/bar/rowToX.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-625">
+          <caret line="320" column="42" lean-forward="true" selection-start-line="320" selection-start-column="42" selection-end-line="320" selection-end-column="42" />
+          <folding>
+            <element signature="e#13#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
