@@ -76,7 +76,9 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
     val results = session.execute("select * from mts_meta.bars_property;")
     val rsList = results.all()
     val bp = for(i <- 0 to rsList.size()-1) yield rowToBarProperty(rsList.get(i))
-    bp.filter(b => b.is_enabled==1)
+    // # DEBUG
+    //bp.filter(b => (b.is_enabled==1 && (b.ticker_id==23) && b.bar_width_sec==30))
+    bp
   }
 
   def get_Bars(bars_properties : Seq[bars_property]) = {
@@ -113,6 +115,7 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
         rowToTicker(ds_tikers_ddates.get(i))
     //logger.info("get_Tickers listTicker.size="+listTicker.size)
     listTicker
+      //#debug .filter(lt => (lt.ticker_id==23))
   }
 
 
@@ -392,6 +395,7 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
     //val ds_tickersddates : scala.List[Row] = get_ds_tickers_ddates()
     val tickers : Seq[Ticker] = get_Tickers(get_ds_tickers_ddates())
 
+    /*
     logger.debug("----------------------------------------------------------------------------------")
     for (oneTicker <- tickers if oneTicker.ticker_id != 0) {
       logger.info(" ticker_id [ "+oneTicker.ticker_id+
@@ -401,7 +405,7 @@ class BarCalculator(session: Session) extends rowToX(session, LoggerFactory.getL
               "   last_tick_ts_unx = "+oneTicker.last_tick_ts_unx)
     }
     logger.debug("----------------------------------------------------------------------------------")
-
+*/
     run_background_calcs(tickers, lBars.seqBars, bars_properties)
   }
 

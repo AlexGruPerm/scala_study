@@ -2,7 +2,7 @@ package bar
 
 import java.util.Date
 
-import bar.calculator.{Adviser, BarC, CurrTicker, Ticker, bars_property, pair_ts_tsunx}
+import bar.calculator._
 import com.datastax.driver.core.{LocalDate, Row, Session}
 import org.slf4j.Logger
 
@@ -444,38 +444,54 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
               row.getString("ticker_seconds")
              )
   }
+
+  val prepDistinctDateTickers = session.prepare(""" select distinct ddate,ticker_id FROM mts_src.ticks where ticker_id=:p_ticker_id allow filtering; """)
+
   /**
     * Return max(ddate) by ticker
     */
   def getLastTickDdate(p_ticker : Int) ={
-    val rsList = session.execute("select distinct ddate,ticker_id FROM mts_src.ticks;").all()
+    //val rsList = session.execute("select distinct ddate,ticker_id FROM mts_src.ticks;").all()
+    val rsList = session.execute(prepDistinctDateTickers.bind().setInt("p_ticker_id", p_ticker)).all()
+
     //alogger.info(" getLastTickDdate rsList.size="+rsList.size)
     val res = for(i <- 0 to rsList.size()-1) yield
       (
-        rsList.get(i).getInt("ticker_id"),
+        //rsList.get(i).getInt("ticker_id"),
         rsList.get(i).getDate("ddate"),
         new Date(rsList.get(i).getDate("ddate").getMillisSinceEpoch)
       )
-    //alogger.info("getLastTickDdate BEFORE max_dates = res.find")
-    val getLastTickDdate_Res_Max = {if (res.nonEmpty) res.map(x => x._3).max else 0 }
-    val max_dates = res.find(x => x._3 == getLastTickDdate_Res_Max &&  x._1 == p_ticker).map(x => (x._2,x._3))
-    //alogger.info("[getLastTickDdate] p_ticker="+p_ticker+"  max_dates=["+max_dates+"]")
-    max_dates
 
+    //#Debug
+    /*
+    for(r <- res){
+      alogger.info(" ---------- r-res - ??? p_ticker="+p_ticker+"  "+r._1+"  "+r._2+"  "+r._3)
+    }
+    */
+
+    //alogger.info("getLastTickDdate BEFORE max_dates = res.find")
+
+    //BUG !!!  getLastTickDdate_Res_Max searched by all tickers!
+    //OLD CODE val getLastTickDdate_Res_Max = {if (res.nonEmpty) res.map(x => x._3).max else 0 }
+    // from 31.08.2018 new code
+    val getLastTickDdate_Res_Max = {if (res.nonEmpty) res/*.filter(r => r._1 == p_ticker)*/.map(x => x._2).max else 0 }
+    val max_dates = res.find(x => x._2 == getLastTickDdate_Res_Max /*&&  x._1 == p_ticker*/).map(x => (x._1,x._2))
+    //alogger.info(" >>>>>>>>>>>>>>    [getLastTickDdate] p_ticker="+p_ticker+"  max_dates=["+max_dates+"]")
+    max_dates
   }
 
   /**
     * Return max(ts),max(ts) as UNixTimeStamp by ticker
     */
   def getLastTickTs(p_ticker : Int, p_maxdate : LocalDate) = {
-    alogger.info("INSIDE getLastTickTs: setDate -> p_maxdate="+p_maxdate)
+    alogger.info(" >>>  INSIDE getLastTickTs: p_ticker="+p_ticker+" setDate -> p_maxdate="+p_maxdate)
     val bound = prepared.bind().setInt("tickerId", p_ticker).setDate("maxDDate",p_maxdate)
     val rsList = session.execute(bound).all()
     val res = for(i <- 0 to rsList.size()-1) yield new pair_ts_tsunx(
       rsList.get(i).getLong("ts"), //getTimestamp("ts"),
       rsList.get(i).getLong("tsunx")
     )
-    alogger.info(" > getLastTickTs res(0)  ts="+res(0).ts+"  ts_unx="+res(0).ts_unx)
+    alogger.info(" > p_ticker="+p_ticker+" getLastTickTs res(0)  ts="+res(0).ts+"  ts_unx="+res(0).ts_unx)
     res(0)
   }
 
