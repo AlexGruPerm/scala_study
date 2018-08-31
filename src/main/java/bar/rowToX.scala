@@ -394,6 +394,39 @@ abstract class rowToX(val session: Session,val alogger: Logger) {
   }
 
 
+  val prepInsertFutureAnalyze = session.prepare(
+    """
+      insert into mts_bars.bars_future(
+      	ticker_id,
+      	bar_width_sec,
+      	ts_end,
+      	c,
+      	ft_log_0017_cls_price,
+      	ft_log_0017_res,
+      	ft_log_0017_ts_end,
+      	ft_log_0034_cls_price,
+      	ft_log_0034_res,
+      	ft_log_0034_ts_end,
+      	ft_log_0051_cls_price,
+      	ft_log_0051_res,
+      	ft_log_0051_ts_end
+      ) values(
+      	:p_ticker_id,
+      	:p_bar_width_sec,
+      	:p_ts_end,
+      	:p_c,
+      	:p_ft_log_0017_cls_price,
+      	:p_ft_log_0017_res,
+      	:p_ft_log_0017_ts_end,
+      	:p_ft_log_0034_cls_price,
+      	:p_ft_log_0034_res,
+      	:p_ft_log_0034_ts_end,
+      	:p_ft_log_0051_cls_price,
+      	:p_ft_log_0051_res,
+      	:p_ft_log_0051_ts_end
+      );
+    """)
+
 
   def rowToAdviser (row : Row) = {
     new Adviser(

@@ -6,6 +6,10 @@ class Bar (p_ticker_id : Int, p_bar_width_sec : Int, barTicks : Seq[TinyTick]) {
     (valueD * 10000).round / 10000.toDouble
   }
 
+  def simpleRound5Double(valueD : Double) = {
+    (valueD * 100000).round / 100000.toDouble
+  }
+
   def simpleRound6Double(valueD : Double) = {
     (valueD * 1000000).round / 1000000.toDouble
   }
@@ -15,12 +19,12 @@ class Bar (p_ticker_id : Int, p_bar_width_sec : Int, barTicks : Seq[TinyTick]) {
   val bar_width_sec   :Int= p_bar_width_sec
   val ts_begin        :Long = barTicks(0).ts
   val ts_end          :Long = barTicks.last.ts
-  val o               :Double = simpleRound4Double((barTicks(0).ask + barTicks(0).bid)/2)
-  val h               :Double = simpleRound4Double(barTicks.map(x => (x.ask+x.bid)/2).max)
-  val l               :Double = simpleRound4Double(barTicks.map(x => (x.ask+x.bid)/2).min)
-  val c               :Double = simpleRound4Double((barTicks.last.ask + barTicks.last.bid)/2)
-  val h_body          :Double = simpleRound4Double(math.abs(c-o))
-  val h_shad          :Double = simpleRound4Double(math.abs(h-l))
+  val o               :Double = simpleRound5Double((barTicks(0).ask + barTicks(0).bid)/2)
+  val h               :Double = simpleRound5Double(barTicks.map(x => (x.ask+x.bid)/2).max)
+  val l               :Double = simpleRound5Double(barTicks.map(x => (x.ask+x.bid)/2).min)
+  val c               :Double = simpleRound5Double((barTicks.last.ask + barTicks.last.bid)/2)
+  val h_body          :Double = simpleRound5Double(math.abs(c-o))
+  val h_shad          :Double = simpleRound5Double(math.abs(h-l))
   val btype           :String =(o compare c).signum match {
     case -1 => "g" // bOpen < bClose
     case  0 => "n" // bOpen = bClose
@@ -36,7 +40,7 @@ class Bar (p_ticker_id : Int, p_bar_width_sec : Int, barTicks : Seq[TinyTick]) {
                                     )
                                   )
                                  else 0
-  val log_co          :Double = simpleRound4Double(Math.log(c)-Math.log(o))
+  val log_co          :Double = simpleRound5Double(Math.log(c)-Math.log(o))
 
   override def toString =
     "[ "+ts_begin+":"+ts_end+"] ohlc=["+o+","+h+","+l+","+c+"] "+btype+"   body,shad=["+h_body+","+h_shad+"]"

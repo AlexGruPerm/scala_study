@@ -550,6 +550,12 @@ CREATE TABLE mts_bars.bars_future(
     PRIMARY KEY((ticker_id, bar_width_sec),ts_end)
 ) WITH CLUSTERING ORDER BY (ts_end DESC);
 
+truncate mts_bars.bars_future;
+
+select count(*) from mts_bars.bars_future;
+
+select * from mts_bars.bars_future where ticker_id=1 and bar_width_sec=30 order by ts_end limit 5000;
+
 
 
 
