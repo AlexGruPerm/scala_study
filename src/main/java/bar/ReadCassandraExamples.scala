@@ -17,6 +17,7 @@ object ReadCassandraExamples extends App {
     val barCalc = new BarCalculator(client.session)
     val patSearch = new PatternSeacher(client.session)
     val tendAdviser = new TendAdviser(client.session)
+    val fa = new BarFutureAnalyzer(client.session)
 
     //val tickersDS = barCalc.getTickersList
     //logger.info("tickersDS.size="+tickersDS.size)
@@ -73,6 +74,14 @@ object ReadCassandraExamples extends App {
       Thread.sleep(5000)
     }
 
+  def taskFutAnalyze(): Future[Unit] = Future {
+    val t1 = System.currentTimeMillis
+    fa.calc()
+    val t2 = System.currentTimeMillis
+    logger.info("Duration of taskFutAnalyze.calc() - "+(t2 - t1) + " msecs.")
+    Thread.sleep(30000)
+  }
+
     def loopCalcBars(): Future[Unit] = {
       taskCalcBars.flatMap(_ => loopCalcBars())
     }
@@ -93,13 +102,18 @@ object ReadCassandraExamples extends App {
     taskTendAdviser.flatMap(_ => loopTendAdviser())
   }
 
+  def loopFutAnalyze() : Future[Unit] = {
+    taskFutAnalyze.flatMap(_ => loopFutAnalyze())
+  }
+
     def infiniteLoop(): Future[Unit] = {
-       Future.sequence(List(loopCalcBars())).map(_ => ())
+       Future.sequence(List(loopCalcBars(),loopFutAnalyze())).map(_ => ())
+
       // Future.sequence(List(loopPatSearch())).map(_ => ())
       // Future.sequence(List(loopTaskAnyCalc())).map(_ => ())
 
-     //  Future.sequence(List(loopAdviser())).map(_ => ())
-     //  Future.sequence(List(loopTendAdviser())).map(_ => ())
+       Future.sequence(List(loopAdviser())).map(_ => ())
+       Future.sequence(List(loopTendAdviser())).map(_ => ())
     }
 
     Await.ready(infiniteLoop(), Duration.Inf)
