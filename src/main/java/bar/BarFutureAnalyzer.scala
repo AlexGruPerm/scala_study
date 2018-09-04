@@ -9,11 +9,13 @@ import scala.collection.JavaConverters
 class BarFutureAnalyzer(session: Session) extends rowToX(session, LoggerFactory.getLogger(ReadCassandraExamples.getClass)){
   val logger = LoggerFactory.getLogger(ReadCassandraExamples.getClass)
 
+  /*
   val tickersWidths  = JavaConverters.asScalaIteratorConverter(session.execute(prepTickersWidths.bind()).all().iterator())
     .asScala.toSeq.map(r => new TickersWidth(r.getInt("ticker_id"),
     r.getInt("bar_width_sec")
   ))
     .sortBy(_.ticker_id).toList
+  */
 
   def simpleRound5Double(valueD : Double) = {
     (valueD * 100000).round / 100000.toDouble
@@ -38,12 +40,12 @@ class BarFutureAnalyzer(session: Session) extends rowToX(session, LoggerFactory.
     }
   }
 
-  def analyzeThisBar(currBar :BarC)= {
+  def analyzeThisBar(currBar :BarC, tickersWidths : Seq[TickersWidth])= {
     /**
       * restBars contains all bars for ticker and width_sec that has ts_begin less than ts_end of current input bar.
       */
     val restBars = tickersWidths.filter(tw => tw.ticker_id == currBar.ticker_id && tw.bar_width_sec == currBar.bar_width_sec)
-      .head.get_seqBars
+      .head.getSeqBars
       .dropWhile((b :BarC) => {b.ts_begin < currBar.ts_end})
     val listOfLogs = Seq(0.0017, 0.0034, 0.0051)
 
@@ -70,16 +72,23 @@ class BarFutureAnalyzer(session: Session) extends rowToX(session, LoggerFactory.
   }
 
   def calc() = {
+    val tickersWidths : Seq[TickersWidth]  = JavaConverters.asScalaIteratorConverter(session.execute(prepTickersWidths.bind()).all().iterator())
+      .asScala.toSeq.map(r => new TickersWidth(r.getInt("ticker_id"),
+                                               r.getInt("bar_width_sec")
+                                              ))
+      .sortBy(_.ticker_id).toList
+
     tickersWidths.foreach(r => logger.info("1. ticker_id = "+r.ticker_id+" width_sec = "+r.bar_width_sec+
-      " FROM max_ts_end = "+r.get_maxTsEnd+" READED "+r.get_seqBars.size+" BARS."))
+      " FROM max_ts_end = "+r.getMaxTsEnd+" READED "+r.getSeqBars.size+" BARS."))
 
     val seqBarAnalyzed :Seq[BarFutureAnal] =
-      for (
-        tw <- tickersWidths;
-        seqB <- tw.get_seqBars
+      for (                    // чтобы было на чём считать, делаем паузу для накопления новых баров.
+        tw <- tickersWidths if tw.diffMaxTsEndBarsSeq_MINUS_MaxTsEndFA >= 100*tw.bar_width_sec;
+        seqB <- tw.getSeqBars
       )
         yield {
-          analyzeThisBar(seqB)
+            logger.info("Ticker_id="+tw.ticker_id+" width_sec="+tw.bar_width_sec+" tw.maxTsEnd(FA)="+tw.maxTsEnd+" maxTsEndBars="+tw.maxTsEndBars+" Diff[sec.]="+tw.diffMaxTsEndBarsSeq_MINUS_MaxTsEndFA)
+            analyzeThisBar(seqB, tickersWidths)
         }
 
     logger.info("FULL SIZE ANALYZED BARS = "+seqBarAnalyzed.size)

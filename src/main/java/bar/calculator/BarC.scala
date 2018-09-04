@@ -17,3 +17,13 @@ case class 	BarC(
                  disp            :Double,
                  log_co          :Double
                 )
+
+case class BarCPat(b :BarC,
+                   //--------
+                   ticks_cnt_prcnt      : Double,
+                   ticks_cnt_prcnt_from : Double,
+                   ticks_cnt_prcnt_to   : Double,
+                   //--------
+                   abs_logco_prcnt      : Double,
+                   abs_logco_prcnt_from : Double,
+                   abs_logco_prcnt_to   : Double)

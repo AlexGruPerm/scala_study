@@ -79,7 +79,7 @@ object ReadCassandraExamples extends App {
     fa.calc()
     val t2 = System.currentTimeMillis
     logger.info("Duration of taskFutAnalyze.calc() - "+(t2 - t1) + " msecs.")
-    Thread.sleep(30000)
+    Thread.sleep(60000) //1 min.
   }
 
     def loopCalcBars(): Future[Unit] = {
@@ -107,13 +107,13 @@ object ReadCassandraExamples extends App {
   }
 
     def infiniteLoop(): Future[Unit] = {
-       Future.sequence(List(loopCalcBars(),loopFutAnalyze())).map(_ => ())
+       Future.sequence(List(loopCalcBars())).map(_ => ())
+       Future.sequence(List(loopFutAnalyze())).map(_ => ())
+// Future.sequence(List(loopPatSearch())).map(_ => ())
+ // Future.sequence(List(loopTaskAnyCalc())).map(_ => ())
 
-      // Future.sequence(List(loopPatSearch())).map(_ => ())
-      // Future.sequence(List(loopTaskAnyCalc())).map(_ => ())
-
-       Future.sequence(List(loopAdviser())).map(_ => ())
-       Future.sequence(List(loopTendAdviser())).map(_ => ())
+    //   Future.sequence(List(loopAdviser())).map(_ => ())
+    //   Future.sequence(List(loopTendAdviser())).map(_ => ())
     }
 
     Await.ready(infiniteLoop(), Duration.Inf)
