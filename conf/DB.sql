@@ -557,7 +557,33 @@ select count(*) from mts_bars.bars_future;
 select * from mts_bars.bars_future where ticker_id=1 and bar_width_sec=30 order by ts_end limit 5000;
 
 
+//****************************
 
+CREATE TABLE mts_bars.pattern_search_results(
+	ticker_id            int,
+	bar_width_sec        int,
+    patt_ts_begin        bigint,       // ts_begin первого    бара в искомой (текущей) формации
+    patt_ts_end          bigint,       // ts_end   последнего бара в искомой формации
+    patt_bars_count      int,          // количество баров в искомой формации
+    history_found_tsends list<bigint>, // List(ts_end) найденных формаций в истории по искомой формации
+    //--------------------------
+    ft_log_0017_res_u        int,      //количество найденных u для уровня 0.0017 в mts_bars.bars_future для всех history_found_tsends
+    ft_log_0017_res_d        int,
+    ft_log_0017_res_n        int,
+    //--------------------------
+    ft_log_0034_res_u        int,
+    ft_log_0034_res_d        int,
+    ft_log_0034_res_n        int,
+    //--------------------------
+    ft_log_0051_res_u        int,
+    ft_log_0051_res_d        int,
+    ft_log_0051_res_n        int,
+    //--------------------------
+    ft_log_sum_u             int,
+    ft_log_sum_d             int,
+    ft_log_sum_n             int,
+    PRIMARY KEY((ticker_id, bar_width_sec),patt_ts_end)
+) WITH CLUSTERING ORDER BY (patt_ts_end DESC);
 
 
 

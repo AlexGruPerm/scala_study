@@ -79,7 +79,7 @@ object ReadCassandraExamples extends App {
     fa.calc()
     val t2 = System.currentTimeMillis
     logger.info("Duration of taskFutAnalyze.calc() - "+(t2 - t1) + " msecs.")
-    Thread.sleep(60000) //1 min.
+    Thread.sleep(600000) //Once in 10 min.
   }
 
     def loopCalcBars(): Future[Unit] = {
