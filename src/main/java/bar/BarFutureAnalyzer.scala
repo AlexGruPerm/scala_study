@@ -72,6 +72,7 @@ class BarFutureAnalyzer(session: Session) extends rowToX(session, LoggerFactory.
   }
 
   def calc() = {
+    logger.info("BarFutureAnalyzer - Begin calc")
     val tickersWidths : Seq[TickersWidth]  = JavaConverters.asScalaIteratorConverter(session.execute(prepTickersWidths.bind()).all().iterator())
       .asScala.toSeq.map(r => new TickersWidth(r.getInt("ticker_id"),
                                                r.getInt("bar_width_sec")
