@@ -559,11 +559,15 @@ select * from mts_bars.bars_future where ticker_id=1 and bar_width_sec=30 order 
 
 //****************************
 
+
+DROP table mts_bars.pattern_search_results;
+
 CREATE TABLE mts_bars.pattern_search_results(
 	ticker_id            int,
 	bar_width_sec        int,
     patt_ts_begin        bigint,       // ts_begin первого    бара в искомой (текущей) формации
     patt_ts_end          bigint,       // ts_end   последнего бара в искомой формации
+    patt_end_c           Double,
     patt_bars_count      int,          // количество баров в искомой формации
     history_found_tsends list<bigint>, // List(ts_end) найденных формаций в истории по искомой формации
     //--------------------------
@@ -584,9 +588,6 @@ CREATE TABLE mts_bars.pattern_search_results(
     ft_log_sum_n             int,
     PRIMARY KEY((ticker_id, bar_width_sec),patt_ts_end)
 ) WITH CLUSTERING ORDER BY (patt_ts_end DESC);
-
-
-
 
 
 

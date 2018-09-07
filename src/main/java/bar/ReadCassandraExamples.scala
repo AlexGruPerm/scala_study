@@ -114,7 +114,7 @@ object ReadCassandraExamples extends App {
       // Future.sequence(List(loopTaskAnyCalc())).map(_ => ())
 
     //   Future.sequence(List(loopAdviser())).map(_ => ())
-    //   Future.sequence(List(loopTendAdviser())).map(_ => ())
+       Future.sequence(List(loopTendAdviser())).map(_ => ())
     }
 
     Await.ready(infiniteLoop(), Duration.Inf)
