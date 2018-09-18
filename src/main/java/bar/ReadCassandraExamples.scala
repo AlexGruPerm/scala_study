@@ -18,6 +18,8 @@ object ReadCassandraExamples extends App {
     val patSearch = new PatternSeacher(client.session)
     val tendAdviser = new TendAdviser(client.session)
     val fa = new BarFutureAnalyzer(client.session)
+    val ps = new PatternSearcher(client.session)
+
 
     //val tickersDS = barCalc.getTickersList
     //logger.info("tickersDS.size="+tickersDS.size)
@@ -29,7 +31,7 @@ object ReadCassandraExamples extends App {
       barCalc.calc()
       val t2 = System.currentTimeMillis
       logger.info("Duration of barCalc.calc() - "+(t2 - t1) + " msecs.")
-      Thread.sleep(60000)
+      Thread.sleep(30000)
     }
 
     def taskPattSearch(): Future[Unit] = Future {
@@ -79,8 +81,19 @@ object ReadCassandraExamples extends App {
     fa.calc()
     val t2 = System.currentTimeMillis
     logger.info("Duration of taskFutAnalyze.calc() - "+(t2 - t1) + " msecs.")
-    Thread.sleep(600000) //Once in 10 min.
+    Thread.sleep(60000) //Once in 10 min.
   }
+
+
+  def taskPatterSeacher(): Future[Unit] = Future {
+    val t1 = System.currentTimeMillis
+    ps.calc(4)
+    val t2 = System.currentTimeMillis
+    logger.info("Duration of taskPatterSeacher.calc() - "+(t2 - t1) + " msecs.")
+    Thread.sleep(60000) //Once in 10 min.
+  }
+
+
 
     def loopCalcBars(): Future[Unit] = {
       taskCalcBars.flatMap(_ => loopCalcBars())
@@ -106,10 +119,16 @@ object ReadCassandraExamples extends App {
     taskFutAnalyze.flatMap(_ => loopFutAnalyze())
   }
 
+  def loopPatternSearch() : Future[Unit] = {
+    taskPatterSeacher.flatMap(_ => loopPatternSearch())
+  }
+
+
     def infiniteLoop(): Future[Unit] = {
        Future.sequence(List(loopCalcBars())).map(_ => ())
        Future.sequence(List(loopFutAnalyze())).map(_ => ())
 
+      Future.sequence(List(loopPatternSearch())).map(_ => ())
       // Future.sequence(List(loopPatSearch())).map(_ => ())
       // Future.sequence(List(loopTaskAnyCalc())).map(_ => ())
 
